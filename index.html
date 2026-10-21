@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ambinight — Les couleurs de votre écran illuminent votre maison</title>
+  <meta name="description" content="Synchronisez vos lumières connectées avec vos films, séries et jeux. Une immersion totale, bien au-delà de votre écran.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="video" href="assets/hero.mp4" type="video/mp4">
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#" class="logo" aria-label="Ambinight">
+      <svg viewBox="0 0 24 24" class="logo-mark" aria-hidden="true">
+        <path d="M12 2v20M12 9c-3 0-5 1.5-6 3M12 9c3 0 5 1.5 6 3M7 15h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span>Ambinight</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#application">Application</a>
+      <a href="#compatibilite">Compatibilité</a>
+      <a href="commencer.html#tarifs">Tarifs</a>
+    </nav>
+    <a href="commencer.html" class="btn btn-light btn-sm">Commencer</a>
+  </header>
+
+  <!-- ============ HERO (vidéo animée au scroll) ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-sticky">
+      <video class="hero-video" id="heroVideo" src="assets/hero.mp4" poster="assets/hero-poster.jpg" muted playsinline preload="auto"></video>
+      <div class="hero-shade"></div>
+
+      <div class="hero-content wrap">
+        <h1 class="hero-title">
+          <span class="line">Les couleurs</span>
+          <span class="line">de votre écran</span>
+          <span class="line">illuminent</span>
+          <span class="line">votre maison.</span>
+        </h1>
+        <p class="hero-sub">Synchronisez vos lumières connectées avec vos films, séries et jeux. Une immersion totale, bien au-delà de votre écran.</p>
+        <div class="hero-actions">
+          <a href="commencer.html" class="btn btn-light">Commencer <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button class="btn-ghost" id="openDemo" type="button">
+            <span class="play"><svg viewBox="0 0 16 16"><path d="M6 4.5v7l5.5-3.5z" fill="currentColor"/></svg></span>
+            Voir la démo
+          </button>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars">
+            <img class="av" src="assets/avatars/a1.jpg" alt=""><img class="av" src="assets/avatars/a2.jpg" alt=""><img class="av" src="assets/avatars/a3.jpg" alt="">
+          </div>
+          <div>
+            <div class="stars"><span aria-label="5 étoiles"><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>4,9/5</b></div>
+            <div class="proof-sub">+10 000 utilisateurs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-brands">
+        <div class="hero-brands-label">Compatible avec</div>
+        <div class="hero-brands-row">
+          <img class="brand-logo l-hue" src="assets/logos/hue-w.svg" alt="Philips Hue">
+          <img class="brand-logo l-ikea" src="assets/logos/ikea-w.svg" alt="IKEA">
+          <img class="brand-logo l-tuya" src="assets/logos/tuya.svg" alt="Tuya">
+          <img class="brand-logo l-govee" src="assets/logos/govee.svg" alt="Govee">
+          <img class="brand-logo l-ali" src="assets/logos/aliexpress-w.svg" alt="AliExpress">
+          <span class="brand b-more">et plus...</span>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 — ÉMOTIONS ============ -->
+  <section class="emotions" id="fonctionnalites">
+    <div class="emotions-media">
+      <img src="assets/jellyfish.jpg" alt="Salon plongé dans la lumière bleue et violette d'un film">
+    </div>
+    <div class="wrap emotions-inner">
+      <div class="emotions-copy reveal">
+        <h2>Le même film.<br>Des émotions plus fortes.</h2>
+        <p>Étendez l'ambiance de votre écran à toute la maison. Chaque scène, chaque couleur, pour une expérience immersive unique.</p>
+        <ul class="features">
+          <li>
+            <span class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg></span>
+            <span>Synchronisation<br>en temps réel</span>
+          </li>
+          <li>
+            <span class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span>
+            <span>Plusieurs pièces<br>et plusieurs<br>lumières</span>
+          </li>
+          <li>
+            <span class="f-icon"><svg viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 0 1 4 4v1.5a3 3 0 0 1-5.4 1.8L14.5 14h-5l-1.1 1.3A3 3 0 0 1 3 13.5V12a4 4 0 0 1 4-4z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17" cy="12.8" r=".6"/></svg></span>
+            <span>Compatible<br>films, séries<br>et jeux</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — MAISON CONNECTÉE (vidéo interactive) ============ -->
+  <section class="maison" id="maison">
+    <div class="maison-scene-wrap">
+      <div class="scene" id="scene">
+        <svg class="scene-svg" viewBox="0 180 1280 530" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <filter id="feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter>
+            <filter id="glow" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Masques des pièces (coordonnées relevées sur la vidéo, repère 1280×720) -->
+            <mask id="m-salon"   maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="529,351 781,255 820,274 906,374 741,445 736,536 534,447" fill="#fff" filter="url(#feather)"/></mask>
+            <mask id="m-bureau"  maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="782,254 865,225 974,264 974,336 912,369 821,273" fill="#fff" filter="url(#feather)"/></mask>
+            <mask id="m-chambre" maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="983,266 1060,231 1265,316 1263,402 1196,444 1111,407 1066,360 992,342" fill="#fff" filter="url(#feather)"/></mask>
+            <mask id="m-cuisine" maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="914,368 996,336 1066,361 1113,409 956,504 936,420" fill="#fff" filter="url(#feather)"/></mask>
+            <mask id="m-repas"   maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="741,445 906,374 914,368 936,420 956,504 916,536 916,606 736,536" fill="#fff" filter="url(#feather)"/></mask>
+            <mask id="m-cinema"  maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="953,506 1110,409 1196,445 1259,471 1259,625 1074,689 954,566" fill="#fff" filter="url(#feather)"/></mask>
+
+            <linearGradient id="g-stream" x1="380" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset=".45" stop-color="#9b6bff"/>
+              <stop offset="1" stop-color="#ff5ce1"/>
+            </linearGradient>
+            <linearGradient id="g-warm" x1="380" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset=".5" stop-color="#b37bff"/>
+              <stop offset="1" stop-color="#ffa24a"/>
+            </linearGradient>
+            <linearGradient id="g-blue" x1="380" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset="1" stop-color="#3b6bff"/>
+            </linearGradient>
+          </defs>
+
+          <image href="assets/rooms-dark.jpg" width="1280" height="720"/>
+
+          <g class="room-light" data-room="salon"   mask="url(#m-salon)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="bureau"  mask="url(#m-bureau)"><image href="assets/rooms-lit-bureau.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="chambre" mask="url(#m-chambre)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="cuisine" mask="url(#m-cuisine)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="repas"   mask="url(#m-repas)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="cinema"  mask="url(#m-cinema)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+
+          <!-- Reflets au sol sous la maison -->
+          <g class="floor-glows">
+            <ellipse class="floor-glow" data-room="salon"  cx="650" cy="600" rx="70" ry="22" fill="#ff7a3c"/>
+            <ellipse class="floor-glow" data-room="repas"  cx="800" cy="650" rx="70" ry="20" fill="#ff5a3c"/>
+            <ellipse class="floor-glow" data-room="cinema" cx="1000" cy="690" rx="90" ry="20" fill="#3d5bff"/>
+          </g>
+
+          <!-- Flux lumineux TV → pièces -->
+          <g class="streams" filter="url(#glow)">
+            <path class="stream" data-room="salon"   stroke="url(#g-stream)" d="M372 338 C 470 330, 540 368, 600 352 S 670 330, 697 334"/>
+            <path class="stream" data-room="bureau"  stroke="url(#g-stream)" d="M376 330 C 520 300, 640 330, 740 300 S 860 270, 896 282"/>
+            <path class="stream" data-room="chambre" stroke="url(#g-blue)"   d="M378 352 C 560 330, 700 300, 900 296 S 1120 330, 1196 344"/>
+            <path class="stream" data-room="cuisine" stroke="url(#g-warm)"   d="M376 372 C 520 400, 680 410, 820 400 S 960 410, 1012 418"/>
+            <path class="stream" data-room="repas"   stroke="url(#g-warm)"   d="M362 392 C 480 450, 600 500, 720 502 S 840 494, 882 492"/>
+            <path class="stream" data-room="cinema"  stroke="url(#g-blue)"   d="M350 410 C 470 480, 640 540, 820 540 S 1080 540, 1153 538"/>
+          </g>
+          <g class="pulses" id="pulses" filter="url(#glow)"></g>
+        </svg>
+
+        <!-- Interrupteurs placés comme dans la vidéo -->
+        <div class="switches" id="switches"></div>
+        <div class="scene-hint" id="sceneHint">Cliquez sur les interrupteurs pour allumer chaque pièce</div>
+      </div>
+    </div>
+
+    <div class="maison-copy reveal">
+      <h2>Bien plus qu'une TV.<br>Une maison connectée.</h2>
+      <p>Vos lumières réagissent en temps réel aux couleurs de votre écran, créant une atmosphère dynamique dans chaque pièce.</p>
+      <div class="room-chips" id="roomChips"></div>
+      <div class="stats">
+        <div class="stat"><b>1</b><span>écran</span></div>
+        <div class="stat"><b>Toutes</b><span>vos pièces</span></div>
+        <div class="stat"><b>Des possibilités</b><span>infinies</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 — SIMPLE ============ -->
+  <section class="simple" id="comment">
+    <div class="simple-bg"><img src="assets/warm-room.jpg" alt=""></div>
+    <div class="wrap simple-inner">
+      <div class="simple-copy reveal">
+        <h2>Simple. Puissant.<br>Pour tous.</h2>
+        <p>Installez en quelques minutes et transformez votre maison en véritable salle de cinéma.</p>
+        <ol class="steps">
+          <li><span>1</span>Connectez vos appareils</li>
+          <li><span>2</span>Personnalisez vos pièces</li>
+          <li><span>3</span>Profitez de l'expérience</li>
+        </ol>
+      </div>
+
+      <div class="phone-stage" id="phoneStage">
+        <div class="p3-glow" id="p3Glow"></div>
+        <div class="p3-shadow" id="p3Shadow"></div>
+        <div class="p3" id="p3">
+          <!-- Épaisseur : tranches empilées en Z -->
+          <div class="p3-slices" id="p3Slices"></div>
+
+          <!-- Boutons latéraux -->
+          <span class="p3-btn p3-btn-action"></span>
+          <span class="p3-btn p3-btn-volup"></span>
+          <span class="p3-btn p3-btn-voldown"></span>
+          <span class="p3-btn p3-btn-power"></span>
+
+          <!-- Façade : cadre titane + verre, dessinés en SVG -->
+          <svg class="p3-frame" viewBox="0 0 330 680" aria-hidden="true">
+            <defs>
+              <linearGradient id="ti" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a8a92"/>
+                <stop offset=".18" stop-color="#3a3a40"/>
+                <stop offset=".35" stop-color="#cfcfd6"/>
+                <stop offset=".5" stop-color="#4a4a52"/>
+                <stop offset=".68" stop-color="#2a2a2f"/>
+                <stop offset=".84" stop-color="#b9b9c1"/>
+                <stop offset="1" stop-color="#55555c"/>
+              </linearGradient>
+              <linearGradient id="tiEdge" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+                <stop offset=".5" stop-color="#ffffff" stop-opacity=".05"/>
+                <stop offset="1" stop-color="#ffffff" stop-opacity=".35"/>
+              </linearGradient>
+              <radialGradient id="bezelShade" cx=".5" cy=".5" r=".7">
+                <stop offset=".85" stop-color="#000"/>
+                <stop offset="1" stop-color="#16161a"/>
+              </radialGradient>
+              <mask id="ringMask">
+                <rect width="330" height="680" fill="#fff"/>
+                <rect x="13" y="13" width="304" height="654" rx="45" fill="#000"/>
+              </mask>
+            </defs>
+            <!-- bande titane -->
+            <rect x="0" y="0" width="330" height="680" rx="56" fill="url(#ti)"/>
+            <rect x=".75" y=".75" width="328.5" height="678.5" rx="55.3" fill="none" stroke="url(#tiEdge)" stroke-width="1.5"/>
+            <rect x="3.5" y="3.5" width="323" height="673" rx="52.5" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="1"/>
+            <!-- antennes -->
+            <g fill="#1d1d21" opacity=".9">
+              <rect x="0" y="92" width="4" height="3"/><rect x="326" y="92" width="4" height="3"/>
+              <rect x="0" y="590" width="4" height="3"/><rect x="326" y="590" width="4" height="3"/>
+              <rect x="70" y="0" width="3" height="4"/><rect x="257" y="676" width="3" height="4"/>
+            </g>
+            <!-- bordure noire autour de l'écran -->
+            <rect x="5" y="5" width="320" height="670" rx="51" fill="url(#bezelShade)"/>
+            <rect x="5.5" y="5.5" width="319" height="669" rx="50.5" fill="none" stroke="#fff" stroke-opacity=".08"/>
+          </svg>
+
+          <!-- Écran : interface Ambinight -->
+          <div class="p3-screen">
+            <div class="ui">
+              <div class="ui-status">
+                <span class="ui-time">9:41</span>
+                <span class="ui-island"><i></i></span>
+                <span class="ui-sys">
+                  <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".7"/><rect x="5" y="5.5" width="3" height="6.5" rx=".7"/><rect x="10" y="3" width="3" height="9" rx=".7"/><rect x="15" y="0" width="3" height="12" rx=".7"/></svg>
+                  <svg viewBox="0 0 16 12"><path d="M8 11.5l2.2-2.6a3.2 3.2 0 0 0-4.4 0zM3.4 6.4a6.6 6.6 0 0 1 9.2 0l1.5-1.8a9 9 0 0 0-12.2 0zM.2 2.6a11.5 11.5 0 0 1 15.6 0" fill="currentColor"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="8" rx="2"/><path d="M24.5 4v4a2 2 0 0 0 0-4z" opacity=".5"/></svg>
+                </span>
+              </div>
+
+              <div class="ui-head">
+                <span class="ui-ico">
+                  <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+                </span>
+                <span class="ui-brand">
+                  <svg viewBox="0 0 24 24"><path d="M12 2v20M12 9c-3 0-5 1.5-6 3M12 9c3 0 5 1.5 6 3M7 15h10"/></svg>
+                  Ambinight
+                </span>
+                <span class="ui-ico ui-spark">
+                  <svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg>
+                </span>
+              </div>
+
+              <div class="ui-row">
+                <span class="ui-home">Maison <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+                <button class="ui-switch on" id="uiSwitch" type="button" aria-label="Synchronisation de la maison"><i></i></button>
+              </div>
+
+              <div class="ui-rooms" id="uiRooms">
+                <button class="active" type="button" data-c="#c76bff">
+                  <span><svg viewBox="0 0 24 24"><path d="M5 11V8.5A2.5 2.5 0 0 1 7.5 6h9A2.5 2.5 0 0 1 19 8.5V11"/><path d="M3 13a2 2 0 0 1 4 0v1.5h10V13a2 2 0 0 1 4 0v4.5H3z"/><path d="M5.5 17.5V19M18.5 17.5V19"/></svg></span>
+                  Salon
+                </button>
+                <button type="button" data-c="#ff8a3c">
+                  <span><svg viewBox="0 0 24 24"><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 13h16M8 16h2"/><path d="M7 9V6a3 3 0 0 1 6 0"/></svg></span>
+                  Cuisine
+                </button>
+                <button type="button" data-c="#3e8bff">
+                  <span><svg viewBox="0 0 24 24"><path d="M3 19V6M3 15h18v4M21 15v-2.5a3 3 0 0 0-3-3h-7V15"/><circle cx="7" cy="12" r="1.8"/></svg></span>
+                  Chambre
+                </button>
+                <button type="button" data-c="#b05cff">
+                  <span><svg viewBox="0 0 24 24"><path d="M8 20h8M12 20v-6"/><path d="M12 14l-4-6 3-3 5 2"/><path d="M16 7l2.5 3.5-4 1"/></svg></span>
+                  Bureau
+                </button>
+              </div>
+
+              <div class="ui-slider">
+                <div class="ui-slider-head"><span>Intensité</span><b id="uiVal">80 %</b></div>
+                <div class="ui-track" id="uiTrack"><div class="ui-fill" id="uiFill"><i></i></div></div>
+              </div>
+
+              <ul class="ui-list">
+                <li>Mode Scène <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+                <li>Couleurs <span class="ui-dots" id="uiDots"><i></i><i></i><i></i><i></i></span></li>
+                <li>Synchronisation <span class="ui-live"><i></i>En direct</span></li>
+                <li>Effets</li>
+                <li>Paramètres</li>
+              </ul>
+              <div class="ui-home-bar"></div>
+            </div>
+          </div>
+
+          <!-- Verre : reflets qui suivent l'inclinaison -->
+          <div class="p3-glass"><div class="p3-glare" id="p3Glare"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ L'APPLICATION WINDOWS ============ -->
+  <section class="appshow" id="application">
+    <div class="appshow-bg"></div>
+    <div class="wrap">
+      <div class="appshow-head reveal">
+        <span class="appshow-eyebrow"><img src="assets/app-icon.svg" alt="">Application Windows</span>
+        <h2>Toute votre ambiance,<br>dans une seule fenêtre.</h2>
+        <p>Lancez la synchro, choisissez les lumières qui suivent l'écran et réglez l'intensité. Le reste se fait tout seul.</p>
+      </div>
+
+      <div class="appshow-stage reveal" id="appStage">
+        <div class="appshow-glow"></div>
+        <div class="appshow-window" id="appWindow">
+          <img class="active" src="assets/app/01-ambiance-synchro-active.webp" alt="Écran Ambiance : synchronisation active, aperçu de la TV avec son halo et pièces Salon, Chambre et Cuisine" data-tab="0">
+          <img src="assets/app/03-mes-lumieres.webp" alt="Écran Mes lumières : chaque lumière, classée par pièce, avec son interrupteur" data-tab="1" loading="lazy">
+          <img src="assets/app/04-connexions.webp" alt="Écran Connexions : lumières reliées via Home Assistant et boîtier caméra ULamp trouvé" data-tab="2" loading="lazy">
+          <img src="assets/app/05-reglages.webp" alt="Écran Réglages : mode nuit, démarrage avec Windows et raccourci clavier" data-tab="3" loading="lazy">
+          <img src="assets/app/06-premier-lancement.webp" alt="Premier lancement : assistant en deux étapes pour relier les lumières puis trouver la TV" data-tab="4" loading="lazy">
+        </div>
+      </div>
+
+      <div class="appshow-tabs reveal" id="appTabs" role="tablist">
+        <button class="active" type="button" role="tab" aria-selected="true" data-tab="0"><b>Ambiance</b><span>Aperçu en direct, intensité, réactivité et vos pièces d'un coup d'œil.</span><i></i></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="1"><b>Mes lumières</b><span>Choisissez, pièce par pièce, les lumières qui suivent l'écran.</span><i></i></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="2"><b>Connexions</b><span>Home Assistant et le boîtier caméra ULamp, reliés en quelques secondes.</span><i></i></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="3"><b>Réglages</b><span>Mode nuit, démarrage avec Windows, raccourci Ctrl + Alt + A.</span><i></i></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="4"><b>Premier lancement</b><span>Deux étapes : relier vos lumières, puis trouver votre TV.</span><i></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPATIBILITÉ ============ -->
+  <section class="compat" id="compatibilite">
+    <div class="wrap">
+      <h2 class="reveal">Compatible avec vos lumières préférées.</h2>
+      <p class="reveal">Ambinight est compatible avec les principales marques d'éclairage connecté.</p>
+      <div class="compat-row reveal">
+        <div class="card"><img class="brand-logo l-hue" src="assets/logos/hue-w.svg" alt="Philips Hue"></div>
+        <div class="card"><img class="brand-logo l-ikea" src="assets/logos/ikea-w.svg" alt="IKEA"></div>
+        <div class="card"><img class="brand-logo l-tuya" src="assets/logos/tuya.svg" alt="Tuya"></div>
+        <div class="card"><img class="brand-logo l-govee" src="assets/logos/govee.svg" alt="Govee"></div>
+        <div class="card"><img class="brand-logo l-ali" src="assets/logos/aliexpress-w.svg" alt="AliExpress"></div>
+        <div class="card card-wide">
+          <img class="dev" src="assets/logos/bluetooth-w.svg" alt="Bluetooth">
+          <svg class="dev dev-strip" viewBox="0 0 48 24"><ellipse cx="24" cy="12" rx="21" ry="7" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="24" cy="12" rx="13" ry="3.5" fill="none" stroke="currentColor" stroke-width="1.2"/><g fill="currentColor"><circle cx="8" cy="10" r="1"/><circle cx="14" cy="7" r="1"/><circle cx="22" cy="5.6" r="1"/><circle cx="30" cy="5.8" r="1"/><circle cx="38" cy="7.4" r="1"/></g></svg>
+          <svg class="dev" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" fill="currentColor"/><path d="M9 19h6M10 21.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="dev" viewBox="0 0 24 24"><path d="M5 3h14l-3 9H8z" fill="currentColor"/><path d="M9 12h6v4H9zM10 16h4v4h-4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="dots">•••</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta" id="cta">
+    <div class="cta-media"><img src="assets/gamer.jpg" alt="Joueur devant un écran dont les couleurs illuminent la pièce"></div>
+    <div class="cta-copy reveal">
+      <h2>Transformez chaque<br>moment en une ambiance unique.</h2>
+      <p>Avec Ambinight, l'action ne s'arrête pas<br>aux bords de votre écran.</p>
+      <a href="commencer.html" class="btn btn-light">Commencer <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ============ MODALE DÉMO ============ -->
+  <div class="modal" id="demoModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box">
+      <button class="modal-close" data-close type="button" aria-label="Fermer">×</button>
+      <video id="demoVideo" src="assets/demo.mp4" controls playsinline preload="metadata"></video>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
