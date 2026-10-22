@@ -762,3 +762,38 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
   .ab-visual { height: 120px; }
   .ab-can ul { justify-content: center; }
 }
+
+/* ---------- Démo et fenêtre PC : rendu 3D en direct (moteur de l'application) ---------- */
+.live3d { position: absolute; inset: 0; }
+.live3d canvas, .w3d-live canvas { display: block; width: 100% !important; height: 100% !important; outline: none; }
+.live3d canvas { cursor: grab; }
+.live3d canvas:active { cursor: grabbing; }
+.live-links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; transition: opacity .3s; }
+.live-link { fill: none; stroke: url(#g-live); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: .05 .025; opacity: 0; transition: opacity .6s; animation: liveFlow 1.6s linear infinite; }
+.live-link { stroke-dasharray: 10 7; }
+.live-link.on { opacity: .85; }
+@keyframes liveFlow { to { stroke-dashoffset: -34; } }
+.visit-hint { position: absolute; z-index: 3; left: 50%; bottom: 28px; translate: -50% 0; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: #fff; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .2); backdrop-filter: blur(10px); transition: opacity .4s; }
+.visit-hint svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; animation: hintBob 1.6s ease-in-out infinite; }
+@keyframes hintBob { 50% { transform: translateY(3px); } }
+.visit-hint.hide { opacity: 0; }
+.visit-btn { display: none; }
+.live-badge { position: absolute; z-index: 3; right: var(--gutter); bottom: 28px; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .02em; color: rgba(255, 255, 255, .6); }
+.live-badge i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pillPing 1.6s infinite; }
+.demo3d .demo-head { transition: opacity .5s; }
+.demo3d.inside .demo-head { opacity: 0; }
+.w3d-live { position: absolute; inset: 0; }
+.w3d-live canvas { cursor: grab; }
+@media (max-width: 900px) {
+  .demo-scene { aspect-ratio: 4 / 3.4; }
+  .live-links, .visit-hint { display: none; }
+  .visit-btn { position: absolute; z-index: 3; left: 50%; bottom: 14px; translate: -50% 0; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: #0b0b10; background: #fff; }
+  .visit-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .live-badge { top: 12px; bottom: auto; right: 14px; }
+}
+@media (min-width: 901px) {
+  .demo3d .demo-head { left: max(24px, 5vw); right: auto; max-width: 470px; text-align: left; }
+  .demo3d .demo-head h2 { font-size: clamp(26px, 2.4vw, 36px); }
+  .demo3d .demo-head p { font-size: 15.5px; }
+}
+.demo3d.inside .demo-head { opacity: 0 !important; }
