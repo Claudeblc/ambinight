@@ -206,10 +206,13 @@
 .eco-app svg, .eco-app img { width: 20px; height: 20px; flex-shrink: 0; }
 .eco-app img { filter: invert(1); }
 
-/* ---------- Matériel : images détourées posées directement sur la page, sans cadre ni halo ---------- */
+/* ---------- Matériel : cadre autour de la vignette uniquement, texte posé sur la page ---------- */
 .kit-card, .kit-card:hover { background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
-.kit-view { background: none; }
-.kv-glow, .app-halo, .kit-photo .kit-view::after { display: none; }
-.kit-info { padding: 6px 4px 0; }
-.kit-card.kit-eco { padding: 34px 4px 0; border-top: 1px solid rgba(255, 255, 255, .1); border-radius: 0; }
-.kit-photo .kv-img { filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .55)); }
+.kit-photo .kit-view, .kit-app .kit-view {
+  border-radius: 24px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
+  border: 1px solid rgba(255, 255, 255, .08); transition: border-color .4s;
+}
+.kit-card:hover .kit-view { border-color: rgba(255, 255, 255, .18); }
+.kit-info { padding: 18px 4px 0; }
+.kit-card.kit-eco { padding: 34px 4px 0; border-top: 1px solid rgba(255, 255, 255, .1); }
