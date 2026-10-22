@@ -205,3 +205,11 @@
 .eco-app { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
 .eco-app svg, .eco-app img { width: 20px; height: 20px; flex-shrink: 0; }
 .eco-app img { filter: invert(1); }
+
+/* ---------- Matériel : images détourées posées directement sur la page, sans cadre ni halo ---------- */
+.kit-card, .kit-card:hover { background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+.kit-view { background: none; }
+.kv-glow, .app-halo, .kit-photo .kit-view::after { display: none; }
+.kit-info { padding: 6px 4px 0; }
+.kit-card.kit-eco { padding: 34px 4px 0; border-top: 1px solid rgba(255, 255, 255, .1); border-radius: 0; }
+.kit-photo .kv-img { filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .55)); }
