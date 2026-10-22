@@ -224,9 +224,9 @@
       const k = Math.max(W / 1280, H / 720);           // échelle de l'image (couverture)
       const offX = (1280 * k - W) / 2;
       const offY = (720 * k - H) / 2;
-      let pw = Math.min(300, Math.max(200, 190 * k));   // largeur du téléphone à l'écran
+      let pw = Math.min(330, Math.max(270, 250 * k));   // largeur du téléphone à l'écran
       let ps = pw / 330;
-      if (680 * ps > H - 150) { ps = (H - 150) / 680; pw = 330 * ps; }
+      if (680 * ps > H - 110) { ps = (H - 110) / 680; pw = 330 * ps; }
       const ph = 680 * ps;
       const left = 470 * k - offX - pw / 2;            // entre la TV (x 380) et la maison (x 535)
       const top = H - ph - Math.max(18, H * 0.035);
@@ -524,6 +524,90 @@
     };
     paint();
     if (!reduced) setInterval(() => { if (running) { hue = (hue + 19) % 360; paint(); } }, 1500);
+  }
+
+  /* ---------- 4 quater. Tutoriel animé : une étape par cran de défilement ---------- */
+  const tScene = document.getElementById('tScene');
+  if (tScene) {
+    const tPin = document.getElementById('tutoPin');
+    const tWorld = document.getElementById('tWorld');
+    const tItems = [...document.querySelectorAll('#tCards li')];
+    const TSTEPS = tItems.length;
+    let tStep = 0;
+    const setStep = (n, frac = 1) => {
+      if (n !== tStep) {
+        tStep = n;
+        for (let i = 1; i <= TSTEPS; i++) {
+          tScene.classList.toggle(`t-on-${i}`, i <= n);
+          tScene.classList.toggle(`t-cur-${i}`, i === n);
+        }
+        tItems.forEach((li, i) => {
+          li.classList.toggle('seen', i < n);
+          li.classList.toggle('active', i === n - 1);
+          li.classList.toggle('done', i < n - 1);
+        });
+      }
+      const bar = tItems[n - 1]?.querySelector('.t-bar');
+      if (bar) bar.style.setProperty('--p', frac.toFixed(3));
+    };
+
+    // couleurs de la TV reprises par le rétroéclairage et les lampes à l'étape 5
+    const TPAL = [['#3f7bff', '#ff7a3c', '#c76bff'], ['#ff5a3c', '#ffb347', '#ff3d7f'], ['#2fe0c8', '#3f7bff', '#7c6bff'], ['#ff4fd8', '#5b6bff', '#ffa24a']];
+    let tPal = 0;
+    const tPaint = () => {
+      const [a, b, c] = TPAL[tPal];
+      tScene.style.setProperty('--tc1', a);
+      tScene.style.setProperty('--tc2', b);
+      tScene.style.setProperty('--tc3', c);
+    };
+    if (!reduced) setInterval(() => { if (tStep === TSTEPS) { tPal = (tPal + 1) % TPAL.length; tPaint(); } }, 1800);
+
+    // léger relief qui suit la souris
+    if (window.matchMedia('(hover: hover)').matches && !reduced) {
+      tScene.parentElement.addEventListener('pointermove', (e) => {
+        const r = tScene.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        tWorld.style.setProperty('--ry', `${(-6 + x * 8).toFixed(2)}deg`);
+        tWorld.style.setProperty('--rx', `${(6 - y * 6).toFixed(2)}deg`);
+      });
+    }
+
+    const pinned = hasGsap && !reduced && window.matchMedia('(min-width: 901px) and (min-height: 640px)').matches;
+    if (pinned) {
+      // section épinglée : chaque cran de défilement fait apparaître l'étape suivante
+      const st = ScrollTrigger.create({
+        trigger: tPin,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * 3.2}`,
+        pin: true,
+        onUpdate: (self) => {
+          const p = self.progress * TSTEPS;
+          const n = Math.min(TSTEPS, Math.max(1, Math.floor(p) + 1));
+          setStep(n, n === TSTEPS ? 1 : p - (n - 1));
+        },
+        onLeaveBack: () => setStep(0),
+      });
+      tItems.forEach((li, i) => li.querySelector('button').addEventListener('click', () => {
+        const y = st.start + ((i + 0.5) / TSTEPS) * (st.end - st.start);
+        if (lenis) lenis.scrollTo(y, { duration: 1 }); else window.scrollTo({ top: y, behavior: 'smooth' });
+      }));
+    } else {
+      // téléphone ou mouvement réduit : les étapes défilent seules quand la section est visible
+      let tView = false;
+      let tTimer = null;
+      const next = () => setStep(tStep >= TSTEPS ? 1 : tStep + 1);
+      new IntersectionObserver(([e]) => {
+        tView = e.isIntersecting;
+        if (tView && !tStep) setStep(1);
+      }, { threshold: 0.35 }).observe(tScene);
+      if (!reduced) tTimer = setInterval(() => { if (tView) next(); }, 3200);
+      if (reduced) setStep(TSTEPS);
+      tItems.forEach((li, i) => li.querySelector('button').addEventListener('click', () => {
+        clearInterval(tTimer);
+        setStep(i + 1);
+      }));
+    }
   }
 
   /* ---------- 5. Application PC ---------- */
