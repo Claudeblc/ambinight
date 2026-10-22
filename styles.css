@@ -862,3 +862,6 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
   .salon-live .live-badge { position: static; translate: none; order: 5; margin-top: 10px; }
 }
 .salon-live .live-badge { left: max(24px, 5vw); right: auto; translate: none; bottom: 84px; }
+.cmp-detail { list-style: none; margin: -6px 0 4px; padding: 4px 14px 10px 28px; display: grid; gap: 6px; border-left: 2px solid rgba(255, 255, 255, .12); margin-left: 14px; }
+.cmp-detail li { display: flex; justify-content: space-between; gap: 16px; font-size: 13.5px; color: rgba(255, 255, 255, .62); }
+.cmp-detail b { font-weight: 600; color: rgba(255, 255, 255, .85); font-variant-numeric: tabular-nums; white-space: nowrap; }
