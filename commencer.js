@@ -1,8 +1,22 @@
 /* =========================================================
    Ambinight — page « Commencer »
-   Scroll fluide, apparitions, fenêtre de commande
+   Scroll fluide, navigation, apparitions, commande, téléchargements
    ========================================================= */
 (() => {
+  /* ---------- Liens à renseigner ----------
+     CHECKOUT : liens de paiement Lemon Squeezy (Store → Products → Share).
+     STORES   : liens des fiches Microsoft Store, App Store et Google Play.
+     Tant qu'un lien est vide, le bouton correspondant reste inactif. */
+  const CHECKOUT = {
+    'Licence à vie': '',
+    'Famille': '',
+  };
+  const STORES = {
+    windows: '',
+    ios: '',
+    android: '',
+  };
+
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
@@ -17,18 +31,25 @@
     }
   }
 
-  // Ancres internes
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  // Ancres de la page courante (y compris « commencer.html#tarifs »)
+  document.querySelectorAll('a[href*="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if (id.length < 2) return;
-      const target = document.querySelector(id);
+      const url = new URL(a.href, location.href);
+      if (url.pathname !== location.pathname || url.hash.length < 2) return;
+      const target = document.querySelector(url.hash);
       if (!target) return;
       e.preventDefault();
       if (lenis) lenis.scrollTo(target, { offset: -70, duration: 1.3 });
       else target.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Barre de navigation : même comportement que sur l'accueil, lien « Tarifs » actif
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  nav.querySelectorAll('.nav-links a').forEach((a) => { if (a.getAttribute('href') === 'commencer.html#tarifs') a.classList.add('current'); });
 
   // Apparitions
   if (hasGsap && !reduced) {
@@ -75,8 +96,15 @@
       return;
     }
     coEmail.classList.remove('err');
-    // TODO : rediriger vers la session de paiement (Stripe Checkout, Lemon Squeezy…)
-    coNote.textContent = 'Le paiement en ligne ouvre au lancement de l\'application. Nous vous écrirons à cette adresse.';
+    const link = CHECKOUT[coPlan.textContent];
+    if (!link) {
+      coNote.textContent = 'Le paiement en ligne n\'est pas encore ouvert. Réessayez dans quelques jours.';
+      return;
+    }
+    // Lemon Squeezy pré-remplit l'adresse e-mail avec checkout[email]
+    const url = new URL(link);
+    url.searchParams.set('checkout[email]', coEmail.value);
+    window.location.href = url.toString();
   });
 
   // Prérequis : relief des photos qui suit la souris
@@ -103,14 +131,15 @@
     });
   }
 
-  // Liens de téléchargement en attente des vrais fichiers / fiches des stores
-  document.querySelectorAll('.platform').forEach((p) => p.addEventListener('click', (e) => {
-    if (p.getAttribute('href') !== '#') return;
-    if (p.querySelector('.pf-soon')) { e.preventDefault(); return; }
-    e.preventDefault();
-    const btn = p.querySelector('.pf-btn');
-    if (btn.dataset.done) return;
-    btn.dataset.done = '1';
-    btn.textContent = 'Disponible très bientôt';
-  }));
+  // Badges des stores : pointent vers la fiche quand le lien est renseigné
+  document.querySelectorAll('.store-badge').forEach((badge) => {
+    const link = STORES[badge.dataset.store];
+    if (link) {
+      badge.href = link;
+      badge.target = '_blank';
+      badge.rel = 'noopener';
+    } else {
+      badge.addEventListener('click', (e) => e.preventDefault());
+    }
+  });
 })();

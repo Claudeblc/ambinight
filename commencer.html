@@ -3,38 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Commencer avec Ambinight — Tarifs et téléchargement</title>
-  <meta name="description" content="Achetez votre licence Ambinight et téléchargez l'application pour Windows, iOS et Android.">
+  <title>Tarifs et téléchargement — Ambinight</title>
+  <meta name="description" content="Le prix d'Ambinight, les liens de téléchargement pour PC, iPhone et Android, et le matériel nécessaire.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@300..800&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="commencer.css">
 </head>
 <body class="page-start">
 
-  <header class="nav scrolled" id="nav">
-    <a href="index.html" class="logo" aria-label="Ambinight, accueil">
-      <img class="logo-mark" src="assets/logo.svg" alt="">
-      <span>Ambinight</span>
-    </a>
-    <nav class="nav-links">
-      <a href="#tarifs">Tarifs</a>
-      <a href="#telecharger">Télécharger</a>
-      <a href="#prerequis">Prérequis</a>
-      <a href="#faq">FAQ</a>
+  <!-- ============ NAVIGATION (identique sur toutes les pages) ============ -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="logo" aria-label="Ambinight, accueil"><img class="logo-mark" src="assets/logo.svg" alt=""><span>Ambinight</span></a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html#compatibilite">Compatibilité</a>
+      <a href="index.html#fonctionnalites">Fonctionnalités</a>
+      <a href="index.html#comment">Comment ça marche</a>
+      <a href="index.html#application">Application</a>
+      <a href="commencer.html#tarifs">Tarifs</a>
     </nav>
-    <a href="#tarifs" class="btn btn-light btn-sm">Acheter</a>
+    <a href="commencer.html#tarifs" class="btn btn-light btn-sm">Commencer</a>
   </header>
 
   <!-- ============ EN-TÊTE ============ -->
   <section class="s-hero">
     <div class="s-hero-bg"><img src="assets/rooms-lit.jpg" alt=""></div>
     <div class="wrap s-hero-inner">
-      <p class="s-kicker mono">Tarifs · téléchargement · matériel</p>
-      <h1>Tout ce qu'il faut pour démarrer, sur une page</h1>
-      <p>Le prix, l'application à installer et le matériel nécessaire. Si un point n'est pas clair, la FAQ en bas répond aux questions qu'on nous pose le plus.</p>
+      <p class="label">Commencer</p>
+      <h1>Le prix, l'application et le matériel</h1>
+      <p>Tout ce qu'il faut savoir avant d'installer Ambinight. Une question qui reste&nbsp;? Elle est sûrement dans la FAQ, en bas de page.</p>
       <ol class="s-steps">
         <li><b>1</b>Choisissez votre licence</li>
         <li><b>2</b>Téléchargez l'application</li>
@@ -48,7 +47,7 @@
     <div class="wrap">
       <div class="s-head reveal">
         <h2>Un paiement, pas d'abonnement</h2>
-        <p>Vous payez une fois et l'application reste à vous, mises à jour comprises. Pour comparer&nbsp;: une Hue Play Sync Box coûte plus de 200&nbsp;€.</p>
+        <p>Vous payez une fois, l'application reste à vous, mises à jour comprises. À titre de comparaison, un boîtier de synchronisation de marque coûte souvent plus de 200&nbsp;€.</p>
       </div>
 
       <div class="plans">
@@ -72,9 +71,9 @@
           <div class="price"><b>14,99 €</b><span>paiement unique</span></div>
           <button class="btn btn-light buy" type="button" data-plan="Licence à vie" data-price="14,99 €">Acheter la licence <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="plan-list">
-            <li>3 PC Windows</li>
+            <li>3 appareils&nbsp;: PC, iPhone, Android</li>
             <li>Pièces et lumières illimitées</li>
-            <li>Films, séries et jeux en temps réel</li>
+            <li>Films, séries et jeux</li>
             <li>Mises à jour à vie incluses</li>
           </ul>
         </article>
@@ -85,7 +84,7 @@
           <div class="price"><b>24,99 €</b><span>paiement unique</span></div>
           <button class="btn btn-outline buy" type="button" data-plan="Famille" data-price="24,99 €">Choisir Famille</button>
           <ul class="plan-list">
-            <li>6 PC Windows</li>
+            <li>6 appareils</li>
             <li>Plusieurs écrans synchronisés</li>
             <li>Scènes et profils par pièce</li>
             <li>Support prioritaire</li>
@@ -106,30 +105,31 @@
     <div class="wrap">
       <div class="s-head reveal">
         <h2>Télécharger Ambinight</h2>
-        <p>L'application tourne aujourd'hui sur Windows. Les versions iPhone et Android sont en préparation&nbsp;: votre licence les inclura.</p>
+        <p>Une licence couvre vos appareils. Sur chaque plateforme, Ambinight s'appuie sur la maison connectée que vous utilisez déjà.</p>
       </div>
 
       <div class="platforms">
-        <a class="platform reveal" href="#" data-os="windows">
-          <span class="pf-logo">
-            <svg viewBox="0 0 24 24" fill="#fff"><rect x="2" y="2" width="9.5" height="9.5"/><rect x="12.5" y="2" width="9.5" height="9.5"/><rect x="2" y="12.5" width="9.5" height="9.5"/><rect x="12.5" y="12.5" width="9.5" height="9.5"/></svg>
-          </span>
-          <h3>Windows</h3>
-          <p>Windows 10 et 11 · 64 bits</p>
-          <span class="pf-btn">Télécharger pour Windows</span>
-        </a>
-        <a class="platform reveal" href="#" data-os="ios">
+        <article class="platform reveal">
+          <span class="pf-logo"><svg viewBox="0 0 24 24" fill="#fff"><rect x="2" y="2" width="9.5" height="9.5"/><rect x="12.5" y="2" width="9.5" height="9.5"/><rect x="2" y="12.5" width="9.5" height="9.5"/><rect x="12.5" y="12.5" width="9.5" height="9.5"/></svg></span>
+          <h3>PC Windows</h3>
+          <p>Windows 10 et 11</p>
+          <p class="pf-req"><span>Prérequis</span>Home Assistant</p>
+          <a class="store-badge" href="#" data-store="windows" aria-label="Obtenir Ambinight sur le Microsoft Store"><img src="assets/badges/microsoft.svg" alt="Get it from Microsoft"></a>
+        </article>
+        <article class="platform reveal">
           <span class="pf-logo"><img src="assets/logos/si-apple.svg" alt=""></span>
           <h3>iPhone et iPad</h3>
-          <p>iOS et iPadOS 16 ou plus récent</p>
-          <span class="pf-btn pf-soon">En préparation</span>
-        </a>
-        <a class="platform reveal" href="#" data-os="android">
+          <p>iOS 16 ou plus récent</p>
+          <p class="pf-req"><span>Prérequis</span>Apple Maison</p>
+          <a class="store-badge" href="#" data-store="ios" aria-label="Télécharger Ambinight dans l'App Store"><img src="assets/badges/app-store.svg" alt="Télécharger dans l'App Store"></a>
+        </article>
+        <article class="platform reveal">
           <span class="pf-logo"><img src="assets/logos/si-android.svg" alt=""></span>
           <h3>Android</h3>
           <p>Android 9 ou plus récent</p>
-          <span class="pf-btn pf-soon">En préparation</span>
-        </a>
+          <p class="pf-req"><span>Prérequis</span>Google Home</p>
+          <a class="store-badge store-badge-gp" href="#" data-store="android" aria-label="Disponible sur Google Play"><img src="assets/badges/google-play.svg" alt="Disponible sur Google Play"></a>
+        </article>
       </div>
     </div>
   </section>
@@ -139,7 +139,7 @@
     <div class="wrap">
       <div class="s-head reveal">
         <h2>Le matériel nécessaire</h2>
-        <p>Une TV, le kit caméra avec sa bande LED, l'application. Les ampoules et Home Assistant sont en plus, si vous voulez que toute la pièce suive.</p>
+        <p>Une TV, un kit Ambilight Bluetooth et l'application. Les ampoules sont en option, pour que toute la pièce suive.</p>
       </div>
 
       <div class="kit">
@@ -148,7 +148,7 @@
           <div class="kit-info">
             <div class="kit-meta"><span class="kit-num">01</span><span class="kit-tag tag-own">Vous l'avez déjà</span></div>
             <h3>Votre téléviseur</h3>
-            <p>Votre TV de salon, quelle que soit sa taille. C'est elle qui donne le ton : chaque couleur à l'image part vers vos lumières.</p>
+            <p>N'importe quelle TV, quelle que soit sa taille. Ses couleurs servent de modèle à toutes vos lumières.</p>
           </div>
         </article>
 
@@ -156,8 +156,8 @@
           <div class="kit-view"><div class="kv-glow"></div><img class="kv-img" src="assets/kit/kit-ambilight.webp" alt="Kit Ambilight : caméra sur pied, bande LED en bobine, contrôleur et télécommande" loading="lazy"></div>
           <div class="kit-info">
             <div class="kit-meta"><span class="kit-num">02</span><span class="kit-tag tag-need">Indispensable</span><span class="kit-link"><img src="assets/logos/bluetooth-w.svg" alt="">Bluetooth</span></div>
-            <h3>Le kit caméra + bande LED</h3>
-            <p>Un boîtier caméra ULamp qui lit les couleurs de l'écran et une bande LED à coller derrière la TV, livrés ensemble. L'application le trouve en Bluetooth.</p>
+            <h3>Un kit Ambilight Bluetooth</h3>
+            <p>Une caméra qui lit l'écran et une bande LED à coller derrière la TV. Toutes les marques conviennent, du moment que le kit fonctionne en Bluetooth.</p>
           </div>
         </article>
 
@@ -170,16 +170,16 @@
           <div class="kit-info">
             <div class="kit-meta"><span class="kit-num">03</span><span class="kit-tag tag-core">Le cœur</span><span class="kit-link">Windows · iOS · Android</span></div>
             <h3>L'application Ambinight</h3>
-            <p>Aucun boîtier à acheter : l'application reçoit l'image de la caméra, calcule l'ambiance et l'envoie à toutes vos lumières.</p>
+            <p>Elle trouve le kit et vos lumières, puis les fait changer de couleur avec l'image. Aucun boîtier en plus.</p>
           </div>
         </article>
 
         <article class="kit-card kit-photo kit-bulb reveal" data-visual="bulb">
           <div class="kit-view"><div class="kv-glow"></div><img class="kv-img" src="assets/kit/bulb.webp" alt="Ampoule connectée Wi‑Fi allumée" loading="lazy"></div>
           <div class="kit-info">
-            <div class="kit-meta"><span class="kit-num">04</span><span class="kit-tag tag-opt">Recommandé</span><span class="kit-link"><svg viewBox="0 0 16 12"><path d="M8 11.5l2.2-2.6a3.2 3.2 0 0 0-4.4 0zM3.4 6.4a6.6 6.6 0 0 1 9.2 0l1.5-1.8a9 9 0 0 0-12.2 0zM.2 2.6a11.5 11.5 0 0 1 15.6 0" fill="currentColor"/></svg>Wi‑Fi</span></div>
-            <h3>Ampoules connectées Wi‑Fi</h3>
-            <p>Pour étendre l'ambiance à toute la pièce, et même à toute la maison. Elles doivent être reliées à Home Assistant.</p>
+            <div class="kit-meta"><span class="kit-num">04</span><span class="kit-tag tag-opt">En option</span></div>
+            <h3>Des ampoules connectées</h3>
+            <p>Pour que l'ambiance déborde dans toute la pièce, ou toute la maison.</p>
             <div class="req-logos">
               <img src="assets/logos/hue-w.svg" alt="Philips Hue" style="height:24px">
               <img src="assets/logos/ikea-w.svg" alt="IKEA" style="height:15px">
@@ -191,14 +191,14 @@
 
         <article class="kit-card kit-eco reveal">
           <div class="kit-info">
-            <div class="kit-meta"><span class="kit-num">05</span><span class="kit-tag tag-need">Indispensable pour les ampoules</span></div>
-            <h3>Home Assistant</h3>
-            <p>Aujourd'hui, l'application pilote vos ampoules à travers Home Assistant. Apple Maison et Google Home arrivent via Matter, en cours de développement.</p>
+            <div class="kit-meta"><span class="kit-num">05</span><span class="kit-tag tag-need">Prérequis</span></div>
+            <h3>La maison connectée de votre appareil</h3>
+            <p>Ambinight passe par l'application domotique de votre plateforme pour piloter les ampoules.</p>
           </div>
           <ul class="eco">
-            <li class="eco-on"><img src="assets/logos/si-homeassistant.svg" alt="">Home Assistant<em>Disponible</em></li>
-            <li class="eco-soon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M7.5 12.5L12 9l4.5 3.5V17h-9z"/></svg>Apple Maison<em>Bientôt</em></li>
-            <li class="eco-soon"><img src="assets/logos/si-googlehome.svg" alt="">Google Home<em>Bientôt</em></li>
+            <li><span class="eco-os">PC Windows</span><span class="eco-app"><img src="assets/logos/si-homeassistant.svg" alt="">Home Assistant</span></li>
+            <li><span class="eco-os">iPhone</span><span class="eco-app"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M7.5 12.5L12 9l4.5 3.5V17h-9z"/></svg>Apple Maison</span></li>
+            <li><span class="eco-os">Android</span><span class="eco-app"><img src="assets/logos/si-googlehome.svg" alt="">Google Home</span></li>
           </ul>
         </article>
       </div>
@@ -219,15 +219,15 @@
         </details>
         <details>
           <summary>Puis-je utiliser ma licence sur plusieurs appareils ?</summary>
-          <p>Oui&nbsp;: 3 PC avec la Licence à vie, 6 avec la formule Famille. Les futures versions mobiles seront incluses.</p>
+          <p>Oui&nbsp;: 3 appareils avec la Licence à vie, 6 avec la formule Famille. PC, iPhone et Android comptent chacun pour un appareil.</p>
         </details>
         <details>
-          <summary>Je n'ai pas encore de dispositif Ambilight, que faire ?</summary>
-          <p>Commencez avec l'essai gratuit pour piloter vos ampoules reliées à Home Assistant. Vous ajouterez le kit caméra et bande LED quand vous le souhaitez.</p>
+          <summary>Mon kit Ambilight est-il compatible ?</summary>
+          <p>S'il fonctionne en Bluetooth, oui, quelle que soit sa marque. Le plus simple est de lancer l'essai gratuit&nbsp;: si l'application trouve le kit, il est compatible.</p>
         </details>
         <details>
-          <summary>Qu'est-ce qu'Ambinight ne fait pas encore ?</summary>
-          <p>Pas de pilotage direct des ampoules sans Home Assistant pour l'instant (Hue, Tuya et Govee arrivent). Pas encore d'Apple Maison ni de Google Home&nbsp;: c'est prévu via Matter. Et l'application n'existe aujourd'hui que sur Windows.</p>
+          <summary>Je n'ai pas encore de kit, lequel choisir ?</summary>
+          <p>N'importe quel kit caméra + bande LED vendu avec une connexion Bluetooth. Prenez une bande assez longue pour faire le tour de votre TV.</p>
         </details>
         <details>
           <summary>Et si ça ne fonctionne pas chez moi ?</summary>
@@ -246,10 +246,18 @@
     </div>
   </section>
 
-  <footer class="s-footer">
-    <div class="wrap">
+  <!-- ============ PIED DE PAGE (identique sur toutes les pages) ============ -->
+  <footer class="site-footer">
+    <div class="wrap site-footer-inner">
       <a href="index.html" class="logo"><img class="logo-mark" src="assets/logo.svg" alt=""><span>Ambinight</span></a>
-      <span>© 2026 Ambinight</span>
+      <nav class="footer-links" aria-label="Liens du pied de page">
+        <a href="index.html#compatibilite">Compatibilité</a>
+        <a href="index.html#comment">Comment ça marche</a>
+        <a href="commencer.html#tarifs">Tarifs</a>
+        <a href="commencer.html#telecharger">Télécharger</a>
+        <a href="commencer.html#faq">FAQ</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ambinight</span>
     </div>
   </footer>
 
