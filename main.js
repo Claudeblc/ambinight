@@ -88,7 +88,7 @@
 
   // Intro du hero
   if (hasGsap && !reduced) {
-    gsap.from(['.hero-kicker', '.hero-title', '.hero-sub', '.hero-actions', '.hero-facts'], { y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 0.15 });
+    gsap.from(['.hero-title', '.hero-sub', '.hero-actions', '.hero-brands', '.hero-facts'], { y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 0.15 });
     gsap.from('.nav', { y: -20, opacity: 0, duration: 1, ease: 'power3.out' });
   }
 
