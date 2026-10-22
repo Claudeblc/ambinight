@@ -271,6 +271,118 @@
     </div>
   </section>
 
+  <!-- ============ COULEURS : les lampes prennent les couleurs de l'image ============ -->
+  <section class="colors" id="couleurs">
+    <div class="wrap">
+      <div class="colors-head reveal">
+        <p class="label">Couleurs</p>
+        <h2>Vos lampes prennent les couleurs de l'image</h2>
+        <p>Ambinight ne se contente pas d'allumer et d'éteindre. Un coucher de soleil donne une lumière orangée, une plongée dans l'océan baigne la pièce de bleu. Les couleurs changent en même temps que l'image.</p>
+      </div>
+
+      <div class="colors-stage">
+        <!-- TV de démonstration -->
+        <div class="tvm reveal">
+          <div class="tvm-halo" id="tvHalo"></div>
+          <div class="tvm-frame">
+            <div class="tvm-screen" id="tvScreen">
+              <img class="active" src="assets/screens/ocean.jpg" alt="Image d'océan à l'écran">
+              <img src="assets/screens/sunset.jpg" alt="Coucher de soleil à l'écran" loading="lazy">
+              <img src="assets/screens/city.jpg" alt="Ville la nuit à l'écran" loading="lazy">
+              <img src="assets/screens/race.jpg" alt="Jeu de course à l'écran" loading="lazy">
+            </div>
+          </div>
+          <div class="tvm-stand"></div>
+          <div class="tvm-scenes" id="tvScenes" role="tablist" aria-label="Choisir l'image affichée">
+            <button class="active" type="button" data-scene="0"><i style="--dot:#2fb8ff"></i>Océan</button>
+            <button type="button" data-scene="1"><i style="--dot:#ff9a3d"></i>Coucher de soleil</button>
+            <button type="button" data-scene="2"><i style="--dot:#ff4fd8"></i>Ville</button>
+            <button type="button" data-scene="3"><i style="--dot:#ff3d5a"></i>Jeu de course</button>
+          </div>
+        </div>
+
+        <!-- Téléphone : page d'accueil de l'application -->
+        <div class="colors-phone reveal">
+          <div class="phone-stage phone-static">
+            <div class="p3-glow"></div>
+            <div class="p3-shadow"></div>
+            <div class="p3">
+              <div class="p3-slices"></div>
+
+          <!-- Boutons latéraux -->
+          <span class="p3-btn p3-btn-action"></span>
+          <span class="p3-btn p3-btn-volup"></span>
+          <span class="p3-btn p3-btn-voldown"></span>
+          <span class="p3-btn p3-btn-power"></span>
+
+          <!-- Façade : cadre titane + verre, dessinés en SVG -->
+          <svg class="p3-frame" viewBox="0 0 330 680" aria-hidden="true">
+            <defs>
+              <linearGradient id="ti" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a8a92"/>
+                <stop offset=".18" stop-color="#3a3a40"/>
+                <stop offset=".35" stop-color="#cfcfd6"/>
+                <stop offset=".5" stop-color="#4a4a52"/>
+                <stop offset=".68" stop-color="#2a2a2f"/>
+                <stop offset=".84" stop-color="#b9b9c1"/>
+                <stop offset="1" stop-color="#55555c"/>
+              </linearGradient>
+              <linearGradient id="tiEdge" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+                <stop offset=".5" stop-color="#ffffff" stop-opacity=".05"/>
+                <stop offset="1" stop-color="#ffffff" stop-opacity=".35"/>
+              </linearGradient>
+              <radialGradient id="bezelShade" cx=".5" cy=".5" r=".7">
+                <stop offset=".85" stop-color="#000"/>
+                <stop offset="1" stop-color="#16161a"/>
+              </radialGradient>
+              <mask id="ringMask">
+                <rect width="330" height="680" fill="#fff"/>
+                <rect x="13" y="13" width="304" height="654" rx="45" fill="#000"/>
+              </mask>
+            </defs>
+            <!-- bande titane -->
+            <rect x="0" y="0" width="330" height="680" rx="56" fill="url(#ti)"/>
+            <rect x=".75" y=".75" width="328.5" height="678.5" rx="55.3" fill="none" stroke="url(#tiEdge)" stroke-width="1.5"/>
+            <rect x="3.5" y="3.5" width="323" height="673" rx="52.5" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="1"/>
+            <!-- antennes -->
+            <g fill="#1d1d21" opacity=".9">
+              <rect x="0" y="92" width="4" height="3"/><rect x="326" y="92" width="4" height="3"/>
+              <rect x="0" y="590" width="4" height="3"/><rect x="326" y="590" width="4" height="3"/>
+              <rect x="70" y="0" width="3" height="4"/><rect x="257" y="676" width="3" height="4"/>
+            </g>
+            <!-- bordure noire autour de l'écran -->
+            <rect x="5" y="5" width="320" height="670" rx="51" fill="url(#bezelShade)"/>
+            <rect x="5.5" y="5.5" width="319" height="669" rx="50.5" fill="none" stroke="#fff" stroke-opacity=".08"/>
+          </svg>
+              <div class="p3-screen">
+                <div class="app app-home">
+                  <div class="app-status"><span>9:41</span><span class="app-island"><i></i></span><span class="app-sys"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".7"/><rect x="5" y="5.5" width="3" height="6.5" rx=".7"/><rect x="10" y="3" width="3" height="9" rx=".7"/><rect x="15" y="0" width="3" height="12" rx=".7"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="8" rx="2"/></svg></span></div>
+                  <div class="app-brand"><img src="assets/logo.svg" alt=""><div><b>Ambinight</b><span>Lumière d'ambiance</span></div><em class="app-live">Synchro active</em></div>
+                  <h4 class="home-title">Votre écran.<br>Toute la pièce.</h4>
+                  <div class="app-card home-preview">
+                    <div class="home-tv"><div class="home-halo" id="homeHalo"></div><div class="home-tvscreen" id="homeTv"></div></div>
+                  </div>
+                  <button type="button" class="home-start on" id="homeStart"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg><span>En cours</span></button>
+                  <div class="home-slider"><span>Intensité</span><div class="home-track"><i style="width:72%"></i></div><b>72 %</b></div>
+                  <div class="app-section-title"><b>Vos lumières</b></div>
+                  <div class="home-lamps" id="homeLamps">
+                    <div class="home-lamp"><span class="lamp-dot"></span><b>Salon</b><small>3 lampes</small></div>
+                    <div class="home-lamp"><span class="lamp-dot"></span><b>Chambre</b><small>1 lampe</small></div>
+                    <div class="home-lamp"><span class="lamp-dot"></span><b>Cuisine</b><small>1 lampe</small></div>
+                    <div class="home-lamp"><span class="lamp-dot"></span><b>Bureau</b><small>2 lampes</small></div>
+                  </div>
+                  <div class="app-homebar"></div>
+                </div>
+              </div>
+              <div class="p3-glass"><div class="p3-glare"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TUTORIEL ============ -->
   <section class="tuto" id="comment">
     <div class="wrap">
@@ -347,6 +459,97 @@
         <button type="button" role="tab" aria-selected="false" data-tab="4"><b>Premier lancement</b><span>L'assistant qui vous guide pas à pas.</span><i></i></button>
       </div>
     </div>
+    </div>
+  </section>
+
+  <!-- ============ VUE 3D DANS L'APPLICATION PC (fenêtre interactive) ============ -->
+  <section class="pc3d" id="vue3d">
+    <div class="wrap">
+      <div class="pc3d-head reveal">
+        <p class="label">Vue 3D</p>
+        <h2>Votre logement en 3D, dans l'application PC</h2>
+        <p>La vue 3D place chaque ampoule dans sa pièce. Un clic sur une ampoule l'allume ou l'éteint, comme dans l'application. Essayez directement dans la fenêtre ci-dessous.</p>
+      </div>
+
+      <div class="win reveal" id="win">
+        <div class="win-bar">
+          <span class="win-title"><img src="assets/logo.svg" alt="">Ambinight</span>
+          <span class="win-ctrl" aria-hidden="true"><i><svg viewBox="0 0 10 10"><path d="M1 5h8"/></svg></i><i><svg viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7"/></svg></i><i class="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg></i></span>
+        </div>
+        <div class="win-body">
+          <aside class="win-side">
+            <div class="win-brand"><img src="assets/logo.svg" alt=""><div><b>Ambinight</b><span>Lumière d'ambiance</span></div></div>
+            <nav class="win-nav" aria-label="Menu de l'application">
+              <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>Ambiance</span>
+              <span><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>Mes lumières</span>
+              <span class="active"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Vue 3D</span>
+              <span><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Connexions</span>
+              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</span>
+            </nav>
+            <div class="win-rooms" id="w3dRooms" aria-live="polite"></div>
+          </aside>
+          <main class="win-main">
+            <div class="win-head">
+              <div><h3>Vue 3D</h3><p>Cliquez sur une ampoule pour allumer la pièce.</p></div>
+              <div class="win-actions"><span class="win-live"><i></i>Synchronisation active</span><button type="button" id="w3dAll">Tout allumer</button></div>
+            </div>
+            <div class="w3d" id="w3d">
+              <svg class="w3d-svg" viewBox="500 200 790 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <filter id="wfeather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter>
+            <filter id="wglow" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Masques des pièces (coordonnées relevées sur la vidéo, repère 1280×720) -->
+            <mask id="wm-salon"   maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="529,351 781,255 820,274 906,374 741,445 736,536 534,447" fill="#fff" filter="url(#wfeather)"/></mask>
+            <mask id="wm-bureau"  maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="782,254 865,225 974,264 974,336 912,369 821,273" fill="#fff" filter="url(#wfeather)"/></mask>
+            <mask id="wm-chambre" maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="983,266 1060,231 1265,316 1263,402 1196,444 1111,407 1066,360 992,342" fill="#fff" filter="url(#wfeather)"/></mask>
+            <mask id="wm-cuisine" maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="914,368 996,336 1066,361 1113,409 956,504 936,420" fill="#fff" filter="url(#wfeather)"/></mask>
+            <mask id="wm-repas"   maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="741,445 906,374 914,368 936,420 956,504 916,536 916,606 736,536" fill="#fff" filter="url(#wfeather)"/></mask>
+            <mask id="wm-cinema"  maskUnits="userSpaceOnUse" x="0" y="0" width="1280" height="720"><polygon points="953,506 1110,409 1196,445 1259,471 1259,625 1074,689 954,566" fill="#fff" filter="url(#wfeather)"/></mask>
+
+            <linearGradient id="wg-stream" x1="380" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset=".45" stop-color="#9b6bff"/>
+              <stop offset="1" stop-color="#ff5ce1"/>
+            </linearGradient>
+            <linearGradient id="wg-warm" x1="380" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset=".5" stop-color="#b37bff"/>
+              <stop offset="1" stop-color="#ffa24a"/>
+            </linearGradient>
+            <linearGradient id="wg-blue" x1="380" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3ee8ff"/>
+              <stop offset="1" stop-color="#3b6bff"/>
+            </linearGradient>
+          </defs>
+
+          <image href="assets/rooms-dark.jpg" width="1280" height="720"/>
+          <image class="ambient" href="assets/rooms-lit.jpg" width="1280" height="720"/>
+
+          <g class="room-light" data-room="salon"   mask="url(#wm-salon)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="bureau"  mask="url(#wm-bureau)"><image href="assets/rooms-lit-bureau.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="chambre" mask="url(#wm-chambre)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="cuisine" mask="url(#wm-cuisine)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="repas"   mask="url(#wm-repas)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+          <g class="room-light" data-room="cinema"  mask="url(#wm-cinema)"><image href="assets/rooms-lit.jpg" width="1280" height="720"/></g>
+
+          <!-- Reflets au sol sous la maison -->
+          <g class="floor-glows">
+            <ellipse class="floor-glow" data-room="salon"  cx="650" cy="600" rx="70" ry="22" fill="#ff7a3c"/>
+            <ellipse class="floor-glow" data-room="repas"  cx="800" cy="650" rx="70" ry="20" fill="#ff5a3c"/>
+            <ellipse class="floor-glow" data-room="cinema" cx="1000" cy="690" rx="90" ry="20" fill="#3d5bff"/>
+          </g>
+
+          <!-- Flux lumineux TV → pièces -->
+          </svg>
+              <div class="w3d-spots" id="w3dSpots"></div>
+              <div class="w3d-hint" id="w3dHint"><span>Cliquez sur une ampoule</span></div>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
   </section>
 

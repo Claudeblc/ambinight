@@ -229,6 +229,123 @@
     requestAnimationFrame(loop);
   }
 
+  /* ---------- 4 bis. Couleurs : la TV change d'image, les lampes suivent ---------- */
+  const colors = document.getElementById('couleurs');
+  if (colors) {
+    // 4 couleurs par image : halo de la TV et lampes Salon, Chambre, Cuisine, Bureau
+    const SCENES = [
+      { img: 'assets/screens/ocean.jpg',  pal: ['#2fb8ff', '#1e6bff', '#33e0c1', '#3a8bff'] },
+      { img: 'assets/screens/sunset.jpg', pal: ['#ff8a3d', '#ffb347', '#ff6a3d', '#ffd27a'] },
+      { img: 'assets/screens/city.jpg',   pal: ['#ff4fd8', '#3ee8ff', '#9a5cff', '#ff6ab0'] },
+      { img: 'assets/screens/race.jpg',   pal: ['#ff3d5a', '#3f7bff', '#ff7a3d', '#c04dff'] },
+    ];
+    const shots = [...colors.querySelectorAll('#tvScreen img')];
+    const buttons = [...colors.querySelectorAll('#tvScenes button')];
+    const lamps = [...colors.querySelectorAll('#homeLamps .lamp-dot')];
+    const homeTv = document.getElementById('homeTv');
+    const homeStart = document.getElementById('homeStart');
+    let scene = 0;
+    let running = true;
+    let auto = null;
+    let inView = false;
+
+    const showScene = (i) => {
+      scene = i;
+      const { img, pal } = SCENES[i];
+      shots.forEach((s, k) => s.classList.toggle('active', k === i));
+      buttons.forEach((b, k) => b.classList.toggle('active', k === i));
+      ['a', 'b', 'c', 'd'].forEach((k, n) => colors.style.setProperty(`--scene-${k}`, pal[n]));
+      homeTv.style.backgroundImage = `url("${img}")`;
+      lamps.forEach((l, n) => l.style.setProperty('--lamp', running ? pal[n] : '#d6d8e2'));
+    };
+    const cycle = () => {
+      clearInterval(auto);
+      if (!reduced) auto = setInterval(() => { if (inView && running) showScene((scene + 1) % SCENES.length); }, 3600);
+    };
+    buttons.forEach((b, i) => b.addEventListener('click', () => { showScene(i); cycle(); }));
+    homeStart.addEventListener('click', () => {
+      running = !running;
+      homeStart.classList.toggle('on', running);
+      homeStart.querySelector('span').textContent = running ? 'En cours' : 'Démarrer';
+      showScene(scene);
+    });
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.3 }).observe(colors);
+    showScene(0);
+    cycle();
+  }
+
+  // épaisseur des téléphones fixes
+  document.querySelectorAll('.phone-static .p3-slices').forEach((slices) => {
+    for (let i = 1; i <= 14; i++) {
+      const s = document.createElement('i');
+      s.style.transform = `translateZ(${-i * 0.75}px)`;
+      slices.appendChild(s);
+    }
+  });
+
+  /* ---------- 4 ter. Vue 3D dans la fenêtre PC : ampoules cliquables ---------- */
+  const w3d = document.getElementById('w3d');
+  if (w3d) {
+    // position des ampoules dans l'image de la maison (repère 1280×720, vue 500→1290 × 200→700)
+    const SPOTS = [
+      { id: 'salon',   name: 'Salon',          x: 652,  y: 405, color: '#c76bff' },
+      { id: 'bureau',  name: 'Bureau',         x: 880,  y: 300, color: '#b05cff' },
+      { id: 'chambre', name: 'Chambre',        x: 1180, y: 345, color: '#4f8dff' },
+      { id: 'cuisine', name: 'Cuisine',        x: 985,  y: 410, color: '#ff9a3c' },
+      { id: 'repas',   name: 'Salle à manger', x: 845,  y: 470, color: '#ff7a3c' },
+      { id: 'cinema',  name: 'Home cinéma',    x: 1110, y: 540, color: '#3f7bff' },
+    ];
+    const VB = { x: 500, y: 200, w: 790, h: 500 };
+    const spotsBox = document.getElementById('w3dSpots');
+    const list = document.getElementById('w3dRooms');
+    const hint = document.getElementById('w3dHint');
+    const allBtn = document.getElementById('w3dAll');
+    const on = {};
+    const bulb = '<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>';
+
+    const setSpot = (id, value) => {
+      on[id] = value;
+      w3d.querySelectorAll(`svg [data-room="${id}"]`).forEach((el) => el.classList.toggle('on', value));
+      const btn = spotsBox.querySelector(`[data-room="${id}"]`);
+      btn.classList.toggle('on', value);
+      btn.setAttribute('aria-pressed', String(value));
+      list.querySelector(`[data-room="${id}"]`).classList.toggle('on', value);
+      allBtn.textContent = SPOTS.every((s) => on[s.id]) ? 'Tout éteindre' : 'Tout allumer';
+    };
+    const touch = () => {
+      w3d.classList.add('touched');
+      hint.classList.add('hide');
+    };
+
+    SPOTS.forEach((s) => {
+      on[s.id] = false;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'spot';
+      b.dataset.room = s.id;
+      b.dataset.name = s.name;
+      b.style.setProperty('--c', s.color);
+      b.style.left = `${((s.x - VB.x) / VB.w) * 100}%`;
+      b.style.top = `${((s.y - VB.y) / VB.h) * 100}%`;
+      b.setAttribute('aria-label', `Allumer ou éteindre : ${s.name}`);
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = bulb;
+      b.addEventListener('click', () => { touch(); setSpot(s.id, !on[s.id]); });
+      spotsBox.appendChild(b);
+
+      const row = document.createElement('div');
+      row.dataset.room = s.id;
+      row.style.setProperty('--c', s.color);
+      row.innerHTML = `<span>${s.name}</span><i></i>`;
+      list.appendChild(row);
+    });
+    allBtn.addEventListener('click', () => {
+      touch();
+      const turnOn = !SPOTS.every((s) => on[s.id]);
+      SPOTS.forEach((s, i) => setTimeout(() => setSpot(s.id, turnOn), i * 140));
+    });
+  }
+
   /* ---------- 5. Application PC ---------- */
   const appTabs = document.getElementById('appTabs');
   const appWindow = document.getElementById('appWindow');
