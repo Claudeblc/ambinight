@@ -955,3 +955,35 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
   .cmob .us { background: linear-gradient(135deg, rgba(124, 107, 255, .25), rgba(62, 232, 255, .1)); border-color: rgba(124, 107, 255, .6); }
   .cmob .us strong { font-size: 26px; color: #fff; }
 }
+/* tableau : sans barre de défilement, textes plus grands */
+.ctab-wrap { overflow: hidden; }
+.ctab { min-width: 0; table-layout: fixed; }
+.ctab thead th { font-size: 19px; padding: 16px 20px 12px; }
+.ctab tbody th { width: 21%; font-size: 16px; color: rgba(255, 255, 255, .78); }
+.ctab th, .ctab td { padding-left: 20px; padding-right: 20px; }
+.ctab td b { font-size: 19px; }
+.ctab td small { font-size: 13.5px; }
+.ctab .na { font-size: 15px; }
+.ctab .bad { font-size: 15.5px; }
+.ctab .ok { font-size: 17px; }
+.ctab tfoot th { font-size: 17px; }
+.ctab tfoot td { font-size: 27px; }
+.ctab tfoot .us { font-size: 36px; }
+.ctab thead .us { white-space: normal; }
+.ctab thead .us img { width: 26px; height: 26px; }
+.us-badge { display: table; margin: 6px 0 0; font-size: 10.5px; }
+@media (max-height: 820px) and (min-width: 701px) {
+  .compare { padding: 76px 0 24px; }
+  .compare .compare-head { margin-bottom: 14px; }
+  .compare .compare-head .label { margin-bottom: 4px; }
+  .compare .compare-head p { margin-top: 4px; }
+  .ctab th, .ctab td { padding-top: 6px; padding-bottom: 6px; }
+  .ctab thead th { padding-top: 10px; padding-bottom: 8px; }
+  .ctab td b { font-size: 17px; }
+  .ctab td small { font-size: 12.5px; margin-top: 0; }
+  .ctab tfoot th, .ctab tfoot td { padding-top: 10px; padding-bottom: 10px; }
+  .ctab tfoot td { font-size: 24px; }
+  .ctab tfoot .us { font-size: 30px; }
+  .ctab-foot { margin-top: 10px; }
+  .compare .cmp-note { margin-top: 8px; }
+}
