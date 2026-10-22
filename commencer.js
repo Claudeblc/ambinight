@@ -106,6 +106,7 @@
   // Liens de téléchargement en attente des vrais fichiers / fiches des stores
   document.querySelectorAll('.platform').forEach((p) => p.addEventListener('click', (e) => {
     if (p.getAttribute('href') !== '#') return;
+    if (p.querySelector('.pf-soon')) { e.preventDefault(); return; }
     e.preventDefault();
     const btn = p.querySelector('.pf-btn');
     if (btn.dataset.done) return;

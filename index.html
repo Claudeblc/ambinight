@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ambinight — Les couleurs de votre écran illuminent votre maison</title>
-  <meta name="description" content="Synchronisez vos lumières connectées avec vos films, séries et jeux. Une immersion totale, bien au-delà de votre écran.">
+  <title>Ambinight — vos lampes suivent les couleurs de la TV</title>
+  <meta name="description" content="Ambinight lit l'image de votre TV avec un boîtier caméra ULamp et fait suivre ses couleurs à votre bande LED et à vos lampes Home Assistant. Application Windows, 14,99 € une fois.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="preload" as="video" href="assets/hero.mp4" type="video/mp4">
   <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -39,44 +39,24 @@
       <div class="hero-shade"></div>
 
       <div class="hero-content wrap">
-        <h1 class="hero-title">
-          <span class="line">Les couleurs</span>
-          <span class="line">de votre écran</span>
-          <span class="line">illuminent</span>
-          <span class="line">votre maison.</span>
-        </h1>
-        <p class="hero-sub">Synchronisez vos lumières connectées avec vos films, séries et jeux. Une immersion totale, bien au-delà de votre écran.</p>
+        <p class="hero-kicker mono">Ambinight · bêta Windows</p>
+        <h1 class="hero-title">Quand l'écran change de couleur, <span class="soft">le salon suit.</span></h1>
+        <p class="hero-sub">Ambinight lit l'image de votre TV avec le boîtier caméra ULamp, puis pilote en direct la bande LED et les lampes reliées à votre Home Assistant.</p>
         <div class="hero-actions">
-          <a href="commencer.html" class="btn btn-light">Commencer <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="commencer.html" class="btn btn-light">Essayer 7 jours gratuitement <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <button class="btn-ghost" id="openDemo" type="button">
             <span class="play"><svg viewBox="0 0 16 16"><path d="M6 4.5v7l5.5-3.5z" fill="currentColor"/></svg></span>
-            Voir la démo
+            Voir la démo <span class="mono dim">0:20</span>
           </button>
         </div>
-        <div class="hero-proof">
-          <div class="avatars">
-            <img class="av" src="assets/avatars/a1.jpg" alt=""><img class="av" src="assets/avatars/a2.jpg" alt=""><img class="av" src="assets/avatars/a3.jpg" alt="">
-          </div>
-          <div>
-            <div class="stars"><span aria-label="5 étoiles"><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>4,9/5</b></div>
-            <div class="proof-sub">+10 000 utilisateurs</div>
-          </div>
-        </div>
       </div>
 
-      <div class="hero-brands">
-        <div class="hero-brands-label">Compatible avec</div>
-        <div class="hero-brands-row">
-          <img class="brand-logo l-hue" src="assets/logos/hue-w.svg" alt="Philips Hue">
-          <img class="brand-logo l-ikea" src="assets/logos/ikea-w.svg" alt="IKEA">
-          <img class="brand-logo l-tuya" src="assets/logos/tuya.svg" alt="Tuya">
-          <img class="brand-logo l-govee" src="assets/logos/govee.svg" alt="Govee">
-          <img class="brand-logo l-ali" src="assets/logos/aliexpress-w.svg" alt="AliExpress">
-          <span class="brand b-more">et plus...</span>
-        </div>
-      </div>
-
-      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+      <dl class="hero-facts wrap">
+        <div><dt class="mono">Application</dt><dd>Windows 10 et 11</dd></div>
+        <div><dt class="mono">Caméra</dt><dd>Boîtier ULamp, Bluetooth</dd></div>
+        <div><dt class="mono">Lampes</dt><dd>Via Home Assistant</dd></div>
+        <div><dt class="mono">Prix</dt><dd>14,99 €, une seule fois</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -87,20 +67,20 @@
     </div>
     <div class="wrap emotions-inner">
       <div class="emotions-copy reveal">
-        <h2>Le même film.<br>Des émotions plus fortes.</h2>
-        <p>Étendez l'ambiance de votre écran à toute la maison. Chaque scène, chaque couleur, pour une expérience immersive unique.</p>
+        <h2>Le film ne s'arrête plus au bord de l'écran</h2>
+        <p>Une explosion orange à l'image&nbsp;: le lampadaire passe à l'orange. Un plan de nuit bleu&nbsp;: toute la pièce bascule avec lui. Vous gardez la main sur l'intensité et sur la vitesse de réaction.</p>
         <ul class="features">
           <li>
             <span class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg></span>
-            <span>Synchronisation<br>en temps réel</span>
+            <span><b>Réactivité au choix</b>Douce pour un film, vive pour un jeu</span>
           </li>
           <li>
             <span class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span>
-            <span>Plusieurs pièces<br>et plusieurs<br>lumières</span>
+            <span><b>Lampe par lampe</b>Vous décidez lesquelles suivent l'écran</span>
           </li>
           <li>
             <span class="f-icon"><svg viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 0 1 4 4v1.5a3 3 0 0 1-5.4 1.8L14.5 14h-5l-1.1 1.3A3 3 0 0 1 3 13.5V12a4 4 0 0 1 4-4z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17" cy="12.8" r=".6"/></svg></span>
-            <span>Compatible<br>films, séries<br>et jeux</span>
+            <span><b>Mode nuit</b>Intensité plafonnée à 25&nbsp;% pour ne pas éblouir</span>
           </li>
         </ul>
       </div>
@@ -177,13 +157,13 @@
     </div>
 
     <div class="maison-copy reveal">
-      <h2>Bien plus qu'une TV.<br>Une maison connectée.</h2>
-      <p>Vos lumières réagissent en temps réel aux couleurs de votre écran, créant une atmosphère dynamique dans chaque pièce.</p>
+      <h2>Le salon s'allume, la chambre reste tranquille</h2>
+      <p>Chaque lampe se règle à part. Faites l'essai sur la maquette&nbsp;: cliquez sur les interrupteurs, pièce par pièce.</p>
       <div class="room-chips" id="roomChips"></div>
       <div class="stats">
-        <div class="stat"><b>1</b><span>écran</span></div>
-        <div class="stat"><b>Toutes</b><span>vos pièces</span></div>
-        <div class="stat"><b>Des possibilités</b><span>infinies</span></div>
+        <div class="stat"><b class="mono">Bluetooth</b><span>pour le boîtier caméra</span></div>
+        <div class="stat"><b class="mono">Home Assistant</b><span>pour vos lampes</span></div>
+        <div class="stat"><b class="mono">Ctrl + Alt + A</b><span>pause en un raccourci</span></div>
       </div>
     </div>
   </section>
@@ -193,12 +173,12 @@
     <div class="simple-bg"><img src="assets/warm-room.jpg" alt=""></div>
     <div class="wrap simple-inner">
       <div class="simple-copy reveal">
-        <h2>Simple. Fluide.<br>Pour tous.</h2>
-        <p>Installez en quelques minutes et transformez votre maison en véritable salle de cinéma.</p>
+        <h2>Deux étapes au premier lancement, puis un bouton</h2>
+        <p>L'application vous guide&nbsp;: elle se connecte à Home Assistant, puis cherche le boîtier caméra de la TV. Ensuite, il ne reste qu'à appuyer sur Démarrer.</p>
         <ol class="steps">
-          <li><span>1</span>Connectez vos appareils</li>
-          <li><span>2</span>Personnalisez vos pièces</li>
-          <li><span>3</span>Profitez de l'expérience</li>
+          <li><span>1</span>Relier vos lampes via Home Assistant</li>
+          <li><span>2</span>Trouver la TV&nbsp;: le boîtier ULamp, en Bluetooth</li>
+          <li><span>3</span>Appuyer sur Démarrer</li>
         </ol>
       </div>
 
@@ -334,9 +314,9 @@
     <div class="appshow-bg"></div>
     <div class="wrap">
       <div class="appshow-head reveal">
-        <span class="appshow-eyebrow"><img src="assets/app-icon.svg" alt="">Application Windows</span>
-        <h2>Toute votre ambiance,<br>dans une seule fenêtre.</h2>
-        <p>Lancez la synchro, choisissez les lumières qui suivent l'écran et réglez l'intensité. Le reste se fait tout seul.</p>
+        <p class="appshow-eyebrow mono">L'application Windows, telle qu'elle est aujourd'hui</p>
+        <h2>Une fenêtre, quatre onglets, rien de plus</h2>
+        <p>Ambiance pour lancer la synchro, Mes lumières pour choisir qui suit l'écran, Connexions pour Home Assistant et la caméra, Réglages pour le reste.</p>
       </div>
 
       <div class="appshow-stage reveal" id="appStage">
@@ -363,14 +343,13 @@
   <!-- ============ COMPATIBILITÉ ============ -->
   <section class="compat" id="compatibilite">
     <div class="wrap">
-      <h2 class="reveal">Compatible avec vos lumières préférées.</h2>
-      <p class="reveal">Ambinight est compatible avec les principales marques d'éclairage connecté.</p>
+      <h2 class="reveal">Vos lampes passent par Home Assistant</h2>
+      <p class="reveal">Si une lampe apparaît en couleur dans votre Home Assistant, elle peut suivre l'écran. Le pilotage direct de Hue, Tuya et Govee, sans Home Assistant, est en préparation.</p>
       <div class="compat-row reveal">
         <div class="card"><img class="brand-logo l-hue" src="assets/logos/hue-w.svg" alt="Philips Hue"></div>
         <div class="card"><img class="brand-logo l-ikea" src="assets/logos/ikea-w.svg" alt="IKEA"></div>
         <div class="card"><img class="brand-logo l-tuya" src="assets/logos/tuya.svg" alt="Tuya"></div>
         <div class="card"><img class="brand-logo l-govee" src="assets/logos/govee.svg" alt="Govee"></div>
-        <div class="card"><img class="brand-logo l-ali" src="assets/logos/aliexpress-w.svg" alt="AliExpress"></div>
         <div class="card card-wide">
           <img class="dev" src="assets/logos/bluetooth-w.svg" alt="Bluetooth">
           <svg class="dev dev-strip" viewBox="0 0 48 24"><ellipse cx="24" cy="12" rx="21" ry="7" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="24" cy="12" rx="13" ry="3.5" fill="none" stroke="currentColor" stroke-width="1.2"/><g fill="currentColor"><circle cx="8" cy="10" r="1"/><circle cx="14" cy="7" r="1"/><circle cx="22" cy="5.6" r="1"/><circle cx="30" cy="5.8" r="1"/><circle cx="38" cy="7.4" r="1"/></g></svg>
@@ -386,9 +365,9 @@
   <section class="cta" id="cta">
     <div class="cta-media"><img src="assets/gamer.jpg" alt="Joueur devant un écran dont les couleurs illuminent la pièce"></div>
     <div class="cta-copy reveal">
-      <h2>Transformez chaque<br>moment en une ambiance unique.</h2>
-      <p>Avec Ambinight, l'action ne s'arrête pas<br>aux bords de votre écran.</p>
-      <a href="commencer.html" class="btn btn-light">Commencer <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <h2>Essayez 7 jours, payez 14,99&nbsp;€ si vous gardez</h2>
+      <p>Pas d'abonnement, pas de carte bancaire pour l'essai.<br>Si ça ne marche pas chez vous, vous êtes remboursé sous 14 jours.</p>
+      <a href="commencer.html" class="btn btn-light">Voir les tarifs <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </section>
 

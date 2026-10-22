@@ -7,7 +7,7 @@
   <meta name="description" content="Achetez votre licence Ambinight et téléchargez l'application pour Windows, iOS et Android.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="commencer.css">
@@ -34,9 +34,9 @@
   <section class="s-hero">
     <div class="s-hero-bg"><img src="assets/rooms-lit.jpg" alt=""></div>
     <div class="wrap s-hero-inner">
-      <span class="eyebrow"><i></i>Paiement unique · sans abonnement</span>
-      <h1>Votre maison, synchronisée<br>en quelques minutes.</h1>
-      <p>Choisissez votre licence, installez l'application sur votre ordinateur ou votre téléphone, et laissez vos lumières suivre chaque scène.</p>
+      <p class="s-kicker mono">Tarifs · téléchargement · matériel</p>
+      <h1>Tout ce qu'il faut pour démarrer, sur une page</h1>
+      <p>Le prix, l'application à installer et le matériel nécessaire. Si un point n'est pas clair, la FAQ en bas répond aux questions qu'on nous pose le plus.</p>
       <ol class="s-steps">
         <li><b>1</b>Choisissez votre licence</li>
         <li><b>2</b>Téléchargez l'application</li>
@@ -49,8 +49,8 @@
   <section class="s-section" id="tarifs">
     <div class="wrap">
       <div class="s-head reveal">
-        <h2>Un prix simple. Pour toujours.</h2>
-        <p>Payez une fois, gardez l'application à vie. Toutes les mises à jour sont incluses.</p>
+        <h2>Un paiement, pas d'abonnement</h2>
+        <p>Vous payez une fois et l'application reste à vous, mises à jour comprises. Pour comparer&nbsp;: une Hue Play Sync Box coûte plus de 200&nbsp;€.</p>
       </div>
 
       <div class="plans">
@@ -68,13 +68,13 @@
         </article>
 
         <article class="plan plan-featured reveal">
-          <span class="plan-badge">Le plus choisi</span>
+          <span class="plan-badge">Notre conseil</span>
           <h3>Licence à vie</h3>
           <p class="plan-desc">Tout Ambinight, pour toute la maison.</p>
           <div class="price"><b>14,99 €</b><span>paiement unique</span></div>
           <button class="btn btn-light buy" type="button" data-plan="Licence à vie" data-price="14,99 €">Acheter la licence <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="plan-list">
-            <li>3 appareils (ordinateur et mobiles)</li>
+            <li>3 PC Windows</li>
             <li>Pièces et lumières illimitées</li>
             <li>Films, séries et jeux en temps réel</li>
             <li>Mises à jour à vie incluses</li>
@@ -87,7 +87,7 @@
           <div class="price"><b>24,99 €</b><span>paiement unique</span></div>
           <button class="btn btn-outline buy" type="button" data-plan="Famille" data-price="24,99 €">Choisir Famille</button>
           <ul class="plan-list">
-            <li>6 appareils</li>
+            <li>6 PC Windows</li>
             <li>Plusieurs écrans synchronisés</li>
             <li>Scènes et profils par pièce</li>
             <li>Support prioritaire</li>
@@ -107,8 +107,8 @@
   <section class="s-section s-download" id="telecharger">
     <div class="wrap">
       <div class="s-head reveal">
-        <h2>Téléchargez l'application.</h2>
-        <p>Une seule licence, sur tous vos appareils. Connectez-vous avec le même compte partout.</p>
+        <h2>Télécharger Ambinight</h2>
+        <p>L'application tourne aujourd'hui sur Windows. Les versions iPhone et Android sont en préparation&nbsp;: votre licence les inclura.</p>
       </div>
 
       <div class="platforms">
@@ -124,13 +124,13 @@
           <span class="pf-logo"><img src="assets/logos/si-apple.svg" alt=""></span>
           <h3>iPhone et iPad</h3>
           <p>iOS et iPadOS 16 ou plus récent</p>
-          <span class="pf-btn">Télécharger dans l'App Store</span>
+          <span class="pf-btn pf-soon">En préparation</span>
         </a>
         <a class="platform reveal" href="#" data-os="android">
           <span class="pf-logo"><img src="assets/logos/si-android.svg" alt=""></span>
           <h3>Android</h3>
           <p>Android 9 ou plus récent</p>
-          <span class="pf-btn">Disponible sur Google Play</span>
+          <span class="pf-btn pf-soon">En préparation</span>
         </a>
       </div>
     </div>
@@ -140,8 +140,8 @@
   <section class="s-section" id="prerequis">
     <div class="wrap">
       <div class="s-head reveal">
-        <h2>Ce qu'il vous faut.</h2>
-        <p>Voici tout le matériel, en un coup d'œil. L'application Ambinight relie l'ensemble, sans boîtier supplémentaire.</p>
+        <h2>Le matériel nécessaire</h2>
+        <p>Une TV, le kit caméra avec sa bande LED, l'application. Les ampoules et Home Assistant sont en plus, si vous voulez que toute la pièce suive.</p>
       </div>
 
       <div class="kit">
@@ -158,7 +158,7 @@
           <div class="kit-view"><div class="kv-glow"></div><img class="kv-img" src="assets/kit/kit-ambilight.webp" alt="Kit Ambilight : caméra sur pied, bande LED en bobine, contrôleur et télécommande" loading="lazy"></div>
           <div class="kit-info">
             <div class="kit-meta"><span class="kit-num">02</span><span class="kit-tag tag-need">Indispensable</span><span class="kit-link"><img src="assets/logos/bluetooth-w.svg" alt="">Bluetooth</span></div>
-            <h3>Le kit Ambilight</h3>
+            <h3>Le kit caméra + bande LED</h3>
             <p>Un boîtier caméra ULamp qui lit les couleurs de l'écran et une bande LED à coller derrière la TV, livrés ensemble. L'application le trouve en Bluetooth.</p>
           </div>
         </article>
@@ -204,7 +204,7 @@
           </ul>
         </article>
       </div>
-      <p class="kit-hint-line">Photos : LG Electronics (CC BY 2.0), Zátonyi Sándor / matankic (CC BY 4.0), via Flickr et Wikimedia Commons ; kit Ambilight : photo fabricant. Images détourées et retouchées.</p>
+      <p class="kit-hint-line">Photos : LG Electronics (CC BY 2.0), Zátonyi Sándor / matankic (CC BY 4.0), via Flickr et Wikimedia Commons ; kit caméra : photo fabricant. Images détourées et retouchées.</p>
     </div>
   </section>
 
@@ -212,7 +212,7 @@
   <section class="s-section" id="faq">
     <div class="wrap faq-wrap">
       <div class="s-head reveal">
-        <h2>Questions fréquentes.</h2>
+        <h2>Questions fréquentes</h2>
       </div>
       <div class="faq reveal">
         <details>
@@ -221,11 +221,15 @@
         </details>
         <details>
           <summary>Puis-je utiliser ma licence sur plusieurs appareils ?</summary>
-          <p>Oui : 3 appareils avec la Licence à vie, 6 avec la formule Famille. Vous pouvez en changer à tout moment depuis votre compte.</p>
+          <p>Oui&nbsp;: 3 PC avec la Licence à vie, 6 avec la formule Famille. Les futures versions mobiles seront incluses.</p>
         </details>
         <details>
           <summary>Je n'ai pas encore de dispositif Ambilight, que faire ?</summary>
           <p>Commencez avec l'essai gratuit pour piloter vos ampoules reliées à Home Assistant. Vous ajouterez le kit caméra et bande LED quand vous le souhaitez.</p>
+        </details>
+        <details>
+          <summary>Qu'est-ce qu'Ambinight ne fait pas encore ?</summary>
+          <p>Pas de pilotage direct des ampoules sans Home Assistant pour l'instant (Hue, Tuya et Govee arrivent). Pas encore d'Apple Maison ni de Google Home&nbsp;: c'est prévu via Matter. Et l'application n'existe aujourd'hui que sur Windows.</p>
         </details>
         <details>
           <summary>Et si ça ne fonctionne pas chez moi ?</summary>
@@ -238,8 +242,8 @@
   <!-- ============ CTA FINAL ============ -->
   <section class="s-final">
     <div class="wrap s-final-inner reveal">
-      <h2>Prêt à sortir du cadre ?</h2>
-      <p>Licence à vie, 14,99 €. Une fois. Pour toujours.</p>
+      <h2>14,99&nbsp;€, une fois</h2>
+      <p>Ou essayez d'abord 7 jours, sans carte bancaire.</p>
       <button class="btn btn-light buy" type="button" data-plan="Licence à vie" data-price="14,99 €">Acheter la licence <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </section>
@@ -256,7 +260,7 @@
     <div class="modal-backdrop" data-close></div>
     <div class="checkout">
       <button class="modal-close" data-close type="button" aria-label="Fermer">×</button>
-      <span class="eyebrow"><i></i>Récapitulatif</span>
+      <p class="s-kicker mono">Récapitulatif</p>
       <h3 id="coPlan">Licence à vie</h3>
       <div class="co-row"><span>Total, paiement unique</span><b id="coPrice">14,99 €</b></div>
       <label class="co-field">Adresse e-mail pour recevoir votre licence

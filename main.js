@@ -68,8 +68,7 @@
   };
 
   const heroContent = document.querySelector('.hero-content');
-  const heroBrands = document.querySelector('.hero-brands');
-  const scrollHint = document.querySelector('.scroll-hint');
+  const heroFacts = document.querySelector('.hero-facts');
 
   const tick = () => {
     const p = heroProgress();
@@ -82,16 +81,14 @@
     const fade = Math.min(1, Math.max(0, (p - 0.78) / 0.22));
     heroContent.style.opacity = String(1 - fade);
     heroContent.style.transform = `translateY(${-fade * 40}px)`;
-    heroBrands.style.opacity = String(1 - fade);
-    scrollHint.style.opacity = String(Math.max(0, 1 - p * 6));
+    heroFacts.style.opacity = String(1 - fade);
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 
   // Intro du hero
   if (hasGsap && !reduced) {
-    gsap.from('.hero-title .line', { yPercent: 60, opacity: 0, duration: 1.2, ease: 'power3.out', stagger: 0.09, delay: 0.15 });
-    gsap.from(['.hero-sub', '.hero-actions', '.hero-proof', '.hero-brands'], { y: 24, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.55 });
+    gsap.from(['.hero-kicker', '.hero-title', '.hero-sub', '.hero-actions', '.hero-facts'], { y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 0.15 });
     gsap.from('.nav', { y: -20, opacity: 0, duration: 1, ease: 'power3.out' });
   }
 
