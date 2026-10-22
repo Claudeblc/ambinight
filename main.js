@@ -329,7 +329,7 @@
     const syncBtn = document.getElementById('homeSync');
     const live = document.getElementById('homeLive');
     const buttons = [...colors.querySelectorAll('#tvScenes button')];
-    const CHAPTERS = [0, 5, 10, 15];
+    const CHAPTERS = [0, 6.5, 12, 17.5];
     const ICONS = {
       off: '<svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>',
       on: '<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>',
