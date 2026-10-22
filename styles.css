@@ -865,3 +865,26 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
 .cmp-detail { list-style: none; margin: -6px 0 4px; padding: 4px 14px 10px 28px; display: grid; gap: 6px; border-left: 2px solid rgba(255, 255, 255, .12); margin-left: 14px; }
 .cmp-detail li { display: flex; justify-content: space-between; gap: 16px; font-size: 13.5px; color: rgba(255, 255, 255, .62); }
 .cmp-detail b { font-weight: 600; color: rgba(255, 255, 255, .85); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Ambinight : le matériel est déjà chez vous */
+.cmp-us { grid-template-rows: auto auto; }
+.cmp-detail-us { grid-column: 1 / -1; margin: 6px 0 0; border-left-color: rgba(124, 107, 255, .5); }
+.cmp-detail .owned { display: inline-flex; align-items: center; gap: 6px; color: #6ee7a8; }
+.cmp-detail .owned::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: #6ee7a8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23062' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat; }
+
+/* Sélection Amazon (liens affiliés) */
+.shop { margin: 46px 0 0; padding: 28px; border-radius: 22px; background: rgba(255, 255, 255, .03); border: 1px solid var(--line); }
+.shop-head h3 { font-size: 22px; }
+.shop-head p { margin: 8px 0 0; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+.shop-card { display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 16px; color: #fff; text-decoration: none; background: rgba(255, 255, 255, .04); border: 1px solid var(--line); transition: border-color .3s, transform .3s var(--ease), background .3s; }
+.shop-card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .07); }
+.shop-img { display: grid; place-items: center; height: 120px; margin-bottom: 6px; border-radius: 12px; background: radial-gradient(60% 70% at 50% 60%, rgba(124, 107, 255, .25), transparent 70%); }
+.shop-img img { max-height: 108px; max-width: 80%; object-fit: contain; }
+.shop-tag { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #9db4ff; }
+.shop-card b { font-size: 15.5px; font-weight: 600; }
+.shop-card small { font-size: 13px; color: rgba(255, 255, 255, .6); }
+.shop-card em { margin-top: auto; padding-top: 8px; font-style: normal; font-size: 13.5px; font-weight: 700; color: #ffb547; }
+.shop-card em::after { content: " ↗"; }
+.shop-note { margin: 16px 0 0; font-size: 12px; color: rgba(255, 255, 255, .45); }
+@media (max-width: 800px) { .shop-grid { grid-template-columns: 1fr; } }
