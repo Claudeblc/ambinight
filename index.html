@@ -28,7 +28,15 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="top">
-    <video class="hero-video" src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <video class="hero-video" poster="assets/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <script>
+      // vidéo du hero à la bonne définition : 4K sur grand écran, 1440p sinon, légère sur téléphone
+      (function () {
+        var v = document.querySelector('.hero-video');
+        var px = Math.max(screen.width, screen.height) * (window.devicePixelRatio || 1);
+        v.src = px >= 3000 ? 'assets/hero-4k.mp4' : px >= 1500 && screen.width > 900 ? 'assets/hero-1440.mp4' : 'assets/hero.mp4';
+      })();
+    </script>
     <div class="hero-shade"></div>
 
     <div class="hero-content wrap">
