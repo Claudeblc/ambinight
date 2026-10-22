@@ -400,56 +400,75 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
 }
 
 
-/* ---------- Couleurs : TV de démonstration + accueil de l'application ---------- */
-.colors { --scene-a: #2fb8ff; --scene-b: #1e6bff; --scene-c: #33e0c1; --scene-d: #3a8bff;
-  position: relative; padding: 130px 0 120px; overflow: hidden; background: #040406; }
-.colors::before { content: ""; position: absolute; inset: 20% 10% 10% 0; background: radial-gradient(closest-side, color-mix(in srgb, var(--scene-a) 18%, transparent), transparent); filter: blur(40px); transition: background 1.2s var(--ease); pointer-events: none; }
-.colors-head { position: relative; max-width: 640px; margin-bottom: 56px; }
+/* ---------- Salon : allumer, éteindre ou synchroniser avec la TV ---------- */
+@property --c { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --c2 { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+.colors { position: relative; padding: 130px 0 120px; overflow: hidden; background: #040406; }
+.colors-head { position: relative; max-width: 760px; margin-bottom: 52px; }
 .colors-head p:not(.label) { margin: 16px 0 0; font-size: 17px; color: rgba(255, 255, 255, .78); }
-.colors-stage { position: relative; display: grid; grid-template-columns: 1fr auto; gap: clamp(30px, 5vw, 80px); align-items: center; }
+.colors-stage { position: relative; display: grid; grid-template-columns: 1fr auto; gap: clamp(30px, 4vw, 64px); align-items: center; }
 
-.tvm { position: relative; padding-top: 10px; }
-.tvm-halo {
-  position: absolute; inset: -6% -4% 14%; border-radius: 30px; filter: blur(60px); opacity: .85; pointer-events: none;
-  background: linear-gradient(90deg, var(--scene-a), var(--scene-b) 35%, var(--scene-c) 65%, var(--scene-d));
-  transition: background 1.2s var(--ease);
+/* le salon : photo « lumières éteintes » + halos colorés pilotés par l'application */
+.room { position: relative; aspect-ratio: 1344 / 768; border-radius: 18px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 50px 110px -40px rgba(0, 0, 0, .95); isolation: isolate; }
+.room-base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.room-tv { position: absolute; left: 55.06%; top: 25.65%; width: 30.13%; height: 35.03%; z-index: 2; }
+.room-tv img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .9s var(--ease); }
+.room-tv img.active { opacity: 1; }
+.glow {
+  --c: #ffd2a1; --c2: #ffd2a1;
+  position: absolute; z-index: 3; pointer-events: none; border-radius: 50%;
+  transform: translate(-50%, -50%); opacity: 0; mix-blend-mode: screen;
+  background: radial-gradient(closest-side, var(--c) 0%, color-mix(in srgb, var(--c) 45%, transparent) 40%, transparent 100%);
+  filter: blur(6px);
+  transition: opacity .9s var(--ease), --c 1.2s var(--ease), --c2 1.2s var(--ease);
 }
-.tvm-frame { position: relative; padding: 10px; border-radius: 14px; background: linear-gradient(180deg, #1b1b20, #0c0c10); box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 40px 80px -30px rgba(0, 0, 0, .9); }
-.tvm-screen { position: relative; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000; }
-.tvm-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity 1s var(--ease), transform 6s linear; }
-.tvm-screen img.active { opacity: 1; transform: scale(1); }
-.tvm-stand { width: 32%; height: 10px; margin: 0 auto; border-radius: 0 0 8px 8px; background: linear-gradient(180deg, #2a2a30, #121216); }
-.tvm-scenes { position: relative; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 26px; }
-.tvm-scenes button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, .7); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); transition: background .3s, color .3s, border-color .3s; }
+.glow.lit { opacity: 1; }
+/* bande LED derrière la TV : halo sur le mur, sous l'écran */
+.g-tv { z-index: 1; left: 70.5%; top: 43%; width: 56%; height: 86%; border-radius: 30%; filter: blur(26px) saturate(1.3);
+  background: radial-gradient(ellipse 50% 60% at 25% 50%, var(--c), transparent 70%), radial-gradient(ellipse 50% 60% at 78% 50%, var(--c2), transparent 70%); }
+.g-ceiling { left: 46.5%; top: 6%; width: 40%; height: 30%; filter: blur(14px); }
+.g-floor { left: 34.8%; top: 50%; width: 30%; height: 62%; border-radius: 45% 45% 50% 50%; filter: blur(18px); }
+.g-left { left: 41.8%; top: 59.5%; width: 17%; height: 28%; }
+.g-right { left: 93.2%; top: 63.5%; width: 17%; height: 28%; }
+.g-fill { z-index: 1; left: 50%; top: 50%; width: 140%; height: 140%; filter: blur(40px); opacity: var(--fill-o, 0); background: radial-gradient(closest-side, var(--c), transparent); transition: opacity .9s var(--ease), --c 1.2s var(--ease); }
+.room-hint { position: absolute; z-index: 4; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 8px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: #1b1d29; background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, .45); white-space: nowrap; transition: opacity .5s, transform .5s var(--ease); }
+.room-hint.hide { opacity: 0; transform: translate(-50%, 10px); }
+
+.tvm-scenes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; }
+.tvm-scenes .label { margin: 0 6px 0 0; }
+.tvm-scenes button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: rgba(255, 255, 255, .7); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); transition: background .3s, color .3s, border-color .3s; }
 .tvm-scenes button i { width: 9px; height: 9px; border-radius: 50%; background: var(--dot); box-shadow: 0 0 8px var(--dot); }
 .tvm-scenes button:hover { color: #fff; }
 .tvm-scenes button.active { color: #fff; background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .3); }
 
-/* téléphone fixe (pas d'interaction au survol), placé à droite */
-.colors-phone { width: calc(330px * .82); height: calc(680px * .82); }
-.phone-static { position: relative; left: auto; top: auto; margin: 0; transform: scale(.82); transform-origin: 0 0; --c: var(--scene-a); }
+/* téléphone fixe, à droite */
+.colors-phone { width: calc(330px * .84); height: calc(680px * .84); }
+.phone-static { position: relative; left: auto; top: auto; margin: 0; transform: scale(.84); transform-origin: 0 0; }
 .phone-static .p3 { transform: rotateY(-14deg) rotateX(4deg); animation: phoneFloat 7s ease-in-out infinite; }
 @keyframes phoneFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
-/* page d'accueil de l'application */
-.app-home .home-title { margin: 2px 4px 10px; font-family: var(--font-text); font-size: 17px; font-weight: 700; line-height: 1.15; letter-spacing: -.01em; word-spacing: 0; color: var(--ink); }
+/* écran « Salon » de l'application */
 .home-preview { padding: 8px; }
-.home-tv { position: relative; height: 104px; display: grid; place-items: center; }
-.home-halo { position: absolute; inset: 4px 14px; border-radius: 40%; filter: blur(16px); background: linear-gradient(90deg, var(--scene-a), var(--scene-b), var(--scene-c), var(--scene-d)); transition: background 1.2s var(--ease); }
-.home-tvscreen { position: relative; width: 140px; height: 79px; border-radius: 5px; border: 3px solid #1b1d29; background: #000 center / cover no-repeat; transition: background-image .6s; }
+.home-tv { position: relative; height: 96px; display: grid; place-items: center; }
+.home-halo { position: absolute; inset: 4px 16px; border-radius: 40%; filter: blur(16px); background: linear-gradient(90deg, var(--tv-a, #2fb8ff), var(--tv-b, #1e6bff)); transition: --c 1s; }
+.home-tvscreen { position: relative; width: 132px; height: 74px; border-radius: 5px; border: 3px solid #1b1d29; background: #000 center / cover no-repeat; }
 .home-tvscreen::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: #1b1d29; }
-.home-start { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: 10px 0 8px; padding: 11px; border-radius: 13px; background: #e6e9f4; color: var(--ink); font-size: 13.5px; font-weight: 700; }
-.home-start svg { width: 12px; height: 12px; }
+.home-start { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: 10px 0 2px; padding: 11px; border-radius: 13px; background: #e6e9f4; color: var(--ink); font-size: 12.5px; font-weight: 700; transition: background .3s, color .3s, box-shadow .3s; }
+.home-start svg { width: 11px; height: 11px; }
 .home-start.on { background: var(--blue); color: #fff; box-shadow: 0 8px 20px -8px rgba(47, 107, 255, .8); }
-.home-slider { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 8px 6px; font-size: 11.5px; color: var(--sub); }
-.home-slider b { color: var(--ink); font-weight: 600; }
-.home-track { height: 4px; border-radius: 4px; background: #dfe3ee; }
-.home-track i { display: block; height: 100%; border-radius: 4px; background: var(--blue); }
-.home-lamps { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.home-lamp { padding: 10px; border-radius: 14px; background: rgba(255, 255, 255, .75); border: 1px solid rgba(255, 255, 255, .9); }
-.home-lamp b { display: block; margin-top: 8px; font-size: 12.5px; }
-.home-lamp small { font-size: 10.5px; color: var(--sub); }
-.lamp-dot { display: block; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff 0 18%, var(--lamp, #ccc) 60%); box-shadow: 0 0 16px 2px var(--lamp, transparent); transition: background 1.2s var(--ease), box-shadow 1.2s var(--ease); }
+.seg-legend { font-size: 10px; color: var(--sub); }
+.lamp-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lamp-row { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px; padding: 7px 8px 7px 9px; border-radius: 13px; background: rgba(255, 255, 255, .75); border: 1px solid rgba(255, 255, 255, .9); }
+.lamp-row .lamp-dot { width: 26px; height: 26px; border-radius: 50%; background: #e6e8f0; transition: background .8s, box-shadow .8s; }
+.lamp-row.on .lamp-dot { background: radial-gradient(circle at 40% 35%, #fff 0 20%, #ffd2a1 70%); box-shadow: 0 0 12px #ffd2a1; }
+.lamp-row.tv .lamp-dot { background: radial-gradient(circle at 40% 35%, #fff 0 18%, var(--lamp) 65%); box-shadow: 0 0 14px var(--lamp); }
+.lamp-row b { display: block; font-size: 11.5px; font-weight: 600; line-height: 1.2; }
+.lamp-row small { font-size: 9.5px; color: var(--sub); }
+.mode { display: inline-flex; padding: 2px; border-radius: 8px; background: #eceff7; }
+.mode button { width: 26px; height: 22px; border-radius: 6px; display: grid; place-items: center; color: #8a8ea3; }
+.mode svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.mode button.sel { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(60, 70, 120, .18); }
+.mode button.sel[data-mode="tv"] { background: var(--blue); color: #fff; }
 
 /* ---------- Vue 3D dans la fenêtre de l'application PC ---------- */
 .pc3d { position: relative; padding: 120px 0 130px; background: radial-gradient(50% 50% at 50% 60%, rgba(120, 140, 255, .12), transparent 70%), var(--bg); }
@@ -515,7 +534,7 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
 
 @media (max-width: 1100px) {
   .colors-stage { grid-template-columns: 1fr; justify-items: center; }
-  .tvm { width: 100%; }
+  .room-wrap { width: 100%; }
   .win-body { grid-template-columns: 1fr; }
   .win-side { display: none; }
 }

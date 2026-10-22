@@ -229,47 +229,112 @@
     requestAnimationFrame(loop);
   }
 
-  /* ---------- 4 bis. Couleurs : la TV change d'image, les lampes suivent ---------- */
+  /* ---------- 4 bis. Salon : éteindre, allumer ou synchroniser chaque lampe avec la TV ---------- */
   const colors = document.getElementById('couleurs');
   if (colors) {
-    // 4 couleurs par image : halo de la TV et lampes Salon, Chambre, Cuisine, Bureau
+    // couleurs relevées dans chaque image : bande LED (gauche, droite), plafonnier, lampadaire, lampe gauche, lampe droite
     const SCENES = [
-      { img: 'assets/screens/ocean.jpg',  pal: ['#2fb8ff', '#1e6bff', '#33e0c1', '#3a8bff'] },
-      { img: 'assets/screens/sunset.jpg', pal: ['#ff8a3d', '#ffb347', '#ff6a3d', '#ffd27a'] },
-      { img: 'assets/screens/city.jpg',   pal: ['#ff4fd8', '#3ee8ff', '#9a5cff', '#ff6ab0'] },
-      { img: 'assets/screens/race.jpg',   pal: ['#ff3d5a', '#3f7bff', '#ff7a3d', '#c04dff'] },
+      { img: 'assets/room/tv-ocean.webp',  tv: 'assets/screens/ocean.jpg',  pal: { tv: '#2fd0ff', tv2: '#1e5bff', ceiling: '#36c8ff', floor: '#1fd6c0', left: '#2a8bff', right: '#33e0ff' } },
+      { img: 'assets/room/tv-sunset.webp', tv: 'assets/screens/sunset.jpg', pal: { tv: '#ff9a3d', tv2: '#ff6a3d', ceiling: '#ffb35c', floor: '#ff7d3b', left: '#ffc06a', right: '#ff8a3d' } },
+      { img: 'assets/room/tv-city.webp',   tv: 'assets/screens/city.jpg',   pal: { tv: '#ff4fd8', tv2: '#3ee8ff', ceiling: '#a45cff', floor: '#ff4fb8', left: '#3ee8ff', right: '#ff6ad5' } },
+      { img: 'assets/room/tv-race.webp',   tv: 'assets/screens/race.jpg',   pal: { tv: '#3f7bff', tv2: '#ff3d5a', ceiling: '#ff3d6e', floor: '#4f6bff', left: '#ff5a3d', right: '#c04dff' } },
     ];
-    const shots = [...colors.querySelectorAll('#tvScreen img')];
+    const LAMPS = [
+      { id: 'tv',      name: 'Bande LED TV' },
+      { id: 'ceiling', name: 'Plafonnier' },
+      { id: 'floor',   name: 'Lampadaire' },
+      { id: 'left',    name: 'Lampe gauche' },
+      { id: 'right',   name: 'Lampe droite' },
+    ];
+    const WARM = '#ffd2a1';
+    const ICONS = {
+      off: '<svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>',
+      on: '<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>',
+      tv: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>',
+    };
+    const LABELS = { off: 'Éteinte', on: 'Allumée', tv: 'Synchronisée avec la TV' };
+    const tvImgs = [...colors.querySelectorAll('#roomTv img')];
     const buttons = [...colors.querySelectorAll('#tvScenes button')];
-    const lamps = [...colors.querySelectorAll('#homeLamps .lamp-dot')];
+    const list = document.getElementById('lampList');
     const homeTv = document.getElementById('homeTv');
-    const homeStart = document.getElementById('homeStart');
+    const syncBtn = document.getElementById('homeSync');
+    const live = document.getElementById('homeLive');
+    const hint = document.getElementById('roomHint');
+    const fill = colors.querySelector('.g-fill');
+    const mode = {};
     let scene = 0;
-    let running = true;
-    let auto = null;
+    let touched = false;
     let inView = false;
+
+    const render = () => {
+      const pal = SCENES[scene].pal;
+      let lit = 0;
+      LAMPS.forEach(({ id }) => {
+        const glow = colors.querySelector(`.glow[data-lamp="${id}"]`);
+        const m = mode[id];
+        glow.classList.toggle('lit', m !== 'off');
+        glow.style.setProperty('--c', m === 'tv' ? pal[id] : WARM);
+        if (id === 'tv') glow.style.setProperty('--c2', m === 'tv' ? pal.tv2 : WARM);
+        if (m !== 'off') lit += 1;
+        const row = list.querySelector(`[data-lamp="${id}"]`);
+        row.classList.toggle('on', m === 'on');
+        row.classList.toggle('tv', m === 'tv');
+        row.style.setProperty('--lamp', pal[id]);
+        row.querySelector('small').textContent = LABELS[m];
+        row.querySelectorAll('.mode button').forEach((b) => b.classList.toggle('sel', b.dataset.mode === m));
+      });
+      const anyTv = LAMPS.some(({ id }) => mode[id] === 'tv');
+      const allTv = LAMPS.every(({ id }) => mode[id] === 'tv');
+      fill.style.setProperty('--fill-o', String(Math.min(0.5, lit * 0.09)));
+      fill.style.setProperty('--c', anyTv ? pal.tv : WARM);
+      colors.style.setProperty('--tv-a', pal.tv);
+      colors.style.setProperty('--tv-b', pal.tv2);
+      syncBtn.classList.toggle('on', allTv);
+      syncBtn.querySelector('span').textContent = allTv ? 'Tout est synchronisé' : 'Tout synchroniser avec la TV';
+      live.textContent = anyTv ? 'Synchro TV' : (lit ? 'Allumé' : 'Éteint');
+      live.classList.toggle('off', !anyTv);
+    };
+    const setMode = (id, m) => { mode[id] = m; render(); };
+    const touch = () => { touched = true; hint.classList.add('hide'); };
+
+    LAMPS.forEach(({ id, name }) => {
+      mode[id] = 'off';
+      const li = document.createElement('li');
+      li.className = 'lamp-row';
+      li.dataset.lamp = id;
+      li.innerHTML = `<span class="lamp-dot"></span><span><b>${name}</b><small></small></span><span class="mode" role="radiogroup" aria-label="${name}">${
+        ['off', 'on', 'tv'].map((m) => `<button type="button" data-mode="${m}" aria-label="${LABELS[m]}" title="${LABELS[m]}">${ICONS[m]}</button>`).join('')}</span>`;
+      li.querySelectorAll('.mode button').forEach((b) => b.addEventListener('click', () => { touch(); setMode(id, b.dataset.mode); }));
+      list.appendChild(li);
+    });
+
+    syncBtn.addEventListener('click', () => {
+      touch();
+      const allTv = LAMPS.every(({ id }) => mode[id] === 'tv');
+      LAMPS.forEach(({ id }, i) => setTimeout(() => setMode(id, allTv ? 'off' : 'tv'), i * 150));
+    });
 
     const showScene = (i) => {
       scene = i;
-      const { img, pal } = SCENES[i];
-      shots.forEach((s, k) => s.classList.toggle('active', k === i));
+      tvImgs.forEach((img, k) => img.classList.toggle('active', k === i));
       buttons.forEach((b, k) => b.classList.toggle('active', k === i));
-      ['a', 'b', 'c', 'd'].forEach((k, n) => colors.style.setProperty(`--scene-${k}`, pal[n]));
-      homeTv.style.backgroundImage = `url("${img}")`;
-      lamps.forEach((l, n) => l.style.setProperty('--lamp', running ? pal[n] : '#d6d8e2'));
+      homeTv.style.backgroundImage = `url("${SCENES[i].tv}")`;
+      render();
     };
+    let auto = null;
     const cycle = () => {
       clearInterval(auto);
-      if (!reduced) auto = setInterval(() => { if (inView && running) showScene((scene + 1) % SCENES.length); }, 3600);
+      if (!reduced) auto = setInterval(() => { if (inView) showScene((scene + 1) % SCENES.length); }, 4200);
     };
     buttons.forEach((b, i) => b.addEventListener('click', () => { showScene(i); cycle(); }));
-    homeStart.addEventListener('click', () => {
-      running = !running;
-      homeStart.classList.toggle('on', running);
-      homeStart.querySelector('span').textContent = running ? 'En cours' : 'Démarrer';
-      showScene(scene);
-    });
-    new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.3 }).observe(colors);
+
+    // À la première apparition : la bande LED puis les lampes passent en synchro, pour montrer l'effet
+    new IntersectionObserver(([e]) => {
+      inView = e.isIntersecting;
+      if (inView && !touched) {
+        LAMPS.forEach(({ id }, i) => setTimeout(() => { if (!touched) setMode(id, i === 3 ? 'on' : 'tv'); }, 900 + i * 450));
+      }
+    }, { threshold: 0.35 }).observe(colors.querySelector('.room'));
     showScene(0);
     cycle();
   }

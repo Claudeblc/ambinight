@@ -33,7 +33,7 @@
 
     <div class="hero-content wrap">
       <h1 class="hero-title">Quand l'écran change de couleur, <span class="soft">le salon suit.</span></h1>
-      <p class="hero-sub">Ambinight relie votre kit Ambilight aux lumières de la maison. Quand l'image passe au bleu, au rouge ou à l'orange, vos lampes changent avec elle.</p>
+      <p class="hero-sub">Avec Ambinight, vous allumez et éteignez vos lumières, ou vous les synchronisez avec votre Ambilight&nbsp;: quand l'image passe au bleu, au rouge ou à l'orange, vos lampes changent avec elle.</p>
       <div class="hero-actions">
         <a href="commencer.html#tarifs" class="btn btn-light">Essayer gratuitement <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <button class="btn-ghost" id="openDemo" type="button">
@@ -126,7 +126,7 @@
     <div class="demo-head wrap reveal">
       <p class="label">Essayez</p>
       <h2>Allumez la maison depuis le téléphone</h2>
-      <p>Touchez une pièce dans l'application&nbsp;: elle s'allume dans la maison ci-dessous.</p>
+      <p>Touchez une pièce dans l'application pour l'allumer ou l'éteindre&nbsp;: la maison réagit tout de suite.</p>
     </div>
 
     <div class="demo-scene" id="scene">
@@ -271,29 +271,35 @@
     </div>
   </section>
 
-  <!-- ============ COULEURS : les lampes prennent les couleurs de l'image ============ -->
+  <!-- ============ SALON : allumer, éteindre ou synchroniser avec la TV ============ -->
   <section class="colors" id="couleurs">
     <div class="wrap">
       <div class="colors-head reveal">
-        <p class="label">Couleurs</p>
-        <h2>Vos lampes prennent les couleurs de l'image</h2>
-        <p>Ambinight ne se contente pas d'allumer et d'éteindre. Un coucher de soleil donne une lumière orangée, une plongée dans l'océan baigne la pièce de bleu. Les couleurs changent en même temps que l'image.</p>
+        <p class="label">Dans votre salon</p>
+        <h2>Allumez, éteignez, ou synchronisez vos lumières avec votre Ambilight</h2>
+        <p>Depuis l'application, chaque lampe a trois réglages&nbsp;: éteinte, allumée en lumière normale, ou synchronisée avec la TV. En mode synchro, elle prend les couleurs de l'image en temps réel. Essayez avec le téléphone à droite.</p>
       </div>
 
       <div class="colors-stage">
-        <!-- TV de démonstration -->
-        <div class="tvm reveal">
-          <div class="tvm-halo" id="tvHalo"></div>
-          <div class="tvm-frame">
-            <div class="tvm-screen" id="tvScreen">
-              <img class="active" src="assets/screens/ocean.jpg" alt="Image d'océan à l'écran">
-              <img src="assets/screens/sunset.jpg" alt="Coucher de soleil à l'écran" loading="lazy">
-              <img src="assets/screens/city.jpg" alt="Ville la nuit à l'écran" loading="lazy">
-              <img src="assets/screens/race.jpg" alt="Jeu de course à l'écran" loading="lazy">
+        <div class="room-wrap reveal">
+          <div class="room" id="room">
+            <img class="room-base" src="assets/room/room-off.jpg" alt="Salon avec une grande TV, un plafonnier, un lampadaire et deux lampes">
+            <span class="glow g-fill"></span>
+            <span class="glow g-tv" data-lamp="tv"></span>
+            <div class="room-tv" id="roomTv">
+              <img class="active" src="assets/room/tv-ocean.webp" alt="">
+              <img src="assets/room/tv-sunset.webp" alt="" loading="lazy">
+              <img src="assets/room/tv-city.webp" alt="" loading="lazy">
+              <img src="assets/room/tv-race.webp" alt="" loading="lazy">
             </div>
+            <span class="glow g-ceiling" data-lamp="ceiling"></span>
+            <span class="glow g-floor" data-lamp="floor"></span>
+            <span class="glow g-left" data-lamp="left"></span>
+            <span class="glow g-right" data-lamp="right"></span>
+            <span class="room-hint" id="roomHint">Réglez les lampes depuis le téléphone →</span>
           </div>
-          <div class="tvm-stand"></div>
-          <div class="tvm-scenes" id="tvScenes" role="tablist" aria-label="Choisir l'image affichée">
+          <div class="tvm-scenes" id="tvScenes" role="tablist" aria-label="Choisir l'image affichée sur la TV">
+            <span class="label">À l'écran</span>
             <button class="active" type="button" data-scene="0"><i style="--dot:#2fb8ff"></i>Océan</button>
             <button type="button" data-scene="1"><i style="--dot:#ff9a3d"></i>Coucher de soleil</button>
             <button type="button" data-scene="2"><i style="--dot:#ff4fd8"></i>Ville</button>
@@ -301,7 +307,7 @@
           </div>
         </div>
 
-        <!-- Téléphone : page d'accueil de l'application -->
+        <!-- Téléphone : pièce « Salon » de l'application -->
         <div class="colors-phone reveal">
           <div class="phone-stage phone-static">
             <div class="p3-glow"></div>
@@ -358,20 +364,13 @@
               <div class="p3-screen">
                 <div class="app app-home">
                   <div class="app-status"><span>9:41</span><span class="app-island"><i></i></span><span class="app-sys"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".7"/><rect x="5" y="5.5" width="3" height="6.5" rx=".7"/><rect x="10" y="3" width="3" height="9" rx=".7"/><rect x="15" y="0" width="3" height="12" rx=".7"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="8" rx="2"/></svg></span></div>
-                  <div class="app-brand"><img src="assets/logo.svg" alt=""><div><b>Ambinight</b><span>Lumière d'ambiance</span></div><em class="app-live">Synchro active</em></div>
-                  <h4 class="home-title">Votre écran.<br>Toute la pièce.</h4>
+                  <div class="app-brand"><img src="assets/logo.svg" alt=""><div><b>Salon</b><span>5 lumières</span></div><em class="app-live" id="homeLive">Synchro TV</em></div>
                   <div class="app-card home-preview">
-                    <div class="home-tv"><div class="home-halo" id="homeHalo"></div><div class="home-tvscreen" id="homeTv"></div></div>
+                    <div class="home-tv"><div class="home-halo"></div><div class="home-tvscreen" id="homeTv"></div></div>
                   </div>
-                  <button type="button" class="home-start on" id="homeStart"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg><span>En cours</span></button>
-                  <div class="home-slider"><span>Intensité</span><div class="home-track"><i style="width:72%"></i></div><b>72 %</b></div>
-                  <div class="app-section-title"><b>Vos lumières</b></div>
-                  <div class="home-lamps" id="homeLamps">
-                    <div class="home-lamp"><span class="lamp-dot"></span><b>Salon</b><small>3 lampes</small></div>
-                    <div class="home-lamp"><span class="lamp-dot"></span><b>Chambre</b><small>1 lampe</small></div>
-                    <div class="home-lamp"><span class="lamp-dot"></span><b>Cuisine</b><small>1 lampe</small></div>
-                    <div class="home-lamp"><span class="lamp-dot"></span><b>Bureau</b><small>2 lampes</small></div>
-                  </div>
+                  <button type="button" class="home-start" id="homeSync"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg><span>Tout synchroniser avec la TV</span></button>
+                  <div class="app-section-title"><b>Lumières</b><small class="seg-legend">Éteinte · Allumée · TV</small></div>
+                  <ul class="lamp-list" id="lampList"></ul>
                   <div class="app-homebar"></div>
                 </div>
               </div>
