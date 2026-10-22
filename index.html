@@ -32,7 +32,7 @@
     <div class="hero-shade"></div>
 
     <div class="hero-content wrap">
-      <h1 class="hero-title">Quand l'écran change de couleur, <span class="soft">le salon suit.</span></h1>
+      <h1 class="hero-title">Synchronisez les lumières ambiantes de votre télé <span class="soft">avec toutes les lumières de votre salon.</span></h1>
       <p class="hero-sub">Avec Ambinight, vous allumez et éteignez vos lumières, ou vous les synchronisez avec votre Ambilight&nbsp;: quand l'image passe au bleu, au rouge ou à l'orange, vos lampes changent avec elle.</p>
       <div class="hero-actions">
         <a href="commencer.html#tarifs" class="btn btn-light">Essayer gratuitement <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -130,7 +130,7 @@
     </div>
 
     <div class="demo-scene" id="scene">
-      <svg class="scene-svg" id="sceneSvg" viewBox="-260 190 1540 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <svg class="scene-svg" id="sceneSvg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
             <filter id="feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter>
             <filter id="glow" x="-20%" y="-50%" width="140%" height="200%">
@@ -181,15 +181,7 @@
           </g>
 
           <!-- Flux lumineux TV → pièces -->
-          <rect x="-10" y="0" width="60" height="720" fill="url(#edgeFade)"/>
-          <g class="streams" filter="url(#glow)">
-            <path class="stream" data-room="salon"   stroke="url(#g-stream)" d="M372 338 C 470 330, 540 368, 600 352 S 670 330, 697 334"/>
-            <path class="stream" data-room="bureau"  stroke="url(#g-stream)" d="M376 330 C 520 300, 640 330, 740 300 S 860 270, 896 282"/>
-            <path class="stream" data-room="chambre" stroke="url(#g-blue)"   d="M378 352 C 560 330, 700 300, 900 296 S 1120 330, 1196 344"/>
-            <path class="stream" data-room="cuisine" stroke="url(#g-warm)"   d="M376 372 C 520 400, 680 410, 820 400 S 960 410, 1012 418"/>
-            <path class="stream" data-room="repas"   stroke="url(#g-warm)"   d="M362 392 C 480 450, 600 500, 720 502 S 840 494, 882 492"/>
-            <path class="stream" data-room="cinema"  stroke="url(#g-blue)"   d="M350 410 C 470 480, 640 540, 820 540 S 1080 540, 1153 538"/>
-          </g>
+          <g class="streams" id="streams" filter="url(#glow)"></g>
           <g class="pulses" id="pulses" filter="url(#glow)"></g>
         </svg>
     </div>
@@ -466,8 +458,9 @@
     <div class="wrap">
       <div class="pc3d-head reveal">
         <p class="label">Vue 3D</p>
-        <h2>Votre logement en 3D, dans l'application PC</h2>
-        <p>La vue 3D place chaque ampoule dans sa pièce. Un clic sur une ampoule l'allume ou l'éteint, comme dans l'application. Essayez directement dans la fenêtre ci-dessous.</p>
+        <h2>Recréez votre logement en 3D, puis placez vos lumières</h2>
+        <p>La vue 3D est un éditeur&nbsp;: vous redessinez vos pièces, le salon, la cuisine, la chambre, pour représenter votre appartement, votre maison ou votre villa. Vous ajoutez ensuite chaque lumière à l'endroit exact où elle se trouve chez vous.</p>
+        <p class="pc3d-try"><span class="pill"><i></i>Interactif</span>Cliquez sur les ampoules, puis sur «&nbsp;Ambiance&nbsp;» dans le menu de l'application.</p>
       </div>
 
       <div class="win reveal" id="win">
@@ -478,22 +471,25 @@
         <div class="win-body">
           <aside class="win-side">
             <div class="win-brand"><img src="assets/logo.svg" alt=""><div><b>Ambinight</b><span>Lumière d'ambiance</span></div></div>
-            <nav class="win-nav" aria-label="Menu de l'application">
-              <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>Ambiance</span>
-              <span><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>Mes lumières</span>
-              <span class="active"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Vue 3D</span>
-              <span><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Connexions</span>
-              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</span>
+            <nav class="win-nav" id="winNav" aria-label="Menu de l'application">
+              <button type="button" data-view="ambiance"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>Ambiance<span class="nav-dot"></span></button>
+              <button type="button" data-view="lumieres"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>Mes lumières</button>
+              <button type="button" data-view="vue3d" class="active"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Vue 3D</button>
+              <button type="button" data-view="connexions"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Connexions</button>
+              <button type="button" data-view="reglages"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Réglages</button>
             </nav>
             <div class="win-rooms" id="w3dRooms" aria-live="polite"></div>
           </aside>
+
           <main class="win-main">
-            <div class="win-head">
-              <div><h3>Vue 3D</h3><p>Cliquez sur une ampoule pour allumer la pièce.</p></div>
-              <div class="win-actions"><span class="win-live"><i></i>Synchronisation active</span><button type="button" id="w3dAll">Tout allumer</button></div>
-            </div>
-            <div class="w3d" id="w3d">
-              <svg class="w3d-svg" viewBox="500 200 790 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <!-- Vue 3D : éditeur du logement -->
+            <section class="view active" data-view="vue3d">
+              <div class="win-head">
+                <div><h3>Vue 3D</h3><p>Votre logement, pièce par pièce. Cliquez sur une ampoule pour l'allumer.</p></div>
+                <div class="win-actions"><span class="win-tool"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Ajouter une pièce</span><span class="win-tool"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>Ajouter une lumière</span><button type="button" id="w3dAll">Tout allumer</button></div>
+              </div>
+              <div class="w3d" id="w3d">
+                <svg class="w3d-svg" viewBox="500 200 790 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
             <filter id="wfeather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter>
             <filter id="wglow" x="-20%" y="-50%" width="140%" height="200%">
@@ -543,9 +539,40 @@
 
           <!-- Flux lumineux TV → pièces -->
           </svg>
-              <div class="w3d-spots" id="w3dSpots"></div>
-              <div class="w3d-hint" id="w3dHint"><span>Cliquez sur une ampoule</span></div>
-            </div>
+                <div class="w3d-spots" id="w3dSpots"></div>
+                <div class="w3d-hint" id="w3dHint"><span>Cliquez sur une ampoule</span></div>
+              </div>
+            </section>
+
+            <!-- Ambiance : la vue de synchronisation de l'application -->
+            <section class="view amb" data-view="ambiance">
+              <div class="amb-head">
+                <div><h3 class="amb-title">Votre écran. Toute la pièce.</h3><p>Une ambiance qui suit chaque image.</p></div>
+                <span class="win-live" id="ambLive"><i></i>Synchronisation active</span>
+              </div>
+              <div class="amb-preview">
+                <span class="amb-chip"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3"/></svg>Aperçu en direct</span>
+                <div class="amb-halo" id="ambHalo"></div>
+                <div class="amb-tv" id="ambTv"></div>
+                <div class="amb-bar">
+                  <span class="amb-src"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>TV · ULamp</span>
+                  <button type="button" class="amb-play on" id="ambPlay"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg><span>En cours</span></button>
+                  <button type="button" class="amb-stop" id="ambStop"><svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="1"/></svg>Arrêter</button>
+                  <span class="amb-src"><svg viewBox="0 0 24 24"><path d="M7 15a3 3 0 1 1 0-6c3 0 7 6 10 6a3 3 0 1 0 0-6c-3 0-7 6-10 6z"/></svg>En continu</span>
+                </div>
+              </div>
+              <div class="amb-row">
+                <div class="amb-card amb-int"><span>Intensité</span><b id="ambVal">70 %</b><input type="range" min="0" max="100" value="70" id="ambRange" aria-label="Intensité"></div>
+                <div class="amb-card amb-react"><span>Réactivité</span><div class="amb-seg" id="ambSeg"><button type="button">Douce</button><button type="button" class="on">Normale</button><button type="button">Vive</button></div></div>
+              </div>
+              <h4 class="amb-sub">Vos lumières</h4>
+              <div class="amb-lights" id="ambLights"></div>
+            </section>
+
+            <!-- vues officielles de l'application -->
+            <section class="view shot" data-view="lumieres"><img src="assets/app/main-03-mes-lumieres.webp" alt="Écran Mes lumières de l'application" loading="lazy"></section>
+            <section class="view shot" data-view="connexions"><img src="assets/app/main-04-connexions.webp" alt="Écran Connexions de l'application" loading="lazy"></section>
+            <section class="view shot" data-view="reglages"><img src="assets/app/main-05-reglages.webp" alt="Écran Réglages de l'application" loading="lazy"></section>
           </main>
         </div>
       </div>
