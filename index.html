@@ -553,6 +553,20 @@
     </div>
   </section>
 
+  <!-- ============ VIDÉO DE PRÉSENTATION ============ -->
+  <section class="pres" id="video">
+    <div class="wrap">
+      <div class="pres-head reveal">
+        <p class="label">En vidéo</p>
+        <h2>Ambinight sur ordinateur et sur téléphone</h2>
+      </div>
+      <div class="pres-player reveal">
+        <video id="presVideo" src="assets/ambinight-presentation.mp4" poster="assets/ambinight-presentation.jpg" playsinline preload="none"></video>
+        <button type="button" class="pres-play" id="presPlay" aria-label="Lire la vidéo de présentation"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><span>Lire la vidéo · 45 s</span></button>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ APPLICATION PC ============ -->
   <section class="appshow" id="application">
     <div class="appshow-bg"></div>
@@ -690,7 +704,7 @@
     <div class="modal-backdrop" data-close></div>
     <div class="modal-box">
       <button class="modal-close" data-close type="button" aria-label="Fermer">×</button>
-      <video id="demoVideo" src="assets/demo.mp4" controls playsinline preload="metadata"></video>
+      <video id="demoVideo" src="assets/ambinight-presentation.mp4" controls playsinline preload="metadata"></video>
     </div>
   </div>
 

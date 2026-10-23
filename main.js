@@ -675,6 +675,16 @@
     }
   }
 
+  /* ---------- Vidéo de présentation : lecture au clic, avec le son ---------- */
+  const presVideo = document.getElementById('presVideo');
+  const presPlay = document.getElementById('presPlay');
+  if (presVideo && presPlay) {
+    const wrap = presVideo.parentElement;
+    presPlay.addEventListener('click', () => { presVideo.play().catch(() => {}); });
+    presVideo.addEventListener('play', () => { wrap.classList.add('playing'); presVideo.controls = true; });
+    presVideo.addEventListener('ended', () => wrap.classList.remove('playing'));
+  }
+
   /* ---------- 5. Application PC ---------- */
   const appTabs = document.getElementById('appTabs');
   const appWindow = document.getElementById('appWindow');
