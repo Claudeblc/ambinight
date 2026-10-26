@@ -446,6 +446,8 @@
         if (!touched) lamps.forEach(({ id }, i) => setTimeout(() => { if (!touched) setMode(id, i === 2 ? 'on' : 'tv'); }, 700 + i * 450));
       } else video.pause();
     }, { threshold: 0.3 }).observe(colors);
+    // la scène 3D du salon se prépare bien avant d'arriver à l'écran, pour ne pas saccader au défilement
+    new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { obs.disconnect(); if (!s3d) start(); } }, { rootMargin: '900px 0px' }).observe(colors);
     // la lecture reprend d'elle-même si le navigateur l'a suspendue (chargement, onglet en arrière-plan)
     let lastTry = 0;
     const loop = (t) => {
@@ -527,7 +529,7 @@
       w3dApi.onPick((id) => { if (id) { touch(); setSpot(id, !on[id]); } });
       paint();
     };
-    new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { obs.disconnect(); start(); } }, { rootMargin: '300px' }).observe(win);
+    new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { obs.disconnect(); start(); } }, { rootMargin: '900px 0px' }).observe(win);
 
     allBtn.addEventListener('click', () => {
       if (!w3dApi) return;

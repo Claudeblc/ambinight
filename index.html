@@ -30,11 +30,11 @@
   <section class="hero" id="top">
     <video class="hero-video" poster="assets/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
     <script>
-      // vidéo du hero à la bonne définition : 4K sur grand écran, 1440p sinon, légère sur téléphone
+      // vidéo du hero à la bonne définition : 4K sur grand écran (pas sur les portables haute densité, trop lourde à décoder), 1440p sinon, légère sur téléphone
       (function () {
         var v = document.querySelector('.hero-video');
         var px = Math.max(screen.width, screen.height) * (window.devicePixelRatio || 1);
-        v.src = px >= 3000 ? 'assets/hero-4k.mp4' : px >= 1500 && screen.width > 900 ? 'assets/hero-1440.mp4' : 'assets/hero.mp4';
+        v.src = px >= 3000 && screen.width >= 1900 ? 'assets/hero-4k.mp4' : px >= 1500 && screen.width > 900 ? 'assets/hero-1440.mp4' : 'assets/hero.mp4';
       })();
     </script>
     <div class="hero-shade"></div>
