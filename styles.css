@@ -1000,3 +1000,8 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
 .pres-play:hover { transform: scale(1.05); }
 .pres-play svg { width: 46px; height: 46px; padding: 12px; border-radius: 50%; fill: #fff; background: linear-gradient(135deg, #3ee8ff, #7c6bff); }
 .pres-player.playing .pres-play { opacity: 0; pointer-events: none; }
+
+/* Comparatif : matériel petit prix, discret mais lisible si on cherche */
+.ctab td small.lowcost { margin-top: 6px; font-size: 11px; line-height: 1.35; color: rgba(255, 255, 255, .42); }
+.ctab td small.lowcost em { font-style: normal; font-weight: 700; color: rgba(255, 255, 255, .6); margin-right: 4px; }
+.ctab tfoot td small.lowcost { font-size: 11px; font-weight: 500; letter-spacing: 0; }
