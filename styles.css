@@ -1016,3 +1016,9 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
   .demo3d .demo-head { left: auto; right: var(--gutter); max-width: 520px; text-align: right; }
   .demo3d .demo-head p { margin-left: auto; }
 }
+
+/* titres plus gras : la police n'existe qu'en une graisse, on épaissit le trait */
+h1, h2, h3, .hero-title { -webkit-text-stroke: .045em currentColor; paint-order: stroke fill; }
+.hero-title { -webkit-text-stroke-width: .05em; }
+.hero-title .soft { -webkit-text-stroke-color: rgba(255, 255, 255, .72); }
+h3 { -webkit-text-stroke-width: .03em; }
