@@ -1017,8 +1017,18 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
   .demo3d .demo-head p { margin-left: auto; }
 }
 
-/* titres plus gras : la police n'existe qu'en une graisse, on épaissit le trait */
-h1, h2, h3, .hero-title { -webkit-text-stroke: .045em currentColor; paint-order: stroke fill; }
-.hero-title { -webkit-text-stroke-width: .05em; }
-.hero-title .soft { -webkit-text-stroke-color: rgba(255, 255, 255, .72); }
-h3 { -webkit-text-stroke-width: .03em; }
+/* titres plus gras : la police n'existe qu'en une graisse. On épaissit le trait par des ombres nettes
+   (sans flou) autour des lettres : rendu identique sur Chrome, Firefox et Safari, sans contour parasite. */
+h1, h2, h3 {
+  --b: .022em;
+  text-shadow: var(--b) 0 0 currentColor, calc(var(--b) * -1) 0 0 currentColor, 0 var(--b) 0 currentColor, 0 calc(var(--b) * -1) 0 currentColor,
+    var(--b) var(--b) 0 currentColor, calc(var(--b) * -1) var(--b) 0 currentColor, var(--b) calc(var(--b) * -1) 0 currentColor, calc(var(--b) * -1) calc(var(--b) * -1) 0 currentColor;
+}
+h3 { --b: .014em; }
+.hero-title { --b: .024em;
+  text-shadow: var(--b) 0 0 currentColor, calc(var(--b) * -1) 0 0 currentColor, 0 var(--b) 0 currentColor, 0 calc(var(--b) * -1) 0 currentColor,
+    var(--b) var(--b) 0 currentColor, calc(var(--b) * -1) var(--b) 0 currentColor, var(--b) calc(var(--b) * -1) 0 currentColor, calc(var(--b) * -1) calc(var(--b) * -1) 0 currentColor,
+    0 2px 24px rgba(0, 0, 0, .55); }
+/* couleur pleine (et non transparente) pour que les ombres ne se superposent pas en taches */
+.hero-title .soft { color: #c4c4cc; }
+@media (max-width: 720px) { .hero-title { font-size: 33px; } }
