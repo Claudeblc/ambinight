@@ -51,7 +51,7 @@
   const heroVideo = document.querySelector('.hero-video');
   if (heroVideo && reduced) heroVideo.pause();
   if (hasGsap && !reduced) {
-    gsap.from(['.hero-title', '.hero-sub', '.hero-actions', '.hero-brands', '.hero-facts'], { y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 0.15 });
+    gsap.from(['.hero-kicker', '.hero-title', '.hero-sub', '.hero-actions', '.hero-brands'], { y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 0.15 });
   }
 
   /* ---------- 3. Recherche des appareils ---------- */
@@ -714,18 +714,62 @@
     }
   }
 
-  /* ---------- 6. Modale démo, apparitions ---------- */
-  const modal = document.getElementById('demoModal');
-  const demoVideo = document.getElementById('demoVideo');
-  const openModal = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); lenis && lenis.stop(); demoVideo.currentTime = 0; demoVideo.play().catch(() => {}); };
-  const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); lenis && lenis.start(); demoVideo.pause(); };
-  document.getElementById('openDemo').addEventListener('click', openModal);
-  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  /* ---------- 6. « Voir la démo » : descend à la vidéo et la lance ---------- */
+  const presSection = document.getElementById('video');
+  document.getElementById('openDemo').addEventListener('click', () => {
+    if (lenis) lenis.scrollTo(presSection, { offset: -40, duration: 1.2 }); else presSection.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => document.getElementById('presPlay')?.click(), 900);
+  });
+
+  /* ---------- 7. Tarifs : fenêtre de commande et liens des stores ----------
+     CHECKOUT : liens de paiement Lemon Squeezy (Store → Products → Share).
+     STORES   : liens des fiches Microsoft Store, App Store et Google Play.
+     Tant qu'un lien est vide, le bouton correspondant reste inactif. */
+  const CHECKOUT = { 'Licence à vie': '', 'Famille': '' };
+  const STORES = { windows: '', ios: '', android: '' };
+  const buyModal = document.getElementById('buyModal');
+  if (buyModal) {
+    const coPlan = document.getElementById('coPlan');
+    const coPrice = document.getElementById('coPrice');
+    const coEmail = document.getElementById('coEmail');
+    const coNote = document.getElementById('coNote');
+    const NOTE = coNote.textContent;
+    const openBuy = (plan, price) => {
+      coPlan.textContent = plan;
+      coPrice.textContent = price;
+      coNote.textContent = NOTE;
+      coEmail.classList.remove('err');
+      buyModal.classList.add('open');
+      buyModal.setAttribute('aria-hidden', 'false');
+      lenis && lenis.stop();
+      setTimeout(() => coEmail.focus(), 300);
+    };
+    const closeBuy = () => {
+      buyModal.classList.remove('open');
+      buyModal.setAttribute('aria-hidden', 'true');
+      lenis && lenis.start();
+    };
+    document.querySelectorAll('.buy').forEach((b) => b.addEventListener('click', () => openBuy(b.dataset.plan, b.dataset.price)));
+    buyModal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeBuy));
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBuy(); });
+    document.getElementById('coPay').addEventListener('click', () => {
+      if (!coEmail.checkValidity() || !coEmail.value) { coEmail.classList.add('err'); coEmail.focus(); return; }
+      coEmail.classList.remove('err');
+      const link = CHECKOUT[coPlan.textContent];
+      if (!link) { coNote.textContent = "Le paiement en ligne n'est pas encore ouvert. Réessayez dans quelques jours."; return; }
+      const url = new URL(link);
+      url.searchParams.set('checkout[email]', coEmail.value);   // Lemon Squeezy pré-remplit l'adresse
+      window.location.href = url.toString();
+    });
+  }
+  document.querySelectorAll('.store-badge').forEach((badge) => {
+    const link = STORES[badge.dataset.store];
+    if (link) { badge.href = link; badge.target = '_blank'; badge.rel = 'noopener'; }
+    else badge.addEventListener('click', (e) => e.preventDefault());
+  });
 
   if (hasGsap && !reduced) {
     ScrollTrigger.batch('.reveal', { start: 'top 86%', onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.1 }) });
-    gsap.fromTo('.emotions-media img', { scale: 1.1 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.emotions', start: 'top bottom', end: 'bottom top', scrub: true } });
   } else {
     document.querySelectorAll('.reveal').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
   }

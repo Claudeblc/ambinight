@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@300..800&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="commencer.css">
 </head>
 <body>
 
@@ -17,13 +18,13 @@
   <header class="nav" id="nav">
     <a href="index.html" class="logo" aria-label="Ambinight, accueil"><img class="logo-mark" src="assets/logo.svg" alt=""><span>Ambinight</span></a>
     <nav class="nav-links" aria-label="Navigation principale">
-      <a href="index.html#compatibilite">Compatibilité</a>
-      <a href="index.html#fonctionnalites">Fonctionnalités</a>
-      <a href="index.html#comment">Comment ça marche</a>
-      <a href="index.html#application">Application</a>
-      <a href="commencer.html#tarifs">Tarifs</a>
+      <a href="#video">Vidéo</a>
+      <a href="#demo">Démo</a>
+      <a href="#comment">Installation</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
     </nav>
-    <a href="commencer.html#tarifs" class="btn btn-light btn-sm">Commencer</a>
+    <a href="#tarifs" class="btn btn-light btn-sm">Essayer</a>
   </header>
 
   <!-- ============ HERO ============ -->
@@ -44,7 +45,7 @@
       <h1 class="hero-title">Vos lumières suivent votre&nbsp;télé.<br><span class="soft">Toutes marques.</span></h1>
       <p class="hero-sub">Hue, IKEA, Govee, Tuya : l'appli les relie à votre kit Ambilight.</p>
       <div class="hero-actions">
-        <a href="commencer.html#tarifs" class="btn btn-light">Essayer l'application <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#tarifs" class="btn btn-light">Essayer gratuitement <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <button class="btn-ghost" id="openDemo" type="button">
           <span class="play"><svg viewBox="0 0 16 16"><path d="M6 4.5v7l5.5-3.5z" fill="currentColor"/></svg></span>
           Voir la démo
@@ -60,236 +61,17 @@
         <span class="b-more">et bien d'autres</span>
       </div>
     </div>
-
-    <dl class="hero-facts wrap">
-      <div><dt class="label">Application</dt><dd>PC Windows, iPhone, Android</dd></div>
-      <div><dt class="label">Kit Ambilight</dt><dd>Le vôtre, non fourni</dd></div>
-      <div><dt class="label">Lumières</dt><dd>Hue, IKEA, Govee, Tuya…</dd></div>
-      <div><dt class="label">Prix de l'application</dt><dd>14,99 €, une seule fois</dd></div>
-    </dl>
   </section>
 
-  <!-- ============ CE QUE VOUS ACHETEZ : L'APPLICATION ============ -->
-  <section class="appband" id="appli">
+  <!-- ============ VIDÉO DE PRÉSENTATION ============ -->
+  <section class="pres" id="video">
     <div class="wrap">
-      <div class="appband-head reveal">
-        <p class="label">Ce que vous achetez</p>
-        <h2>Vous avez le kit.<br>Il vous manque l'appli.</h2>
-        <p>Ambinight relie votre kit Ambilight à vos lampes. Rien d'autre à acheter.</p>
+      <div class="pres-head reveal">
+                <h2>Ambinight en 45 secondes</h2>
       </div>
-      <div class="ab-flow reveal">
-        <div class="ab-item ab-side">
-          <div class="ab-visual"><img src="assets/kit/kit-ambilight.webp" alt="Kit Ambilight : caméra et bande LED" loading="lazy"></div>
-          <b>Votre kit Ambilight</b>
-          <span class="ab-tag">Non fourni</span>
-        </div>
-        <span class="ab-arrow" aria-hidden="true"><i></i></span>
-        <div class="ab-item ab-app">
-          <div class="ab-visual"><img src="assets/app-icon.svg" alt="Icône de l'application Ambinight"></div>
-          <b>L'application Ambinight</b>
-          <span class="ab-tag ab-buy">Ce que vous achetez · 14,99&nbsp;€</span>
-        </div>
-        <span class="ab-arrow" aria-hidden="true"><i></i></span>
-        <div class="ab-item ab-side">
-          <div class="ab-visual"><img src="assets/kit/bulb.webp" alt="Ampoule connectée" loading="lazy"></div>
-          <b>Vos lampes connectées</b>
-          <span class="ab-tag">Non fournies</span>
-        </div>
-      </div>
-      <div class="ab-can reveal">
-        <span class="ab-can-title">Avec l'application Ambinight, vous pouvez&nbsp;:</span>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>Allumer et éteindre vos lampes</li>
-          <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>Les synchroniser avec la TV</li>
-          <li><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/></svg>Recréer votre maison en 3D</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ COMPARATIF DE PRIX ============ -->
-  <section class="compare" id="comparatif">
-    <div class="wrap">
-      <div class="compare-head reveal">
-        <p class="label">Comparatif</p>
-        <h2>770&nbsp;€ chez Philips. 14,99&nbsp;€ avec Ambinight.</h2>
-        <p>Même résultat : un kit TV et 2 lampes qui suivent l'image.</p>
-      </div>
-
-      <div class="ctab-wrap reveal">
-        <table class="ctab">
-          <thead>
-            <tr>
-              <th scope="col"><span class="sr-only">Élément</span></th>
-              <th scope="col">Philips Hue</th>
-              <th scope="col">Nanoleaf</th>
-              <th scope="col">Govee</th>
-              <th scope="col" class="us"><img src="assets/app-icon.svg" alt="">Ambinight <span class="us-badge">Le moins cher</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Kit de rétroéclairage TV</th>
-              <td><b>160,99&nbsp;€</b><small>Bande Play gradient 65″</small></td>
-              <td><b>99,99&nbsp;€</b><small>4D Screen Mirror 65″</small></td>
-              <td><b>89,99&nbsp;€</b><small>TV Backlight 3 Lite</small></td>
-              <td class="us"><span class="ok">Déjà en votre possession</span><small>Toutes marques Bluetooth</small><small class="lowcost"><em>Petit prix</em> sinon ≈&nbsp;25&nbsp;€ sur AliExpress</small></td>
-            </tr>
-            <tr>
-              <th scope="row">Boîtier de synchronisation</th>
-              <td><b>349,99&nbsp;€</b><small>Play HDMI Sync Box 8K</small></td>
-              <td><span class="na">Inclus dans le kit</span></td>
-              <td><span class="na">Inclus dans le kit</span></td>
-              <td class="us"><span class="ok">Inutile</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Pont de connexion</th>
-              <td><b>149,99&nbsp;€</b><small>Bridge Pro</small></td>
-              <td><span class="na">—</span></td>
-              <td><span class="na">—</span></td>
-              <td class="us"><span class="ok">Inutile</span></td>
-            </tr>
-            <tr>
-              <th scope="row">2 lampes connectées</th>
-              <td><b>109,99&nbsp;€</b><small>Ampoules couleur E27</small></td>
-              <td><b>62,38&nbsp;€</b><small>Essentials E27</small></td>
-              <td><b>16,99&nbsp;€</b><small>Ampoules E27 RGBWW</small></td>
-              <td class="us"><span class="ok">Déjà en votre possession</span><small>Toutes marques</small><small class="lowcost"><em>Petit prix</em> sinon ≈&nbsp;10&nbsp;€ les 2 sur AliExpress</small></td>
-            </tr>
-            <tr>
-              <th scope="row">Application</th>
-              <td><span class="bad">Propriétaire, obligatoire</span></td>
-              <td><span class="bad">Propriétaire, obligatoire</span></td>
-              <td><span class="bad">Propriétaire, obligatoire</span></td>
-              <td class="us"><b>14,99&nbsp;€</b><small>Une seule fois : vous ne payez que l'application</small></td>
-            </tr>
-            <tr>
-              <th scope="row">Lampes compatibles</th>
-              <td><span class="bad">Hue uniquement</span></td>
-              <td><span class="bad">Nanoleaf uniquement</span></td>
-              <td><span class="bad">Govee uniquement</span></td>
-              <td class="us"><span class="ok">Toutes marques</span></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row">Total</th>
-              <td>770,96&nbsp;€</td>
-              <td>162,37&nbsp;€</td>
-              <td>106,98&nbsp;€</td>
-              <td class="us">14,99&nbsp;€<small class="lowcost">Sans matériel : ≈&nbsp;50&nbsp;€ tout compris (kit 25&nbsp;€ + lampes 10&nbsp;€ + appli)</small></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      <!-- version téléphone : un total par marque -->
-      <ul class="cmob reveal">
-        <li class="us"><div><b>Ambinight</b><small>Vous ne payez que l'application. Kit et lampes déjà en votre possession, sinon ≈&nbsp;35&nbsp;€ en petit prix sur AliExpress</small></div><strong>14,99&nbsp;€</strong></li>
-        <li><div><b>Philips Hue</b><small>Boîtier 349,99 € · pont 149,99 € · kit 160,99 € · 2 lampes 109,99 €</small></div><strong>770,96&nbsp;€</strong></li>
-        <li><div><b>Nanoleaf</b><small>Kit 99,99 € · 2 lampes 62,38 €</small></div><strong>162,37&nbsp;€</strong></li>
-        <li><div><b>Govee</b><small>Kit 89,99 € · 2 lampes 16,99 €</small></div><strong>106,98&nbsp;€</strong></li>
-      </ul>
-      <div class="ctab-foot reveal">
-        <p class="cmp-save"><span>Jusqu'à</span> 755&nbsp;€ <span>d'économie face à Philips Hue</span></p>
-        <a href="commencer.html#tarifs" class="btn btn-light">Essayer l'application <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <p class="cmp-note">Prix publics relevés le 22 octobre 2026 sur philips-hue.com/fr-fr et eu.govee.com/fr-fr ; revendeurs pour les ampoules Govee et Nanoleaf, prix de lancement pour le kit Nanoleaf. Les applications des marques sont gratuites mais ne pilotent que leurs propres lampes. Ambinight demande un kit Ambilight Bluetooth, non fourni. Matériel petit prix : ordres de grandeur AliExpress au 26 octobre 2026 (kit TV Bluetooth avec caméra, ampoules E27 Tuya), variables selon le vendeur et la livraison. Marques citées propriété de leurs détenteurs ; Ambinight n'est affilié à aucune.</p>
-    </div>
-  </section>
-
-  <!-- ============ KITS COMPATIBLES (liens affiliés) ============ -->
-  <section class="kits-shop">
-    <div class="wrap">
-      <!-- Sélection Amazon : kits et ampoules compatibles (liens affiliés) -->
-      <div class="shop reveal" id="kits">
-        <div class="shop-head">
-          <h3>Pas encore de kit&nbsp;? Notre sélection compatible</h3>
-        </div>
-        <div class="shop-grid">
-          <a class="shop-card" data-asin="B0DLFYJ6MS" href="https://www.amazon.fr/dp/B0DLFYJ6MS" target="_blank" rel="sponsored nofollow noopener">
-            <span class="shop-img"><img src="assets/kit/kit-ambilight.webp" alt="" loading="lazy"></span>
-            <span class="shop-tag">Kit caméra · Bluetooth</span>
-            <b>Diyife TV Backlight, TV 55 à 65″</b>
-            <small>Caméra, ruban LED, application uLamp</small>
-            <em>Voir sur Amazon</em>
-          </a>
-          <a class="shop-card" data-asin="B0FRM8CZVK" href="https://www.amazon.fr/dp/B0FRM8CZVK" target="_blank" rel="sponsored nofollow noopener">
-            <span class="shop-img"><img src="assets/kit/kit-ambilight.webp" alt="" loading="lazy"></span>
-            <span class="shop-tag">Kit caméra · Bluetooth</span>
-            <b>Diyife TV Backlight, ruban 5 m</b>
-            <small>Pour les grands écrans, application uLamp</small>
-            <em>Voir sur Amazon</em>
-          </a>
-          <a class="shop-card" data-asin="B0C3VLCFJR" href="https://www.amazon.fr/dp/B0C3VLCFJR" target="_blank" rel="sponsored nofollow noopener">
-            <span class="shop-img"><img src="assets/kit/bulb.webp" alt="" loading="lazy"></span>
-            <span class="shop-tag">Ampoules couleur</span>
-            <b>Govee E27 RGBWW, lot de 2</b>
-            <small>Wi‑Fi, Google Home et Alexa</small>
-            <em>Voir sur Amazon</em>
-          </a>
-        </div>
-        <p class="shop-note">Liens affiliés&nbsp;: en tant que Partenaire Amazon, Ambinight réalise un bénéfice sur les achats remplissant les conditions requises, sans surcoût pour vous.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ COMPATIBILITÉ BLUETOOTH ============ -->
-  <section class="compat" id="compatibilite">
-    <div class="wrap compat-grid">
-      <div class="compat-copy reveal">
-        <p class="label">Compatibilité</p>
-        <h2>Tous les kits Ambilight Bluetooth sont compatibles</h2>
-        <p>Peu importe la marque : l'appli trouve votre kit et vos lampes toute seule.</p>
-        <div class="compat-brands">
-          <span class="label">Lumières compatibles</span>
-          <div class="compat-logos">
-            <img class="brand-logo l-hue" src="assets/logos/hue-w.svg" alt="Philips Hue">
-            <img class="brand-logo l-ikea" src="assets/logos/ikea-w.svg" alt="IKEA">
-            <img class="brand-logo l-tuya" src="assets/logos/tuya.svg" alt="Tuya">
-            <img class="brand-logo l-govee" src="assets/logos/govee.svg" alt="Govee">
-            <img class="brand-logo l-ali" src="assets/logos/aliexpress-w.svg" alt="AliExpress">
-          </div>
-        </div>
-      </div>
-
-      <!-- Recherche Bluetooth, au style de l'application -->
-      <div class="scan reveal" id="scan" aria-label="Exemple de recherche des appareils dans l'application">
-        <div class="scan-head">
-          <img src="assets/logo.svg" alt="">
-          <div>
-            <b>Recherche des appareils</b>
-            <span id="scanStatus">Bluetooth et Wi‑Fi…</span>
-          </div>
-          <span class="scan-radar"><i></i><i></i></span>
-        </div>
-        <ul class="scan-list" id="scanList">
-          <li><span class="dev-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg></span><div><b>Kit Ambilight TV</b><small>Caméra + bande LED · Bluetooth</small></div><em>Trouvé</em></li>
-          <li><span class="dev-ico"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><circle cx="6" cy="12" r="1.2"/><circle cx="10" cy="12" r="1.2"/><circle cx="14" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg></span><div><b>Bande LED, bureau</b><small>Bluetooth</small></div><em>Trouvé</em></li>
-          <li><span class="dev-ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg></span><div><b>Ampoule Hue, salon</b><small>Philips Hue</small></div><em>Trouvé</em></li>
-          <li><span class="dev-ico"><svg viewBox="0 0 24 24"><path d="M8 4h8l3 8H5z"/><path d="M12 12v6M8 20h8"/></svg></span><div><b>Lampe IKEA, chambre</b><small>IKEA Home smart</small></div><em>Trouvé</em></li>
-          <li><span class="dev-ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg></span><div><b>Spot Govee, cuisine</b><small>Govee</small></div><em>Trouvé</em></li>
-        </ul>
-        <div class="scan-foot" id="scanFoot"><span>5 appareils prêts à suivre l'écran</span><button type="button" class="scan-btn" tabindex="-1">Relier</button></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FONCTIONNALITÉS ============ -->
-  <section class="emotions" id="fonctionnalites">
-    <div class="emotions-media">
-      <img src="assets/jellyfish.jpg" alt="Salon éclairé en bleu et violet par l'image d'un film">
-    </div>
-    <div class="wrap emotions-inner">
-      <div class="emotions-copy reveal">
-        <p class="label">Dans l'application</p>
-        <h2>Les couleurs du film débordent sur vos murs</h2>
-        <p>Une scène de nuit, la pièce passe au bleu. Une explosion, tout vire à l'orange.</p>
-        <ul class="features">
-          <li><span class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 12h3l2-6 4 12 2-6h5"/></svg></span><span><b>Réactivité réglable</b>Douce pour un film, vive en jeu.</span></li>
-          <li><span class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span><span><b>Pièce par pièce</b>Vous choisissez les lampes qui suivent.</span></li>
-          <li><span class="f-icon"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span><span><b>Mode nuit</b>Une lumière tamisée, sans éblouir.</span></li>
-        </ul>
+      <div class="pres-player reveal">
+        <video id="presVideo" src="assets/ambinight-presentation.mp4" poster="assets/ambinight-presentation.jpg" playsinline preload="none"></video>
+        <button type="button" class="pres-play" id="presPlay" aria-label="Lire la vidéo de présentation"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><span>Lire la vidéo · 45 s</span></button>
       </div>
     </div>
   </section>
@@ -542,6 +324,44 @@
     </div>
   </section>
 
+  <!-- ============ CE QUE VOUS ACHETEZ : L'APPLICATION ============ -->
+  <section class="appband" id="appli">
+    <div class="wrap">
+      <div class="appband-head reveal">
+        <p class="label">Ce que vous achetez</p>
+        <h2>Vous avez le kit.<br>Il vous manque l'appli.</h2>
+        <p>Ambinight relie votre kit Ambilight à vos lampes. Rien d'autre à acheter.</p>
+      </div>
+      <div class="ab-flow reveal">
+        <div class="ab-item ab-side">
+          <div class="ab-visual"><img src="assets/kit/kit-ambilight.webp" alt="Kit Ambilight : caméra et bande LED" loading="lazy"></div>
+          <b>Votre kit Ambilight</b>
+          <span class="ab-tag">Non fourni</span>
+        </div>
+        <span class="ab-arrow" aria-hidden="true"><i></i></span>
+        <div class="ab-item ab-app">
+          <div class="ab-visual"><img src="assets/app-icon.svg" alt="Icône de l'application Ambinight"></div>
+          <b>L'application Ambinight</b>
+          <span class="ab-tag ab-buy">Ce que vous achetez</span>
+        </div>
+        <span class="ab-arrow" aria-hidden="true"><i></i></span>
+        <div class="ab-item ab-side">
+          <div class="ab-visual"><img src="assets/kit/bulb.webp" alt="Ampoule connectée" loading="lazy"></div>
+          <b>Vos lampes connectées</b>
+          <span class="ab-tag">Non fournies</span>
+        </div>
+      </div>
+      <div class="ab-can reveal">
+        <span class="ab-can-title">Avec l'application Ambinight, vous pouvez&nbsp;:</span>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>Allumer et éteindre vos lampes</li>
+          <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>Les synchroniser avec la TV</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/></svg>Recréer votre maison en 3D</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TUTORIEL ANIMÉ ============ -->
   <section class="tuto" id="comment">
     <div class="tuto-pin" id="tutoPin">
@@ -609,51 +429,6 @@
           <li><button type="button" data-step="5"><span class="t-n">5</span><b>Lancez la synchro</b><span class="t-d">Vos lampes suivent chaque image.</span><em>Prêt</em><i class="t-bar"></i></button></li>
         </ol>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ VIDÉO DE PRÉSENTATION ============ -->
-  <section class="pres" id="video">
-    <div class="wrap">
-      <div class="pres-head reveal">
-        <p class="label">En vidéo</p>
-        <h2>Voyez Ambinight en action</h2>
-      </div>
-      <div class="pres-player reveal">
-        <video id="presVideo" src="assets/ambinight-presentation.mp4" poster="assets/ambinight-presentation.jpg" playsinline preload="none"></video>
-        <button type="button" class="pres-play" id="presPlay" aria-label="Lire la vidéo de présentation"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><span>Lire la vidéo · 45 s</span></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ APPLICATION PC ============ -->
-  <section class="appshow" id="application">
-    <div class="appshow-bg"></div>
-    <div class="wrap">
-      <div class="appshow-head reveal">
-        <p class="label">Sur ordinateur</p>
-        <h2>La même appli sur votre PC</h2>
-        <p>Windows 10 et 11. Elle démarre avec l'ordinateur et se fait oublier.</p>
-      </div>
-      <div class="appshow-stage reveal" id="appStage">
-        <div class="appshow-glow"></div>
-        <div class="appshow-window" id="appWindow">
-          <img class="active" src="assets/app/01-ambiance-synchro-active.webp" alt="Écran Ambiance : aperçu de la TV en direct, intensité et réactivité" data-tab="0">
-          <img src="assets/app/02-ma-maison.webp" alt="Écran Ma maison : l'appartement recréé en 3D" data-tab="1" loading="lazy">
-          <img src="assets/app/03-mes-lumieres.webp" alt="Écran Mes lumières : chaque lampe, classée par pièce" data-tab="2" loading="lazy">
-          <img src="assets/app/04-connexions.webp" alt="Écran Connexions : kit Ambilight et maison connectée" data-tab="3" loading="lazy">
-          <img src="assets/app/05-reglages.webp" alt="Écran Réglages de l'application" data-tab="4" loading="lazy">
-        </div>
-      </div>
-
-      <div class="appshow-tabs reveal" id="appTabs" role="tablist">
-        <button class="active" type="button" role="tab" aria-selected="true" data-tab="0"><b>Ambiance</b><span>La TV et vos lampes en direct</span><i></i></button>
-        <button type="button" role="tab" aria-selected="false" data-tab="1"><b>Ma maison</b><span>Votre logement recréé en 3D</span><i></i></button>
-        <button type="button" role="tab" aria-selected="false" data-tab="2"><b>Mes lumières</b><span>Chaque lampe, pièce par pièce</span><i></i></button>
-        <button type="button" role="tab" aria-selected="false" data-tab="3"><b>Connexions</b><span>Le kit TV et votre domotique</span><i></i></button>
-        <button type="button" role="tab" aria-selected="false" data-tab="4"><b>Réglages</b><span>Mode nuit et démarrage auto</span><i></i></button>
-      </div>
-    </div>
     </div>
   </section>
 
@@ -733,13 +508,267 @@
     </div>
   </section>
 
+  <!-- ============ COMPARATIF DE PRIX ============ -->
+  <section class="compare" id="comparatif">
+    <div class="wrap">
+      <div class="compare-head reveal">
+        <p class="label">Comparatif</p>
+        <h2>770&nbsp;€ chez Philips. 14,99&nbsp;€ avec Ambinight.</h2>
+        <p>Même résultat : un kit TV et 2 lampes qui suivent l'image.</p>
+      </div>
+
+      <div class="ctab-wrap reveal">
+        <table class="ctab">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Élément</span></th>
+              <th scope="col">Philips Hue</th>
+              <th scope="col">Nanoleaf</th>
+              <th scope="col">Govee</th>
+              <th scope="col" class="us"><img src="assets/app-icon.svg" alt="">Ambinight <span class="us-badge">Le moins cher</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Kit de rétroéclairage TV</th>
+              <td><b>160,99&nbsp;€</b><small>Bande Play gradient 65″</small></td>
+              <td><b>99,99&nbsp;€</b><small>4D Screen Mirror 65″</small></td>
+              <td><b>89,99&nbsp;€</b><small>TV Backlight 3 Lite</small></td>
+              <td class="us"><span class="ok">Déjà en votre possession</span><small>Toutes marques Bluetooth</small><small class="lowcost"><em>Petit prix</em> sinon ≈&nbsp;25&nbsp;€ sur AliExpress</small></td>
+            </tr>
+            <tr>
+              <th scope="row">Boîtier de synchronisation</th>
+              <td><b>349,99&nbsp;€</b><small>Play HDMI Sync Box 8K</small></td>
+              <td><span class="na">Inclus dans le kit</span></td>
+              <td><span class="na">Inclus dans le kit</span></td>
+              <td class="us"><span class="ok">Inutile</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Pont de connexion</th>
+              <td><b>149,99&nbsp;€</b><small>Bridge Pro</small></td>
+              <td><span class="na">—</span></td>
+              <td><span class="na">—</span></td>
+              <td class="us"><span class="ok">Inutile</span></td>
+            </tr>
+            <tr>
+              <th scope="row">2 lampes connectées</th>
+              <td><b>109,99&nbsp;€</b><small>Ampoules couleur E27</small></td>
+              <td><b>62,38&nbsp;€</b><small>Essentials E27</small></td>
+              <td><b>16,99&nbsp;€</b><small>Ampoules E27 RGBWW</small></td>
+              <td class="us"><span class="ok">Déjà en votre possession</span><small>Toutes marques</small><small class="lowcost"><em>Petit prix</em> sinon ≈&nbsp;10&nbsp;€ les 2 sur AliExpress</small></td>
+            </tr>
+            <tr>
+              <th scope="row">Application</th>
+              <td><span class="bad">Propriétaire, obligatoire</span></td>
+              <td><span class="bad">Propriétaire, obligatoire</span></td>
+              <td><span class="bad">Propriétaire, obligatoire</span></td>
+              <td class="us"><b>14,99&nbsp;€</b><small>Une seule fois : vous ne payez que l'application</small></td>
+            </tr>
+            <tr>
+              <th scope="row">Lampes compatibles</th>
+              <td><span class="bad">Hue uniquement</span></td>
+              <td><span class="bad">Nanoleaf uniquement</span></td>
+              <td><span class="bad">Govee uniquement</span></td>
+              <td class="us"><span class="ok">Toutes marques</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row">Total</th>
+              <td>770,96&nbsp;€</td>
+              <td>162,37&nbsp;€</td>
+              <td>106,98&nbsp;€</td>
+              <td class="us">14,99&nbsp;€<small class="lowcost">Sans matériel : ≈&nbsp;50&nbsp;€ tout compris (kit 25&nbsp;€ + lampes 10&nbsp;€ + appli)</small></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- version téléphone : un total par marque -->
+      <ul class="cmob reveal">
+        <li class="us"><div><b>Ambinight</b><small>Vous ne payez que l'application. Kit et lampes déjà en votre possession, sinon ≈&nbsp;35&nbsp;€ en petit prix sur AliExpress</small></div><strong>14,99&nbsp;€</strong></li>
+        <li><div><b>Philips Hue</b><small>Boîtier 349,99 € · pont 149,99 € · kit 160,99 € · 2 lampes 109,99 €</small></div><strong>770,96&nbsp;€</strong></li>
+        <li><div><b>Nanoleaf</b><small>Kit 99,99 € · 2 lampes 62,38 €</small></div><strong>162,37&nbsp;€</strong></li>
+        <li><div><b>Govee</b><small>Kit 89,99 € · 2 lampes 16,99 €</small></div><strong>106,98&nbsp;€</strong></li>
+      </ul>
+      <div class="ctab-foot reveal">
+        <p class="cmp-save"><span>Jusqu'à</span> 755&nbsp;€ <span>d'économie face à Philips Hue</span></p>
+        <a href="#tarifs" class="btn btn-light">Essayer l'application <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <p class="cmp-note">Prix publics relevés le 22 octobre 2026 sur philips-hue.com/fr-fr et eu.govee.com/fr-fr ; revendeurs pour les ampoules Govee et Nanoleaf, prix de lancement pour le kit Nanoleaf. Les applications des marques sont gratuites mais ne pilotent que leurs propres lampes. Ambinight demande un kit Ambilight Bluetooth, non fourni. Matériel petit prix : ordres de grandeur AliExpress au 26 octobre 2026 (kit TV Bluetooth avec caméra, ampoules E27 Tuya), variables selon le vendeur et la livraison. Marques citées propriété de leurs détenteurs ; Ambinight n'est affilié à aucune.</p>
+    </div>
+  </section>
+
+  <!-- ============ TARIFS ============ -->
+  <section class="s-section" id="tarifs">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <h2>Essayez gratuitement, payez une fois</h2>
+        <p>Pas d'abonnement. Toutes les mises à jour sont incluses.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan reveal">
+          <h3>Essai</h3>
+          <p class="plan-desc">Pour tester chez vous, sans engagement.</p>
+          <div class="price"><b>0 €</b><span>pendant 7 jours</span></div>
+          <a href="#telecharger" class="btn btn-outline">Essayer gratuitement</a>
+          <ul class="plan-list">
+            <li>Toutes les fonctionnalités</li>
+            <li>1 appareil</li>
+            <li>Jusqu'à 2 pièces</li>
+            <li>Aucune carte bancaire demandée</li>
+          </ul>
+        </article>
+
+        <article class="plan plan-featured reveal">
+          <span class="plan-badge">Notre conseil</span>
+          <h3>Licence à vie</h3>
+          <p class="plan-desc">Toute l'appli, pour toute la maison.</p>
+          <div class="price"><b>14,99 €</b><span>paiement unique</span></div>
+          <button class="btn btn-light buy" type="button" data-plan="Licence à vie" data-price="14,99 €">Acheter la licence <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="plan-list">
+            <li>3 appareils&nbsp;: PC, iPhone, Android</li>
+            <li>Pièces et lumières illimitées</li>
+            <li>Films, séries et jeux</li>
+            <li>Mises à jour à vie incluses</li>
+          </ul>
+        </article>
+
+        <article class="plan reveal">
+          <h3>Famille</h3>
+          <p class="plan-desc">Pour plusieurs télés et toute la famille.</p>
+          <div class="price"><b>24,99 €</b><span>paiement unique</span></div>
+          <button class="btn btn-outline buy" type="button" data-plan="Famille" data-price="24,99 €">Choisir Famille</button>
+          <ul class="plan-list">
+            <li>6 appareils</li>
+            <li>Plusieurs écrans synchronisés</li>
+            <li>Scènes et profils par pièce</li>
+            <li>Support prioritaire</li>
+          </ul>
+        </article>
+      </div>
+
+      <ul class="trust reveal">
+        <li><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé</li>
+        <li><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Satisfait ou remboursé 14 jours</li>
+        <li><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Licence activée immédiatement</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ TÉLÉCHARGER ============ -->
+  <section class="s-section s-download" id="telecharger">
+    <div class="wrap">
+      <div class="s-head reveal">
+        <h2>Téléchargez l'appli sur votre appareil</h2>
+        <p>Une licence pour vos appareils. L'appli utilise la maison connectée que vous avez déjà.</p>
+      </div>
+
+      <div class="platforms">
+        <article class="platform reveal">
+          <span class="pf-logo"><svg viewBox="0 0 24 24" fill="#fff"><rect x="2" y="2" width="9.5" height="9.5"/><rect x="12.5" y="2" width="9.5" height="9.5"/><rect x="2" y="12.5" width="9.5" height="9.5"/><rect x="12.5" y="12.5" width="9.5" height="9.5"/></svg></span>
+          <h3>PC Windows</h3>
+          <p>Windows 10 et 11</p>
+          <p class="pf-req"><span>Prérequis</span>Home Assistant</p>
+          <a class="store-badge" href="#" data-store="windows" aria-label="Obtenir Ambinight sur le Microsoft Store"><img src="assets/badges/microsoft.svg" alt="Get it from Microsoft"></a>
+        </article>
+        <article class="platform reveal">
+          <span class="pf-logo"><img src="assets/logos/si-apple.svg" alt=""></span>
+          <h3>iPhone et iPad</h3>
+          <p>iOS 16 ou plus récent</p>
+          <p class="pf-req"><span>Prérequis</span>Apple Maison</p>
+          <a class="store-badge" href="#" data-store="ios" aria-label="Télécharger Ambinight dans l'App Store"><img src="assets/badges/app-store.svg" alt="Télécharger dans l'App Store"></a>
+        </article>
+        <article class="platform reveal">
+          <span class="pf-logo"><img src="assets/logos/si-android.svg" alt=""></span>
+          <h3>Android</h3>
+          <p>Android 9 ou plus récent</p>
+          <p class="pf-req"><span>Prérequis</span>Google Home</p>
+          <a class="store-badge store-badge-gp" href="#" data-store="android" aria-label="Disponible sur Google Play"><img src="assets/badges/google-play.svg" alt="Disponible sur Google Play"></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KITS COMPATIBLES (liens affiliés) ============ -->
+  <section class="kits-shop">
+    <div class="wrap">
+      <!-- Sélection Amazon : kits et ampoules compatibles (liens affiliés) -->
+      <div class="shop reveal" id="kits">
+        <div class="shop-head">
+          <h3>Pas encore de kit&nbsp;? Notre sélection compatible</h3>
+        </div>
+        <div class="shop-grid">
+          <a class="shop-card" data-asin="B0DLFYJ6MS" href="https://www.amazon.fr/dp/B0DLFYJ6MS" target="_blank" rel="sponsored nofollow noopener">
+            <span class="shop-img"><img src="assets/kit/kit-ambilight.webp" alt="" loading="lazy"></span>
+            <span class="shop-tag">Kit caméra · Bluetooth</span>
+            <b>Diyife TV Backlight, TV 55 à 65″</b>
+            <small>Caméra, ruban LED, application uLamp</small>
+            <em>Voir sur Amazon</em>
+          </a>
+          <a class="shop-card" data-asin="B0FRM8CZVK" href="https://www.amazon.fr/dp/B0FRM8CZVK" target="_blank" rel="sponsored nofollow noopener">
+            <span class="shop-img"><img src="assets/kit/kit-ambilight.webp" alt="" loading="lazy"></span>
+            <span class="shop-tag">Kit caméra · Bluetooth</span>
+            <b>Diyife TV Backlight, ruban 5 m</b>
+            <small>Pour les grands écrans, application uLamp</small>
+            <em>Voir sur Amazon</em>
+          </a>
+          <a class="shop-card" data-asin="B0C3VLCFJR" href="https://www.amazon.fr/dp/B0C3VLCFJR" target="_blank" rel="sponsored nofollow noopener">
+            <span class="shop-img"><img src="assets/kit/bulb.webp" alt="" loading="lazy"></span>
+            <span class="shop-tag">Ampoules couleur</span>
+            <b>Govee E27 RGBWW, lot de 2</b>
+            <small>Wi‑Fi, Google Home et Alexa</small>
+            <em>Voir sur Amazon</em>
+          </a>
+        </div>
+        <p class="shop-note">Liens affiliés&nbsp;: en tant que Partenaire Amazon, Ambinight réalise un bénéfice sur les achats remplissant les conditions requises, sans surcoût pour vous.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="s-section" id="faq">
+    <div class="wrap faq-wrap">
+      <div class="s-head reveal">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="faq reveal">
+        <details open>
+          <summary>Ambinight vend-il le kit Ambilight ?</summary>
+          <p>Non. Ambinight est uniquement une application. Vous utilisez votre propre kit Ambilight Bluetooth et vos propres lampes.</p>
+        </details>
+        <details>
+          <summary>Est-ce un abonnement ?</summary>
+          <p>Non. La licence se paie une seule fois et reste à vous, mises à jour comprises.</p>
+        </details>
+        <details>
+          <summary>Puis-je utiliser ma licence sur plusieurs appareils ?</summary>
+          <p>Oui&nbsp;: 3 appareils avec la Licence à vie, 6 avec la formule Famille. PC, iPhone et Android comptent chacun pour un appareil.</p>
+        </details>
+        <details>
+          <summary>Mon kit Ambilight est-il compatible ?</summary>
+          <p>S'il fonctionne en Bluetooth, oui, quelle que soit sa marque. Le plus simple est de lancer l'essai gratuit&nbsp;: si l'application trouve le kit, il est compatible.</p>
+        </details>
+        <details>
+          <summary>Je n'ai pas encore de kit, lequel choisir ?</summary>
+          <p>N'importe quel kit caméra + bande LED vendu avec une connexion Bluetooth. Prenez une bande assez longue pour faire le tour de votre TV.</p>
+        </details>
+        <details>
+          <summary>Et si ça ne fonctionne pas chez moi ?</summary>
+          <p>Vous êtes remboursé sous 14 jours, sans justification.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CTA ============ -->
   <section class="cta" id="cta">
     <div class="cta-media"><img src="assets/gamer.jpg" alt="Joueur devant une TV dont les couleurs éclairent la pièce"></div>
     <div class="cta-copy reveal">
       <h2>Essai gratuit 7 jours, puis 14,99&nbsp;€ à vie</h2>
       <p>Sans abonnement. Sans carte bancaire pour l'essai.</p>
-      <a href="commencer.html#tarifs" class="btn btn-light">Voir les tarifs <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#tarifs" class="btn btn-light">Voir les tarifs <svg class="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </section>
 
@@ -748,22 +777,29 @@
     <div class="wrap site-footer-inner">
       <a href="index.html" class="logo"><img class="logo-mark" src="assets/logo.svg" alt=""><span>Ambinight</span></a>
       <nav class="footer-links" aria-label="Liens du pied de page">
-        <a href="index.html#compatibilite">Compatibilité</a>
-        <a href="index.html#comment">Comment ça marche</a>
-        <a href="commencer.html#tarifs">Tarifs</a>
-        <a href="commencer.html#telecharger">Télécharger</a>
-        <a href="commencer.html#faq">FAQ</a>
+        <a href="#video">Vidéo</a>
+        <a href="#comment">Installation</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#telecharger">Télécharger</a>
+        <a href="#faq">FAQ</a>
       </nav>
       <span class="footer-copy">© 2026 Ambinight</span>
     </div>
   </footer>
 
-  <!-- ============ MODALE DÉMO ============ -->
-  <div class="modal" id="demoModal" aria-hidden="true">
+  <!-- ============ COMMANDE ============ -->
+  <div class="modal" id="buyModal" aria-hidden="true">
     <div class="modal-backdrop" data-close></div>
-    <div class="modal-box">
+    <div class="checkout">
       <button class="modal-close" data-close type="button" aria-label="Fermer">×</button>
-      <video id="demoVideo" src="assets/ambinight-presentation.mp4" controls playsinline preload="metadata"></video>
+      <p class="s-kicker mono">Récapitulatif</p>
+      <h3 id="coPlan">Licence à vie</h3>
+      <div class="co-row"><span>Total, paiement unique</span><b id="coPrice">14,99 €</b></div>
+      <label class="co-field">Adresse e-mail pour recevoir votre licence
+        <input type="email" placeholder="vous@exemple.fr" autocomplete="email" id="coEmail">
+      </label>
+      <button class="btn btn-light co-pay" type="button" id="coPay">Continuer vers le paiement</button>
+      <p class="co-note" id="coNote">Paiement sécurisé. Votre clé de licence est envoyée par e-mail dès la commande validée.</p>
     </div>
   </div>
 
