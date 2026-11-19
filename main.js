@@ -72,213 +72,177 @@
     new IntersectionObserver(([e]) => { if (e.isIntersecting) play(); }, { threshold: 0.4 }).observe(scan);
   }
 
-  /* ---------- 4. Démo 3D en direct : le moteur de l'application, piloté par le téléphone ---------- */
+  /* ---------- 4. Démo 3D pilotée par le téléphone ---------- */
+  const ROOMS = [
+    { id: 'salon',   name: 'Salon',          color: '#c76bff' },
+    { id: 'cinema',  name: 'Home cinéma',    color: '#3f7bff' },
+    { id: 'repas',   name: 'Salle à manger', color: '#ff7a3c' },
+    { id: 'cuisine', name: 'Cuisine',        color: '#ff9a3c' },
+    { id: 'chambre', name: 'Chambre',        color: '#4f8dff' },
+    { id: 'bureau',  name: 'Bureau',         color: '#b05cff' },
+  ];
   const demo = document.getElementById('demo');
   const stage = document.getElementById('phoneStage');
   const roomsList = document.getElementById('appRooms');
-  const live3dHost = document.getElementById('live3d');
+  const pulses = document.getElementById('pulses');
+  const state = {};
 
-  if (demo && stage && roomsList && live3dHost && window.Ambinight3D) {
-    const narrowMq = window.matchMedia('(max-width: 900px)');
-    const a3d = window.Ambinight3D.mount(live3dHost, { night: true, quality: narrowMq.matches ? 'equilibree' : 'haute', interactive: !narrowMq.matches });
-    // Images diffusées sur la TV et couleur dominante que la synchro envoie aux lampes
-    const SCREENS = [
-      { img: 'assets/screens/ocean.jpg',  rgb: [30, 140, 255] },
-      { img: 'assets/screens/sunset.jpg', rgb: [255, 120, 40] },
-      { img: 'assets/screens/city.jpg',   rgb: [225, 60, 255] },
-      { img: 'assets/screens/race.jpg',   rgb: [255, 45, 70] },
-    ];
-    const hex = ([r, g, b]) => `rgb(${r}, ${g}, ${b})`;
-    const state = {};
-    let syncing = true;
-    let touched = false;
-    let screen = 0;
+  if (demo && stage && roomsList) {
+    // Flux lumineux : TV → téléphone, puis téléphone → chaque pièce (recalculés selon la place du téléphone)
+    const streamsG = document.getElementById('streams');
+    const NS = 'http://www.w3.org/2000/svg';
+    const ROOM_POINTS = { salon: [697, 334], bureau: [896, 282], chambre: [1196, 344], cuisine: [1012, 418], repas: [882, 492], cinema: [1153, 538] };
+    const ROOM_GRAD = { salon: 'g-stream', bureau: 'g-stream', chambre: 'g-blue', cuisine: 'g-warm', repas: 'g-warm', cinema: 'g-blue' };
+    const buildStreams = (box) => {
+      streamsG.innerHTML = '';
+      pulses.innerHTML = '';
+      const links = [];
+      // TV (bord droit de l'écran) → bord gauche du téléphone
+      const ty = box.y0 + box.h * 0.22;
+      links.push({ room: 'tvlink', grad: 'g-stream', d: `M384 365 C ${384 + 50} 365, ${box.x0 - 50} ${ty}, ${box.x0 + 6} ${ty}` });
+      // téléphone (bord droit, au niveau de la liste des pièces) → pièces
+      Object.entries(ROOM_POINTS).forEach(([room, [ex, ey]], i) => {
+        const sy = box.y0 + box.h * (0.6 + i * 0.055);
+        const sx = box.x1 - 6;
+        links.push({ room, grad: ROOM_GRAD[room], d: `M${sx} ${sy} C ${sx + 90} ${sy}, ${ex - 90} ${ey + 30}, ${ex} ${ey}` });
+      });
+      links.forEach((l, i) => {
+        const path = document.createElementNS(NS, 'path');
+        path.setAttribute('class', 'stream');
+        path.setAttribute('data-room', l.room);
+        path.setAttribute('stroke', `url(#${l.grad})`);
+        path.setAttribute('d', l.d);
+        path.setAttribute('pathLength', '1');
+        streamsG.appendChild(path);
+        const pulse = path.cloneNode();
+        pulse.setAttribute('class', 'pulse');
+        pulse.removeAttribute('stroke');
+        pulse.style.animationDelay = `${-i * 0.37}s`;
+        pulses.appendChild(pulse);
+      });
+    };
+
     const allBtn = document.getElementById('appAll');
     const live = document.getElementById('appLive');
     const playBtn = document.getElementById('appPlay');
-    const tvPrev = document.getElementById('appTvScreen');
-    const halo = document.getElementById('appHalo');
+    let syncing = true;
+    let touched = false;
 
-    const showScreen = (i) => {
-      screen = i;
-      const s = SCREENS[i];
-      a3d.setTvImage(s.img, s.rgb);
-      tvPrev.style.setProperty('--tv', `url(${s.img}) center / cover`);
-      halo.style.setProperty('--halo', `radial-gradient(${hex(s.rgb)}, transparent 70%)`);
-      roomsList.querySelectorAll('.app-room').forEach((li) => li.style.setProperty('--c', hex(s.rgb)));
-      stage.style.setProperty('--c', hex(s.rgb));
-    };
-
-    const setLamp = (id, on) => {
+    const setRoom = (id, on) => {
       state[id] = on;
-      a3d.setSyncLight(id, on);
-      a3d.setLight(id, on && !syncing);
-      const li = roomsList.querySelector(`[data-id="${id}"]`);
+      document.querySelectorAll(`#scene [data-room="${id}"]`).forEach((el) => el.classList.toggle('on', on && syncing));
+      document.querySelectorAll('#scene [data-room="tvlink"]').forEach((el) => el.classList.toggle('on', syncing));
+      const li = roomsList.querySelector(`[data-room="${id}"]`);
       li.classList.toggle('on', on);
       li.setAttribute('aria-checked', String(on));
-      li.querySelector('small').textContent = on ? (syncing ? 'Suit l\'écran' : 'Allumée') : 'Éteinte';
-      allBtn.textContent = a3d.lights.every((l) => state[l.id]) ? 'Tout éteindre' : 'Tout allumer';
+      li.querySelector('small').textContent = on ? 'Suit l\'écran' : 'Éteinte';
+      if (on) stage.style.setProperty('--c', ROOMS.find((r) => r.id === id).color);
+      allBtn.textContent = ROOMS.every((r) => state[r.id]) ? 'Tout éteindre' : 'Tout allumer';
     };
 
     const bulbSvg = '<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>';
-    a3d.lights.forEach((l) => {
-      state[l.id] = false;
+    ROOMS.forEach((room) => {
+      state[room.id] = false;
       const li = document.createElement('li');
       li.className = 'app-room';
-      li.dataset.id = l.id;
+      li.dataset.room = room.id;
+      li.style.setProperty('--c', room.color);
       li.setAttribute('role', 'switch');
       li.setAttribute('aria-checked', 'false');
       li.tabIndex = 0;
-      li.innerHTML = `<span class="bulb">${bulbSvg}</span><span><b>${l.name}</b><small>Éteinte</small></span><span class="tgl"></span>`;
-      const toggle = () => { touched = true; setLamp(l.id, !state[l.id]); };
+      li.innerHTML = `<span class="bulb">${bulbSvg}</span><span><b>${room.name}</b><small>Éteinte</small></span><span class="tgl"></span>`;
+      const toggle = () => { touched = true; setRoom(room.id, !state[room.id]); };
       li.addEventListener('click', toggle);
       li.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
       roomsList.appendChild(li);
     });
-    // un clic sur une lampe dans la maquette l'allume aussi
-    a3d.onPick((id) => { if (id) { touched = true; setLamp(id, !state[id]); } });
 
     allBtn.addEventListener('click', () => {
       touched = true;
-      const turnOn = !a3d.lights.every((l) => state[l.id]);
-      a3d.lights.forEach((l, i) => setTimeout(() => setLamp(l.id, turnOn), i * 160));
+      const turnOn = !ROOMS.every((r) => state[r.id]);
+      ROOMS.forEach((r, i) => setTimeout(() => setRoom(r.id, turnOn), i * 160));
     });
 
-    const setSyncing = (v) => {
-      syncing = v;
-      a3d.setSync(v);
-      playBtn.classList.toggle('on', v);
-      playBtn.querySelector('span').textContent = v ? 'En cours' : 'Démarrer';
-      live.classList.toggle('off', !v);
-      live.textContent = v ? 'Synchro active' : 'En pause';
-      a3d.lights.forEach((l) => setLamp(l.id, state[l.id]));
-    };
-    playBtn.addEventListener('click', () => { touched = true; setSyncing(!syncing); });
+    // Démarrer / arrêter la synchro : coupe la lumière sans perdre les choix
+    playBtn.addEventListener('click', () => {
+      touched = true;
+      syncing = !syncing;
+      playBtn.classList.toggle('on', syncing);
+      playBtn.querySelector('span').textContent = syncing ? 'En cours' : 'Démarrer';
+      live.classList.toggle('off', !syncing);
+      live.textContent = syncing ? 'Synchro active' : 'En pause';
+      ROOMS.forEach((r) => setRoom(r.id, state[r.id]));
+      refreshLinks();
+    });
 
-    const SPEEDS = [6500, 4200, 2200];
-    let speed = SPEEDS[1];
     document.querySelectorAll('#appSeg button').forEach((b, i, all) => b.addEventListener('click', () => {
       all.forEach((x) => x.classList.remove('on'));
       b.classList.add('on');
-      speed = SPEEDS[i];
     }));
 
-    let inView = false;
+    // Aperçu TV du téléphone : couleurs qui changent comme l'image
+    const halo = document.getElementById('appHalo');
+    const tv = document.getElementById('appTvScreen');
+    let hue = 290;
+    const paintTv = () => {
+      const a = `hsl(${hue} 90% 66%)`;
+      const b = `hsl(${(hue + 70) % 360} 85% 62%)`;
+      const c = `hsl(${(hue + 150) % 360} 80% 64%)`;
+      tv.style.setProperty('--tv', `linear-gradient(135deg, ${a}, ${b} 50%, ${c})`);
+      halo.style.setProperty('--halo', `radial-gradient(${a}, ${c})`);
+      document.getElementById('scene').style.setProperty('--tvc', b);
+    };
+    paintTv();
+    if (!reduced) setInterval(() => { if (syncing) { hue = (hue + 23) % 360; paintTv(); } }, 1600);
+
+    // À la première apparition, le salon s'allume tout seul pour montrer l'effet
     new IntersectionObserver(([e]) => {
-      inView = e.isIntersecting;
-      if (inView && !touched) setTimeout(() => {
-        if (touched) return;
-        a3d.lights.filter((l) => /TV|Lampadaire|séjour/i.test(l.name)).forEach((l, i) => setTimeout(() => setLamp(l.id, true), i * 350));
-      }, 600);
-    }, { threshold: 0.4 }).observe(demo);
-    showScreen(0);
-    a3d.setSync(true);
-    if (!reduced) {
-      let last = performance.now();
-      const cycle = (t) => {
-        if (inView && syncing && t - last > speed) { last = t; showScreen((screen + 1) % SCREENS.length); }
-        requestAnimationFrame(cycle);
-      };
-      requestAnimationFrame(cycle);
-    }
+      if (e.isIntersecting && !touched) setTimeout(() => { if (!touched) setRoom('salon', true); }, 700);
+    }, { threshold: 0.5 }).observe(demo);
 
-    // Flux lumineux : TV → téléphone, puis téléphone → chaque lampe allumée (suivent la caméra)
-    const links = document.getElementById('liveLinks');
-    const NS = 'http://www.w3.org/2000/svg';
-    const paths = {};
-    const mk = (id) => {
-      const p = document.createElementNS(NS, 'path');
-      p.setAttribute('class', 'live-link');
-      links.appendChild(p);
-      paths[id] = p;
-      return p;
-    };
-    mk('tv');
-    a3d.lights.forEach((l) => mk(l.id));
-    let box = null;
-    let visit = 0;
-    const drawLinks = () => {
-      if (!box || narrowMq.matches) return;
-      const fade = Math.max(0, 1 - visit * 2.5);
-      links.style.opacity = fade.toFixed(2);
-      if (!fade) return;
-      const tv = a3d.tvScreen();
-      const py = box.y + box.h * 0.24;
-      if (tv) paths.tv.setAttribute('d', `M${tv.x} ${tv.y} C ${tv.x - 120} ${tv.y}, ${box.x1 + 140} ${py}, ${box.x1 - 4} ${py}`);
-      paths.tv.classList.toggle('on', syncing && !!tv);
-      a3d.lights.forEach((l, i) => {
-        const p = a3d.screenOf(l.id);
-        const sy = box.y + box.h * (0.6 + i * 0.055);
-        if (p) paths[l.id].setAttribute('d', `M${box.x1 - 4} ${sy} C ${box.x1 + 110} ${sy}, ${p.x - 110} ${p.y + 40}, ${p.x} ${p.y}`);
-        paths[l.id].classList.toggle('on', !!p && state[l.id] && syncing);
-      });
+    // le flux TV → téléphone est actif tant que la synchro tourne
+    const refreshLinks = () => {
+      document.querySelectorAll('#scene [data-room="tvlink"]').forEach((el) => el.classList.toggle('on', syncing));
+      ROOMS.forEach((r) => document.querySelectorAll(`#scene [data-room="${r.id}"]`).forEach((el) => el.classList.toggle('on', state[r.id] && syncing)));
     };
 
-    // Téléphone posé à gauche, maquette décalée à droite pour lui laisser la place
+    // Appartement en plein écran : le téléphone se place entre la TV et la maison
+    const sceneSvg = document.getElementById('sceneSvg');
     const fit = () => {
-      if (narrowMq.matches) {
+      const narrow = window.innerWidth <= 900;
+      if (narrow) {
         const ps = Math.min(0.8, (window.innerWidth - 40) / 360);
+        demo.style.setProperty('--ps', ps.toFixed(3));
         stage.style.setProperty('--ps', ps.toFixed(3));
         stage.style.left = '';
         stage.style.top = '';
-        a3d.setShift(0);
-        box = null;
+        sceneSvg.setAttribute('viewBox', '520 200 760 500');
         return;
       }
+      sceneSvg.setAttribute('viewBox', '0 0 1280 720');
       const W = demo.clientWidth;
       const H = demo.clientHeight;
-      let ps = Math.min(1, Math.max(0.82, W / 1600));
-      if (680 * ps > H - 110) ps = (H - 110) / 680;
-      const pw = 330 * ps;
+      const k = Math.max(W / 1280, H / 720);           // échelle de l'image (couverture)
+      const offX = (1280 * k - W) / 2;
+      const offY = (720 * k - H) / 2;
+      let pw = Math.min(330, Math.max(270, 250 * k));   // largeur du téléphone à l'écran
+      let ps = pw / 330;
+      if (680 * ps > H - 110) { ps = (H - 110) / 680; pw = 330 * ps; }
       const ph = 680 * ps;
-      const left = Math.max(24, W * 0.05);
+      const left = 470 * k - offX - pw / 2;            // entre la TV (x 380) et la maison (x 535)
       const top = H - ph - Math.max(18, H * 0.035);
+      demo.style.setProperty('--ps', ps.toFixed(3));
       stage.style.setProperty('--ps', ps.toFixed(3));
       stage.style.left = `${left}px`;
       stage.style.top = `${top}px`;
-      links.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      box = { x1: left + pw, y: top, h: ph };
-      a3d.setShift((left + pw) * 0.55);
+      const u = (px, off) => (px + off) / k;
+      buildStreams({ x0: u(left, offX), x1: u(left + pw, offX), y0: u(top, offY), h: ph / k });
+      refreshLinks();
     };
     fit();
     window.addEventListener('resize', fit);
 
-    // Entrer dans la maison : au défilement (écran large) ou avec le bouton (téléphone)
-    const hint = document.getElementById('visitHint');
-    const visitBtn = document.getElementById('visitBtn');
-    const setVisit = (v) => {
-      visit = v;
-      a3d.setVisit(v);
-      demo.classList.toggle('inside', v > 0.5);
-      if (hint) hint.classList.toggle('hide', v > 0.08);
-    };
-    if (hasGsap && !reduced && !narrowMq.matches) {
-      ScrollTrigger.create({
-        trigger: demo,
-        start: 'top top',
-        end: () => `+=${window.innerHeight * 1.4}`,
-        pin: true,
-        onUpdate: (self) => setVisit(Math.min(1, self.progress / 0.75)),
-      });
-    }
-    if (visitBtn) {
-      let anim = null;
-      visitBtn.addEventListener('click', () => {
-        const from = visit;
-        const to = visit > 0.5 ? 0 : 1;
-        const t0 = performance.now();
-        cancelAnimationFrame(anim);
-        const step = (t) => {
-          const k = Math.min(1, (t - t0) / 1600);
-          setVisit(from + (to - from) * k);
-          if (k < 1) anim = requestAnimationFrame(step);
-        };
-        anim = requestAnimationFrame(step);
-        visitBtn.querySelector('span').textContent = to ? 'Vue d\'ensemble' : 'Entrer dans le salon';
-      });
-    }
-
-    // Inclinaison du téléphone qui suit la souris (ressort amorti) + flux
+    // Inclinaison du téléphone qui suit la souris (ressort amorti)
     const p3 = document.getElementById('p3');
     const glare = document.getElementById('p3Glare');
     const slices = p3.querySelector('.p3-slices');
@@ -289,6 +253,7 @@
     }
     const tgt = { rx: 0, ry: 0 };
     const cur = { rx: 0, ry: 0, vrx: 0, vry: 0 };
+    let visible = false;
     demo.addEventListener('pointermove', (e) => {
       const r = stage.getBoundingClientRect();
       const nx = (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2);
@@ -297,13 +262,14 @@
       tgt.rx = Math.max(-1, Math.min(1, ny)) * -9;
     });
     demo.addEventListener('pointerleave', () => { tgt.rx = 0; tgt.ry = 0; });
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { rootMargin: '100px' }).observe(demo);
     const loop = (t) => {
-      if (inView) {
+      if (visible) {
         cur.vrx = (cur.vrx + (tgt.rx - cur.rx) * 0.06) * 0.82;
         cur.vry = (cur.vry + (tgt.ry - cur.ry) * 0.06) * 0.82;
         cur.rx += cur.vrx;
         cur.ry += cur.vry;
-        const narrow = narrowMq.matches;
+        const narrow = window.innerWidth <= 900;
         const floatY = reduced ? 0 : Math.sin(t / 900) * 5;
         const rx = (narrow ? 6 : 4) + cur.rx;
         const ry = (narrow ? 0 : 6) + cur.ry;
@@ -312,23 +278,24 @@
         glare.style.setProperty('--gx', `${ry * 6}px`);
         stage.style.setProperty('--sx', `${30 - ry * 1.4}px`);
         stage.style.setProperty('--sy', `${40 + rx * 1.4}px`);
-        drawLinks();
       }
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
   }
 
-  /* ---------- 4 bis. Salon en 3D : une vraie vidéo sur la TV, les lampes prennent ses couleurs ---------- */
+  /* ---------- 4 bis. Salon : la TV diffuse une vidéo, chaque lampe en mode TV prend ses couleurs en direct ---------- */
   const colors = document.getElementById('couleurs');
-  const salonHost = document.getElementById('salon3d');
-  if (colors && salonHost && window.Ambinight3D) {
-    const narrowMq = window.matchMedia('(max-width: 900px)');
-    const video = document.getElementById('salonVideo');
-    const list = document.getElementById('lampList');
-    const syncBtn = document.getElementById('homeSync');
-    const live = document.getElementById('homeLive');
-    const buttons = [...colors.querySelectorAll('#tvScenes button')];
+  const roomVideo = document.getElementById('roomVideo');
+  if (colors && roomVideo) {
+    const LAMPS = [
+      { id: 'tv',      name: 'Bande LED TV', zone: 'left', zone2: 'right' },
+      { id: 'ceiling', name: 'Plafonnier',   zone: 'top' },
+      { id: 'floor',   name: 'Lampadaire',   zone: 'right' },
+      { id: 'left',    name: 'Lampe gauche', zone: 'left' },
+      { id: 'right',   name: 'Lampe droite', zone: 'right' },
+    ];
+    const WARM = 'rgb(255, 210, 161)';
     const CHAPTERS = [0, 6.5, 12, 17.5];
     const ICONS = {
       off: '<svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>',
@@ -336,128 +303,149 @@
       tv: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg>',
     };
     const LABELS = { off: 'Éteinte', on: 'Allumée', tv: 'Synchronisée avec la TV' };
-    const rgb = ([r, g, b]) => `rgb(${r}, ${g}, ${b})`;
-    let s3d = null;
-    let lamps = [];
+    const buttons = [...colors.querySelectorAll('#tvScenes button')];
+    const list = document.getElementById('lampList');
+    const syncBtn = document.getElementById('homeSync');
+    const live = document.getElementById('homeLive');
+    const hint = document.getElementById('roomHint');
+    const fill = colors.querySelector('.g-fill');
+    const tvBox = document.getElementById('roomTv');
+    const phoneCanvas = document.getElementById('homeTvCanvas');
+    const phoneCtx = phoneCanvas.getContext('2d');
     const mode = {};
+    let zones = { all: 'rgb(60, 140, 255)', left: 'rgb(60, 140, 255)', right: 'rgb(200, 80, 255)', top: 'rgb(120, 110, 255)' };
     let touched = false;
     let inView = false;
 
+    // ----- la vidéo épouse l'écran de la TV de la photo (perspective) -----
+    const QUAD = [[0.0099, 0.1933], [0.9901, 0.0149], [0.9901, 0.9851], [0.0099, 0.9442]];
+    const homography = (w, h, dst) => {
+      const src = [[0, 0], [w, 0], [w, h], [0, h]];
+      const A = [], b = [];
+      for (let i = 0; i < 4; i++) {
+        const [x, y] = src[i], [u, v] = dst[i];
+        A.push([x, y, 1, 0, 0, 0, -x * u, -y * u]); b.push(u);
+        A.push([0, 0, 0, x, y, 1, -x * v, -y * v]); b.push(v);
+      }
+      for (let c = 0; c < 8; c++) {           // élimination de Gauss
+        let p = c;
+        for (let r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+        [A[c], A[p]] = [A[p], A[c]]; [b[c], b[p]] = [b[p], b[c]];
+        for (let r = 0; r < 8; r++) {
+          if (r === c) continue;
+          const f = A[r][c] / A[c][c];
+          for (let k = c; k < 8; k++) A[r][k] -= f * A[c][k];
+          b[r] -= f * b[c];
+        }
+      }
+      const m = b.map((v, i) => v / A[i][i]);
+      return `matrix3d(${m[0]},${m[3]},0,${m[6]},${m[1]},${m[4]},0,${m[7]},0,0,1,0,${m[2]},${m[5]},0,1)`;
+    };
+    const warp = () => {
+      const w = tvBox.clientWidth, h = tvBox.clientHeight;
+      roomVideo.style.width = `${w}px`;
+      roomVideo.style.height = `${h}px`;
+      roomVideo.style.transform = homography(w, h, QUAD.map(([x, y]) => [x * w, y * h]));
+    };
+    warp();
+    window.addEventListener('resize', warp);
+
+    // ----- couleurs lues dans l'image, par zone (comme la caméra du kit) -----
+    const probe = document.createElement('canvas');
+    probe.width = 16; probe.height = 9;
+    const pctx = probe.getContext('2d', { willReadFrequently: true });
+    const vivid = (r, g, b) => {
+      const m = (r + g + b) / 3;
+      const c = [r, g, b].map((v) => Math.max(0, m + (v - m) * 2.2));
+      const mx = Math.max(...c, 1);
+      return `rgb(${c.map((v) => Math.round(Math.min(255, (v / mx) * 255))).join(', ')})`;
+    };
+    const sample = () => {
+      if (roomVideo.readyState < 2) return;
+      pctx.drawImage(roomVideo, 0, 0, 16, 9);
+      const d = pctx.getImageData(0, 0, 16, 9).data;
+      const avg = (x0, x1, y0, y1) => {
+        let r = 0, g = 0, b = 0, n = 0;
+        for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) { const i = (y * 16 + x) * 4; r += d[i]; g += d[i + 1]; b += d[i + 2]; n++; }
+        return vivid(r / n, g / n, b / n);
+      };
+      zones = { all: avg(0, 16, 0, 9), left: avg(0, 5, 0, 9), right: avg(11, 16, 0, 9), top: avg(0, 16, 0, 3) };
+      render();
+    };
+
     const render = () => {
       let lit = 0;
-      lamps.forEach(({ id }) => {
+      LAMPS.forEach(({ id, zone, zone2 }) => {
+        const glow = colors.querySelector(`.glow[data-lamp="${id}"]`);
         const m = mode[id];
-        s3d.setMode(id, m);
+        glow.classList.toggle('lit', m !== 'off');
+        glow.style.setProperty('--c', m === 'tv' ? zones[zone] : WARM);
+        if (zone2) glow.style.setProperty('--c2', m === 'tv' ? zones[zone2] : WARM);
         if (m !== 'off') lit += 1;
         const row = list.querySelector(`[data-lamp="${id}"]`);
         row.classList.toggle('on', m === 'on');
         row.classList.toggle('tv', m === 'tv');
+        row.style.setProperty('--lamp', zones[zone]);
         row.querySelector('small').textContent = LABELS[m];
         row.querySelectorAll('.mode button').forEach((b) => b.classList.toggle('sel', b.dataset.mode === m));
       });
-      const anyTv = lamps.some(({ id }) => mode[id] === 'tv');
-      const allTv = lamps.every(({ id }) => mode[id] === 'tv');
+      const anyTv = LAMPS.some(({ id }) => mode[id] === 'tv');
+      const allTv = LAMPS.every(({ id }) => mode[id] === 'tv');
+      fill.style.setProperty('--fill-o', String(Math.min(0.5, lit * 0.09)));
+      fill.style.setProperty('--c', anyTv ? zones.all : WARM);
+      colors.style.setProperty('--tv-a', zones.left);
+      colors.style.setProperty('--tv-b', zones.right);
       syncBtn.classList.toggle('on', allTv);
       syncBtn.querySelector('span').textContent = allTv ? 'Tout est synchronisé' : 'Tout synchroniser avec la TV';
       live.textContent = anyTv ? 'Synchro TV' : (lit ? 'Allumé' : 'Éteint');
       live.classList.toggle('off', !anyTv);
+      const t = roomVideo.currentTime;
+      const ch = CHAPTERS.reduce((k, c, i) => (t >= c ? i : k), 0);
+      buttons.forEach((b, i) => b.classList.toggle('active', i === ch));
     };
     const setMode = (id, m) => { mode[id] = m; render(); };
+    const touch = () => { touched = true; hint.classList.add('hide'); };
 
-    const start = () => {
-      s3d = window.Ambinight3D.mount(salonHost, { night: 'deep', quality: narrowMq.matches ? 'equilibree' : 'haute', interactive: false });
-      s3d.setView([5.1, 1.7, 2.2], [0.5, 1.0, 5.0], narrowMq.matches ? 68 : 60);
-      s3d.setTvVideo(video);
-      s3d.setSync(true);
-      // les lampes visibles depuis le canapé
-      lamps = s3d.lights.filter((l) => !/Chevet|bain/i.test(l.name));
-      lamps.forEach(({ id, name }) => {
-        mode[id] = 'off';
-        const li = document.createElement('li');
-        li.className = 'lamp-row';
-        li.dataset.lamp = id;
-        li.innerHTML = `<span class="lamp-dot"></span><span><b>${name}</b><small></small></span><span class="mode" role="radiogroup" aria-label="${name}">${
-          ['off', 'on', 'tv'].map((m) => `<button type="button" data-mode="${m}" aria-label="${LABELS[m]}" title="${LABELS[m]}">${ICONS[m]}</button>`).join('')}</span>`;
-        li.querySelectorAll('.mode button').forEach((b) => b.addEventListener('click', () => { touched = true; setMode(id, b.dataset.mode); }));
-        list.appendChild(li);
-      });
-      // chaque ligne du téléphone montre la couleur que sa lampe reçoit en ce moment
-      s3d.onColors((z) => {
-        lamps.forEach(({ id }) => list.querySelector(`[data-lamp="${id}"]`).style.setProperty('--lamp', rgb(z[s3d.zoneOf(id)])));
-        colors.style.setProperty('--tv-a', rgb(z.left));
-        colors.style.setProperty('--tv-b', rgb(z.right));
-        const t = video.currentTime;
-        const ch = CHAPTERS.reduce((k, c, i) => (t >= c ? i : k), 0);
-        buttons.forEach((b, i) => b.classList.toggle('active', i === ch));
-      });
-      render();
-    };
+    LAMPS.forEach(({ id, name }) => {
+      mode[id] = 'off';
+      const li = document.createElement('li');
+      li.className = 'lamp-row';
+      li.dataset.lamp = id;
+      li.innerHTML = `<span class="lamp-dot"></span><span><b>${name}</b><small></small></span><span class="mode" role="radiogroup" aria-label="${name}">${
+        ['off', 'on', 'tv'].map((m) => `<button type="button" data-mode="${m}" aria-label="${LABELS[m]}" title="${LABELS[m]}">${ICONS[m]}</button>`).join('')}</span>`;
+      li.querySelectorAll('.mode button').forEach((b) => b.addEventListener('click', () => { touch(); setMode(id, b.dataset.mode); }));
+      list.appendChild(li);
+    });
 
     syncBtn.addEventListener('click', () => {
-      if (!s3d) return;
-      touched = true;
-      const allTv = lamps.every(({ id }) => mode[id] === 'tv');
-      lamps.forEach(({ id }, i) => setTimeout(() => setMode(id, allTv ? 'off' : 'tv'), i * 150));
+      touch();
+      const allTv = LAMPS.every(({ id }) => mode[id] === 'tv');
+      LAMPS.forEach(({ id }, i) => setTimeout(() => setMode(id, allTv ? 'off' : 'tv'), i * 150));
     });
-    buttons.forEach((b, i) => b.addEventListener('click', () => { video.currentTime = CHAPTERS[i] + 0.05; video.play().catch(() => {}); }));
+    buttons.forEach((b, i) => b.addEventListener('click', () => { roomVideo.currentTime = CHAPTERS[i] + 0.05; roomVideo.play().catch(() => {}); }));
 
-    // Flux : TV → téléphone, téléphone → lampes synchronisées
-    const links = document.getElementById('salonLinks');
-    const phone = colors.querySelector('.colors-phone');
-    const NS = 'http://www.w3.org/2000/svg';
-    const paths = {};
-    const pathFor = (id) => {
-      if (paths[id]) return paths[id];
-      const p = document.createElementNS(NS, 'path');
-      p.setAttribute('class', 'live-link');
-      p.setAttribute('stroke', 'url(#g-salon)');
-      links.appendChild(p);
-      return (paths[id] = p);
-    };
-    const draw = () => {
-      if (!s3d || narrowMq.matches) return;
-      const W = colors.clientWidth;
-      const H = colors.clientHeight;
-      links.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      const r = phone.getBoundingClientRect();
-      const top = colors.getBoundingClientRect().top;
-      const x0 = r.left + 6;
-      const y0 = r.top - top;
-      const tv = s3d.tvScreen();
-      const tvPath = pathFor('tv');
-      const py = y0 + r.height * 0.22;
-      if (tv) tvPath.setAttribute('d', `M${tv.x} ${tv.y} C ${tv.x + 160} ${tv.y}, ${x0 - 160} ${py}, ${x0} ${py}`);
-      tvPath.classList.toggle('on', !!tv && lamps.some(({ id }) => mode[id] === 'tv'));
-      lamps.forEach(({ id }) => {
-        const row = list.querySelector(`[data-lamp="${id}"]`).getBoundingClientRect();
-        const sy = row.top - top + row.height / 2;
-        const p = s3d.screenOf(id);
-        const path = pathFor(id);
-        if (p) path.setAttribute('d', `M${x0} ${sy} C ${x0 - 140} ${sy}, ${p.x + 140} ${p.y}, ${p.x} ${p.y}`);
-        path.classList.toggle('on', !!p && mode[id] === 'tv');
-      });
-    };
-
-    new IntersectionObserver(([e]) => {
-      inView = e.isIntersecting;
-      if (inView) {
-        if (!s3d) start();
-        video.play().catch(() => {});
-        if (!touched) lamps.forEach(({ id }, i) => setTimeout(() => { if (!touched) setMode(id, i === 2 ? 'on' : 'tv'); }, 700 + i * 450));
-      } else video.pause();
-    }, { threshold: 0.3 }).observe(colors);
-    // la scène 3D du salon se prépare bien avant d'arriver à l'écran, pour ne pas saccader au défilement
-    new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { obs.disconnect(); if (!s3d) start(); } }, { rootMargin: '900px 0px' }).observe(colors);
-    // la lecture reprend d'elle-même si le navigateur l'a suspendue (chargement, onglet en arrière-plan)
+    // lecture seulement quand le salon est à l'écran ; la vidéo du téléphone suit la même image
+    let lastSample = 0;
     let lastTry = 0;
     const loop = (t) => {
       if (inView) {
-        draw();
-        if (video.paused && t - lastTry > 1000) { lastTry = t; video.play().catch(() => {}); }
+        if (roomVideo.readyState >= 2) phoneCtx.drawImage(roomVideo, 0, 0, phoneCanvas.width, phoneCanvas.height);
+        if (t - lastSample > 120) { lastSample = t; sample(); }
+        if (roomVideo.paused && t - lastTry > 1000) { lastTry = t; roomVideo.play().catch(() => {}); }
       }
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
+    new IntersectionObserver(([e]) => {
+      inView = e.isIntersecting;
+      if (inView) {
+        roomVideo.preload = 'auto';
+        warp();
+        roomVideo.play().catch(() => {});
+        if (!touched) LAMPS.forEach(({ id }, i) => setTimeout(() => { if (!touched) setMode(id, i === 3 ? 'on' : 'tv'); }, 900 + i * 450));
+      } else roomVideo.pause();
+    }, { threshold: 0.3 }).observe(colors.querySelector('.room'));
+    render();
   }
 
   // Comparatif : les barres de prix se remplissent à l'apparition

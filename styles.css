@@ -1005,3 +1005,14 @@ h2 { font-size: clamp(28px, 3vw, 44px); }
 .ctab td small.lowcost { margin-top: 6px; font-size: 11px; line-height: 1.35; color: rgba(255, 255, 255, .42); }
 .ctab td small.lowcost em { font-style: normal; font-weight: 700; color: rgba(255, 255, 255, .6); margin-right: 4px; }
 .ctab tfoot td small.lowcost { font-size: 11px; font-weight: 500; letter-spacing: 0; }
+
+/* ---------- Appartement : les pièces allumées prennent la teinte de la TV ---------- */
+.room-tint { fill: var(--tvc, #ff8a3d); mix-blend-mode: color; opacity: .78; transition: fill 1.4s linear; }
+/* ---------- Salon : la vidéo de la TV, à la perspective de la photo ---------- */
+.room-tv video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: fill; transform-origin: 0 0; }
+.home-tvscreen canvas { display: block; width: 100%; height: 100%; border-radius: 2px; }
+/* démo appartement : titre à droite, le téléphone grand format occupe la gauche */
+@media (min-width: 901px) {
+  .demo3d .demo-head { left: auto; right: var(--gutter); max-width: 520px; text-align: right; }
+  .demo3d .demo-head p { margin-left: auto; }
+}
